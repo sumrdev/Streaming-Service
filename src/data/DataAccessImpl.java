@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-class DataAccessImpl implements DataAccess {
+public class DataAccessImpl implements DataAccess {
 
     private final String path;
 
@@ -24,7 +24,7 @@ class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("../../database/" + dataField + ".txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("database/" + dataField + ".txt"));
             reader.lines().forEach(data::add);
             reader.close();
         } catch (FileNotFoundException e) {
