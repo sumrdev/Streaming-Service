@@ -6,16 +6,23 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch MainWindow",
+      "request": "launch",
+      "mainClass": "main/presentation.MainWindow",
+      "projectName": "SteamingService"
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"
     },
     {
       "type": "java",
-      "name": "Launch App",
+      "name": "Launch MainWindow",
       "request": "launch",
-      "mainClass": "presentation.MainWindow",
-      "vmArgs": "--module-path ./lib/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml"
+      "mainClass": "presentation/presentation.MainWindow",
+      "projectName": "SteamingService"
     }
   ]
 }
