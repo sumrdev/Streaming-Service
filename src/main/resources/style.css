@@ -1,0 +1,10 @@
+Button {
+  -fx-background-color: transparent;
+}
+
+Button:hover {
+  -fx-text-fill: #575757;
+}
+.active {
+  -fx-background-color: #333946;
+}
