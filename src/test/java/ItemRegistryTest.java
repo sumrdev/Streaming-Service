@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import domain.ItemRegistryImpl;
+
 class ItemRegistryTest {
     static ItemRegistryImpl itemRegistry;
 
-     @BeforeAll
+    @BeforeAll
     static void beforeAll() {
         itemRegistry = new ItemRegistryImpl();
         itemRegistry.initialize();
@@ -21,14 +22,15 @@ class ItemRegistryTest {
         assertEquals(itemRegistry.getItemGenre(movieKey)[0], "Crime");
         assertEquals(itemRegistry.getItemRating(movieKey), 9.2);
     }
+
     @Test
     void ItemRegistryStillRunningSeriesTest() {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String serieList = series.get(0);
-        assertEquals(itemRegistry.getItemTitle(serieList),"Twin Peaks");
+        assertEquals(itemRegistry.getItemTitle(serieList), "Twin Peaks");
         assertEquals(itemRegistry.getItemRelease(serieList), 1990);
         assertEquals(itemRegistry.getSeriesEndYear(serieList), 1991);
-        assertEquals(itemRegistry.getItemGenre(serieList)[0],"Crime");
+        assertEquals(itemRegistry.getItemGenre(serieList)[0], "Crime");
         assertEquals(itemRegistry.getItemGenre(serieList)[1], "Drama");
         assertEquals(itemRegistry.getItemGenre(serieList)[2], "Mystery");
         assertEquals(itemRegistry.getItemRating(serieList), 8.8);
@@ -43,9 +45,9 @@ class ItemRegistryTest {
         assertEquals(itemRegistry.getItemRelease(serieList), 2011);
         assertEquals(itemRegistry.getSeriesEndYear(serieList), 0);
         assertEquals(itemRegistry.getItemGenre(serieList)[0], "Action");
-        assertEquals(itemRegistry.getItemGenre(serieList)[1],"Adventure");
+        assertEquals(itemRegistry.getItemGenre(serieList)[1], "Adventure");
         assertEquals(itemRegistry.getItemGenre(serieList)[2], "Drama");
         assertEquals(itemRegistry.getItemRating(serieList), 9.5);
-        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(6),7);
+        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(6), 7);
     }
 }

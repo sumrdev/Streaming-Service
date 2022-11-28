@@ -14,3 +14,11 @@ Button:hover {
   -fx-scale-y: 1.1;
   -fx-scale-z: 1.1;
 }
+
+.transparent {
+  -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}

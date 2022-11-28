@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minWidth="250.0" prefHeight="419.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minWidth="250.0" prefHeight="765.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainMenuController">
    <top>
       <Text fill="#b2b2b2" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="369.984375" BorderPane.alignment="CENTER">
          <font>
@@ -22,9 +22,9 @@
       </Text>
    </top>
    <center>
-      <ScrollPane fitToWidth="true" prefHeight="407.0" prefWidth="707.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="869.0" style="-fx-background-color: transparant;" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane alignment="TOP_CENTER" hgap="10.0" prefHeight="325.0" prefWidth="0.0" vgap="10.0">
+            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="10.0" prefWidth="0.0" style="-fx-background-color: transparant;" styleClass="transparent" vgap="10.0">
                <children>
                   <StackPane alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="0.0" styleClass="item">
                      <children>
@@ -34,74 +34,6 @@
                            </image>
                         </ImageView>
                         <Text fx:id="itemTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 100;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
-                           <StackPane.margin>
-                              <Insets bottom="10.0" />
-                           </StackPane.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <StackPane alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0">
-                     <children>
-                        <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="itemTitle1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
-                           <StackPane.margin>
-                              <Insets bottom="10.0" />
-                           </StackPane.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <StackPane alignment="BOTTOM_CENTER" layoutX="179.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0">
-                     <children>
-                        <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="itemTitle11" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
-                           <StackPane.margin>
-                              <Insets bottom="10.0" />
-                           </StackPane.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <StackPane alignment="BOTTOM_CENTER" layoutX="348.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0">
-                     <children>
-                        <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="itemTitle111" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
-                           <StackPane.margin>
-                              <Insets bottom="10.0" />
-                           </StackPane.margin>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <StackPane alignment="BOTTOM_CENTER" layoutX="517.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0">
-                     <children>
-                        <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="itemTitle1111" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
                            <StackPane.margin>
                               <Insets bottom="10.0" />
                            </StackPane.margin>
