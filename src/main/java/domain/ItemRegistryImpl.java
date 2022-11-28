@@ -23,6 +23,9 @@ public class ItemRegistryImpl implements ItemRegistry {
             String title = data[0];
             int release = Integer.parseInt(data[1].strip());
             String[] genre = data[2].split(",");
+            for (int i = 0; i < genre.length; i++) {
+                genre[i] = genre[i].strip();
+            }
             double rating = Double.parseDouble(data[3].replace(",", "."));
             addMovie(title, genre, rating, release);
         }
@@ -35,8 +38,8 @@ public class ItemRegistryImpl implements ItemRegistry {
                 endYear = Integer.parseInt(data[1].split("-")[1].strip());
             } 
             String[] genre = data[2].split(",");
-            for (String g : genre) {
-                g.strip();
+            for (int i = 0; i < genre.length; i++) {
+                genre[i] = genre[i].strip();
             }
             double rating = Double.parseDouble(data[3].replace(",", "."));
             ArrayList<Integer> seasons = new ArrayList<>();
