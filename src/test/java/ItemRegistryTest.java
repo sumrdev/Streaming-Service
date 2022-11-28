@@ -1,12 +1,9 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import domain.ItemRegistryImpl;
-import domain.Movie;
-import domain.Item;
 class ItemRegistryTest {
     static ItemRegistryImpl itemRegistry;
 
@@ -14,15 +11,41 @@ class ItemRegistryTest {
     static void beforeAll() {
         itemRegistry = new ItemRegistryImpl();
         itemRegistry.initialize();
-        System.out.println("Before all test methods");
     }
 
     @Test
-    void justAnExample() {
-        ArrayList<Item> movies = itemRegistry.getMovieList();
-        Item movie = movies.get(0);
-        assertTrue(movie.getTitle().equals("The Godfather"));
-        assertTrue(movie.getGenre()[0].equals("Crime"));
-        assertTrue(movie.getRating() == 9.2);
+    void ItemRegistryMovieTest() {
+        ArrayList<String> movies = itemRegistry.getMovieKeyList();
+        String movieKey = movies.get(0);
+        assertEquals(itemRegistry.getItemTitle(movieKey), "The Godfather");
+        assertEquals(itemRegistry.getItemGenre(movieKey)[0], "Crime");
+        assertEquals(itemRegistry.getItemRating(movieKey), 9.2);
+    }
+    @Test
+    void ItemRegistryStillRunningSeriesTest() {
+        ArrayList<String> series = itemRegistry.getSeriesKeyList();
+        String serieList = series.get(0);
+        assertEquals(itemRegistry.getItemTitle(serieList),"Twin Peaks");
+        assertEquals(itemRegistry.getItemRelease(serieList), 1990);
+        assertEquals(itemRegistry.getSeriesEndYear(serieList), 1991);
+        assertEquals(itemRegistry.getItemGenre(serieList)[0],"Crime");
+        assertEquals(itemRegistry.getItemGenre(serieList)[1], "Drama");
+        assertEquals(itemRegistry.getItemGenre(serieList)[2], "Mystery");
+        assertEquals(itemRegistry.getItemRating(serieList), 8.8);
+        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(0), 8);
+    }
+
+    @Test
+    void ItemRegistryFinishedSeriesTest() {
+        ArrayList<String> series = itemRegistry.getSeriesKeyList();
+        String serieList = series.get(2);
+        assertEquals(itemRegistry.getItemTitle(serieList), "Game Of Thrones");
+        assertEquals(itemRegistry.getItemRelease(serieList), 2011);
+        assertEquals(itemRegistry.getSeriesEndYear(serieList), 0);
+        assertEquals(itemRegistry.getItemGenre(serieList)[0], "Action");
+        assertEquals(itemRegistry.getItemGenre(serieList)[1],"Adventure");
+        assertEquals(itemRegistry.getItemGenre(serieList)[2], "Drama");
+        assertEquals(itemRegistry.getItemRating(serieList), 9.5);
+        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(6),7);
     }
 }

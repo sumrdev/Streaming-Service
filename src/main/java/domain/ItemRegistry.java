@@ -11,9 +11,27 @@ public interface ItemRegistry {
     
     public HashSet<String> getGenreSet();
 
-    public ArrayList<Item> getSeriesList();
+    // ArrayList<Movie> getMovieList();
 
-    public ArrayList<Item> getMovieList();
+    // ArrayList<Series> getSeriesList();
 
+
+    public ArrayList<String> getMovieKeyList();
+
+    public ArrayList<String> getSeriesKeyList();
+
+    public String getToString(String itemKey);
+
+    public String getItemTitle(String itemKey);
+
+    public String[] getItemGenre(String itemKey);
+
+    public double getItemRating(String itemKey);
+
+    public int getItemRelease(String itemKey);
+
+    public int getSeriesEndYear(String itemKey);
+
+    public ArrayList<Integer> getSeriesSeasons(String itemKey);
 
 }

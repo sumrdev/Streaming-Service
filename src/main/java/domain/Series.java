@@ -5,7 +5,7 @@ public class Series extends Item {
     int endYear;
     ArrayList<Integer> seasons;
     public Series(String title, String[] genre, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
-        super(title, genre, rating);
+        super(title, genre, rating, startYear);
         this.startYear=startYear;
         this.endYear=endYear;
         this.seasons=seasons;
@@ -20,7 +20,7 @@ public class Series extends Item {
         return seasons;
     }
     public String toString(){
-        return title + ", " + startYear + "-" + endYear + ", " + (seasons.size()+1) + " Seasons";
+        return title + "; " + startYear + "-" + endYear + "; " + (seasons.size()+1) + " Seasons";
         }
     }
 

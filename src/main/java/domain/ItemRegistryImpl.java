@@ -4,14 +4,16 @@ import java.util.*;
 import data.DataAccessImpl;
 
 public class ItemRegistryImpl implements ItemRegistry {
-    ArrayList<Item> movieList;
-    ArrayList<Item> seriesList;
     HashSet<String> genreSet;
+    ArrayList<String> movieKeyList;
+    ArrayList<String> seriesKeyList;
+    HashMap<String, Item> itemMap;
 
     public ItemRegistryImpl (){
-        movieList = new ArrayList<>();
-        seriesList = new ArrayList<>();
-        genreSet = new HashSet<>();
+        movieKeyList = new ArrayList<>();
+        seriesKeyList = new ArrayList<>();
+        itemMap = new HashMap<>();
+        genreSet= new HashSet<>();
     }
     public void initialize(){
         DataAccessImpl da = new DataAccessImpl("database");
@@ -49,32 +51,55 @@ public class ItemRegistryImpl implements ItemRegistry {
             addSeries(title, genre, rating, startYear,endYear, seasons);
         }
     }
-    public void addMovie(String title, String[] genres, double rating, int release){
-        Movie movieToBeAdded = new Movie(title, genres, rating, release);
-        movieList.add(movieToBeAdded);
-        for (String genreString : genres){
+    public void addMovie(String title, String[] genre, double rating, int release){
+        Movie movieToBeAdded = new Movie(title, genre, rating, release);
+        itemMap.put(title, movieToBeAdded);
+        movieKeyList.add(title);
+        for (String genreString : genre){
             genreSet.add(genreString);
         }
     }
-    public void addSeries(String title, String[] genres, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
-        Series seriesToBeAdded = new Series(title, genres, rating, startYear, endYear, seasons);
-        seriesList.add(seriesToBeAdded);
-        for (String genreString : genres){
+    public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
+        Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
+        itemMap.put(title,seriesToBeAdded);
+        seriesKeyList.add(title);
+        for (String genreString : genre){
             genreSet.add(genreString);
         }
+    }
+
+    public ArrayList<String> getMovieKeyList(){
+        return movieKeyList;
+    }
+    public ArrayList<String> getSeriesKeyList(){
+        return seriesKeyList;
     }
     public HashSet<String> getGenreSet(){
         return genreSet;
     }
-    
-    public ArrayList<Item> getSeriesList() {
-        return seriesList;
+    public String getToString(String itemKey){
+        return itemMap.get(itemKey).toString();
     }
-
-    public ArrayList<Item> getMovieList() {
-        return movieList;
+    public String getItemTitle(String itemKey){
+        return itemMap.get(itemKey).getTitle();
     }
-
-
+    public String[] getItemGenre(String itemKey){
+        return itemMap.get(itemKey).getGenre();
+    }
+    public double getItemRating(String itemKey){
+        return itemMap.get(itemKey).getRating();
+    }
+    public int getItemRelease(String itemKey){
+        return itemMap.get(itemKey).getRelease();
+    }
+    public int getSeriesStartYear(String itemKey){
+        return itemMap.get(itemKey).getStartYear();
+    }
+    public int getSeriesEndYear(String itemKey){
+        return itemMap.get(itemKey).getEndYear();
+    }
+    public ArrayList<Integer> getSeriesSeasons(String itemKey){
+        return itemMap.get(itemKey).getSeasons();
+    }
 
 }

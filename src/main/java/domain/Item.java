@@ -6,12 +6,15 @@ public abstract class Item {
     String title;
     String[] genre;
     double rating;
+    int releaseYear;
     
-    public Item(String title, String[] genre, double rating){
-        this.title=title;
-        this.genre=genre;
-        this.rating=rating;
+    public Item(String title, String[] genre, double rating, int releaseYear) {
+        this.title = title;
+        this.genre = genre;
+        this.rating = rating;
+        this.releaseYear = releaseYear;
     }
+
     public String getTitle(){
         return title;
     }
@@ -22,9 +25,9 @@ public abstract class Item {
         return rating;  
     }
     public int getRelease(){
-        //should not happen
-        return 1;
+        return releaseYear;
     }
+
     public int getStartYear(){
         //should not happen
         return 1;
@@ -37,5 +40,4 @@ public abstract class Item {
         //should not happen
         return null;
     }
-
 }
