@@ -49,7 +49,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <compress>2</compress>
-                            <mainClass>main/presentation.MainWindow</mainClass>
+                            <mainClass>presentation.MainWindow</mainClass>
                             <noHeaderFiles>true</noHeaderFiles>
                             <stripDebug>true</stripDebug>
                             <noManPages>true</noManPages>
