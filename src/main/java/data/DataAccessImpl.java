@@ -32,6 +32,8 @@ public class DataAccessImpl implements DataAccess {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("IO Exception while closing file");
+        } catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
         }
         return data;
     }
