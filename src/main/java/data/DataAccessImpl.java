@@ -24,7 +24,7 @@ public class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("database/" + dataField + ".txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(this.path + "/" + dataField + ".txt"));
             reader.lines().forEach(data::add);
             reader.close();
         } catch (FileNotFoundException e) {
@@ -41,8 +41,8 @@ public class DataAccessImpl implements DataAccess {
     // Save data to file
     // Throws an exception if there is an error writing to the file
     @Override
-    public void save(List<String> data) {
-        File f = new File(this.path);
+    public void save(String dataField, List<String> data) {
+        File f = new File(this.path + "/" + dataField + ".txt");
         PrintWriter pw;
         try {
             pw = new PrintWriter(f);
