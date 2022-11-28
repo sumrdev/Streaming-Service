@@ -40,4 +40,12 @@ public abstract class Item {
         //should not happen
         return null;
     }
+
+    public String genreToString(){
+        String genreString = "";
+        for (String string : genre){
+            genreString += string + ",";
+        }
+        return genreString;
+    }
 }

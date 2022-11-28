@@ -19,8 +19,16 @@ public class Series extends Item {
     public ArrayList<Integer> getSeasons(){
         return seasons;
     }
-    public String toString(){
-        return title + "; " + startYear + "-" + endYear + "; " + (seasons.size()+1) + " Seasons";
+
+    public String seasonsToString(){
+        String seasonsString = "";
+        for (int i = 0; i < genre.length; i++) {
+            seasonsString += (i+1) + "-" +  seasons.get(i) + ",";
         }
+        return seasonsString;
     }
+    public String toString(){
+        return title + ";" + startYear + "-" + endYear + ";" + genreToString() + ";"+ rating + ";" + seasonsToString() + ";";
+    }
+}
 

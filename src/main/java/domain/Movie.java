@@ -9,7 +9,8 @@ public class Movie extends Item {
     public int getRelease(){
         return release;
     }
+
     public String toString(){
-        return title + ", " + release;
+        return title + "; " + release + ";" + genreToString() + ";" + rating + ";";
     }
 }
