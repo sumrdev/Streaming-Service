@@ -7,7 +7,7 @@ public class User {
     String password;
     ArrayList<Item> favoriteItems;
 
-    public User(String username, String password, String[] favoriteGenre){
+    public User(String username, String password){
         this.username=username;
         this.password=password;
         this.favoriteItems=new ArrayList<Item>();
