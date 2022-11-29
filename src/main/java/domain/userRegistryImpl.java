@@ -17,11 +17,8 @@ public class userRegistryImpl implements userRegistry {
         List<String> userData = da.load("users");
         for (String s : userData){
             String[] data = s.split(";");
-            ArrayList<String> favorites = new ArrayList<>();
-            for (String dataString : data){
-                favorites.add(dataString);
-            }
-            favorites.remove(0);
+            String[] favorites = data[1].split(",");
+
             addUser(data[0], favorites);
         }
     }
@@ -37,7 +34,7 @@ public class userRegistryImpl implements userRegistry {
     }
 
     @Override
-    public void addUser(String username, ArrayList<String> favorites) {
+    public void addUser(String username, String[] favorites) {
         if (userNameList.contains(username)){
 
         } else{
@@ -71,7 +68,7 @@ public class userRegistryImpl implements userRegistry {
         for (User user : userList){
             String saveString = user.getUsername()+"; ";
             for (String favoriteKey : user.getFavoriteItems()){
-                saveString = saveString + favoriteKey + "; ";
+                saveString = saveString + favoriteKey + ", ";
             }
             listToBeSaved.add(saveString);
         }
