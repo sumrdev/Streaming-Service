@@ -6,7 +6,7 @@ public class User {
     String username;
     HashSet<String> favoriteItems;
 
-    public User(String username, String password){
+    public User(String username){
         this.username=username;
         this.favoriteItems=new HashSet<String>();
     }
