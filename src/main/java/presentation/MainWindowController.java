@@ -44,7 +44,6 @@ public class MainWindowController {
             this.loginMenuController = loginMenu.getController();
             this.ir = new ItemRegistryImpl();
             this.ir.initialize();
-            this.homeMenuController.loadItems(this.ir, this.ir.getSeriesKeyList());
             this.homeMenuController.loadFilters(this.ir);
             this.navigateHome();
         } catch (Exception e) {
