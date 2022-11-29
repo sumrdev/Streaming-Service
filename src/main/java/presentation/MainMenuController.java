@@ -1,17 +1,19 @@
 package presentation;
 
-import java.net.URL;
+import java.security.KeyStore.Entry;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import domain.ItemRegistry;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -28,7 +30,11 @@ public class MainMenuController {
     @FXML
     ChoiceBox<String> choiceCategory;
 
+    @FXML
+    TextField searchBox;
+
     ItemRegistry ir = null;
+    List<String> currentItems = null;
 
     public void loadItems(ItemRegistry ir, List<String> keyList) {
         itemGrid.getChildren().clear();
@@ -66,7 +72,7 @@ public class MainMenuController {
         choiceCategory.getSelectionModel().selectFirst();
     }
 
-    public void updateItems() {
+    public void updateItemFilters() {
         if (ir == null)
             return;
         String genre = choiceGenre.getValue();
@@ -86,6 +92,51 @@ public class MainMenuController {
                 items = items.filter(item -> ir.getSeriesSeasons(item) != null);
             }
         }
-        loadItems(ir, items.toList());
+        currentItems = items.toList();
+        loadItems(ir, currentItems);
+    }
+
+    public void search(ActionEvent e) {
+        String search = searchBox.getText();
+        HashMap<String, Integer> searchResults = new HashMap<>();
+        for (String item : currentItems) {
+            searchResults.put(item, calculate(item, search));
+        }
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(searchResults.entrySet());
+        list.sort((o1, o2) -> o1.getValue() - o2.getValue());
+
+        loadItems(ir, list.stream().map(entry -> entry.getKey()).toList());
+    }
+
+    // by Deep Jain Levenshtein Distance
+    // https://www.baeldung.com/java-levenshtein-distance
+    static int calculate(String x, String y) {
+        int[][] dp = new int[x.length() + 1][y.length() + 1];
+
+        for (int i = 0; i <= x.length(); i++) {
+            for (int j = 0; j <= y.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else {
+                    dp[i][j] = min(dp[i - 1][j - 1]
+                            + costOfSubstitution(x.charAt(i - 1), y.charAt(j - 1)),
+                            dp[i - 1][j] + 1,
+                            dp[i][j - 1] + 1);
+                }
+            }
+        }
+
+        return dp[x.length()][y.length()];
+    }
+
+    public static int costOfSubstitution(char a, char b) {
+        return a == b ? 0 : 1;
+    }
+
+    public static int min(int... numbers) {
+        return Arrays.stream(numbers)
+                .min().orElse(Integer.MAX_VALUE);
     }
 }

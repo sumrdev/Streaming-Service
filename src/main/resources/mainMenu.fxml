@@ -3,11 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -50,10 +52,21 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
+            <Region prefHeight="200.0" prefWidth="50.0" />
+            <VBox alignment="CENTER" layoutX="668.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
+                  <TextField fx:id="searchBox" onAction="#search" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <Region prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre" />
-                  <ChoiceBox fx:id="choiceGenre" prefWidth="150.0" onAction="#updateItems"/>
+                  <ChoiceBox fx:id="choiceGenre" onAction="#updateItemFilters" prefWidth="150.0" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -62,9 +75,10 @@
             <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category" />
-                  <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" onAction="#updateItems" />
+                  <ChoiceBox fx:id="choiceCategory" onAction="#updateItemFilters" prefWidth="150.0" />
                </children>
             </VBox>
+            <Region prefHeight="200.0" prefWidth="50.0" />
          </children>
       </HBox>
    </top>
