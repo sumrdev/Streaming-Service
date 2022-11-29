@@ -27,7 +27,7 @@ public class DataAccessImpl implements DataAccess {
         List<String> data = new ArrayList<>();
         try {
             FileInputStream fis = new FileInputStream(new File(path + "/" + dataField + ".txt"));
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
             BufferedReader reader = new BufferedReader(isr);
             reader.lines().forEach(data::add);
             reader.close();
