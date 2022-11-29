@@ -27,6 +27,8 @@ public class Series extends Item {
         }
         return seasonsString;
     }
+
+    @Override
     public String toString(){
         return title + ";" + startYear + "-" + endYear + ";" + genreToString() + ";"+ rating + ";" + seasonsToString() + ";";
     }

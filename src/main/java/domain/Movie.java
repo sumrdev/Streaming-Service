@@ -10,6 +10,7 @@ public class Movie extends Item {
         return release;
     }
 
+    @Override
     public String toString(){
         return title + "; " + release + ";" + genreToString() + ";" + rating + ";";
     }

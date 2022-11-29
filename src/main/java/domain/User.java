@@ -31,7 +31,7 @@ public class User {
     public String favoriteItemsToString(){
         String favoriteItemsString = "";
         for (Item item : favoriteItems) {
-            favoriteItemsString += item.getTitle() + ",";
+            favoriteItemsString += item.toString();
         }
         return favoriteItemsString;
     }
