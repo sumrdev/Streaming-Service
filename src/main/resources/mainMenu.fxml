@@ -53,7 +53,7 @@
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre" />
-                  <ChoiceBox fx:id="choiceGenre" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceGenre" prefWidth="150.0" onAction="#updateItems"/>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -62,7 +62,7 @@
             <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category" />
-                  <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" onAction="#updateItems" />
                </children>
             </VBox>
          </children>
