@@ -34,6 +34,7 @@ public class MainWindowController {
 
     public void setup() {
         try {
+
             this.scene = (BorderPane) navButtonHome.getScene().getRoot();
             FXMLLoader homeMenu = new FXMLLoader(getClass().getClassLoader().getResource("mainMenu.fxml"));
             FXMLLoader loginMenu = new FXMLLoader(getClass().getClassLoader().getResource("loginMenu.fxml"));
@@ -44,9 +45,10 @@ public class MainWindowController {
             this.ir = new ItemRegistryImpl();
             this.ir.initialize();
             this.homeMenuController.loadItems(this.ir);
+            this.homeMenuController.loadFilters(this.ir);
             this.navigateHome();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 

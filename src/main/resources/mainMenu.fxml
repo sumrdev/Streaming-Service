@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane minWidth="250.0" prefHeight="765.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainMenuController">
-   <top>
-      <Text fill="#b2b2b2" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" textAlignment="CENTER" wrappingWidth="369.984375" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="47.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets bottom="4.0" top="4.0" />
-         </BorderPane.margin>
-      </Text>
-   </top>
    <center>
-      <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="869.0" style="-fx-background-color: transparant;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="869.0" styleClass="transparent" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="10.0" prefWidth="0.0" style="-fx-background-color: transparant;" styleClass="transparent" vgap="10.0">
+            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="10.0" prefWidth="0.0" styleClass="transparent" vgap="10.0">
                <children>
                   <StackPane alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="0.0" styleClass="item">
                      <children>
@@ -54,4 +47,25 @@
          </padding>
       </ScrollPane>
    </center>
+   <top>
+      <HBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre" />
+                  <ChoiceBox fx:id="choiceGenre" prefWidth="150.0" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category" />
+                  <ChoiceBox fx:id="choiceCategory" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>
