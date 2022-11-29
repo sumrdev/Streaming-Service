@@ -31,7 +31,6 @@ public class MainMenuController {
     ItemRegistry ir = null;
 
     public void loadItems(ItemRegistry ir, List<String> keyList) {
-        this.ir = ir;
         itemGrid.getChildren().clear();
         keyList.forEach(item -> {
             try {
@@ -57,8 +56,11 @@ public class MainMenuController {
     }
 
     public void loadFilters(ItemRegistry ir) {
+        this.ir = ir;
         String[] genres = ir.getGenreSet().stream().toArray(String[]::new);
+        choiceGenre.getItems().addAll("All");
         choiceGenre.getItems().addAll(genres);
+        choiceGenre.getSelectionModel().selectFirst();
 
         choiceCategory.getItems().addAll("Movies", "Series", "All");
         choiceCategory.getSelectionModel().selectFirst();
@@ -72,8 +74,11 @@ public class MainMenuController {
 
         Stream<String> items = Stream.concat(ir.getMovieKeyList().stream(), ir.getSeriesKeyList().stream());
         if (genre != null) {
-            items = items.filter(item -> Arrays.asList(ir.getItemGenre(item)).contains(genre));
+            if (!genre.equals("All")) {
+                items = items.filter(item -> Arrays.asList(ir.getItemGenre(item)).contains(genre));
+            }
         }
+
         if (category != null) {
             if (category.equals("Movies")) {
                 items = items.filter(item -> ir.getSeriesSeasons(item) == null);
