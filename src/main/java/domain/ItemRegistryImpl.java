@@ -102,4 +102,8 @@ public class ItemRegistryImpl implements ItemRegistry {
         return itemMap.get(itemKey).getSeasons();
     }
 
+    public String getItemString(String itemKey){
+        return itemMap.get(itemKey).toString();
+    }
+
 }

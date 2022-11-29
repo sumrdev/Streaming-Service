@@ -43,8 +43,9 @@ public abstract class Item {
 
     public String genreToString(){
         String genreString = "";
-        for (String string : genre){
-            genreString += string + ",";
+        for (int i = 0; i < genre.length; i++) {
+            if(i==genre.length-1) genreString += genre[i];
+            else genreString += genre[i] + ",";
         }
         return genreString;
     }

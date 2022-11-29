@@ -2,9 +2,11 @@ package data;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,9 @@ public class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.path + "/" + dataField + ".txt"));
+            FileInputStream fis = new FileInputStream(new File(path + "/" + dataField + ".txt"));
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader reader = new BufferedReader(isr);
             reader.lines().forEach(data::add);
             reader.close();
         } catch (FileNotFoundException e) {
