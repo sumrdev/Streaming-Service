@@ -102,6 +102,14 @@ public class MainMenuController {
         for (String item : currentItems) {
             searchResults.put(item, calculate(item, search));
         }
+
+        //add search string that cantains the search string to the list
+        for (String item : currentItems) {
+            if (item.toLowerCase().contains(search.toLowerCase())) {
+                searchResults.put(item, 0);
+            }
+        }
+        
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(searchResults.entrySet());
         list.sort((o1, o2) -> o1.getValue() - o2.getValue());
 
