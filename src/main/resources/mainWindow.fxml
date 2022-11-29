@@ -16,7 +16,7 @@
             <Region prefHeight="0.0" prefWidth="50.0" />
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Steaming-service" textOrigin="TOP">
                <font>
-                  <Font size="24.0" />
+                  <Font name="Segoe UI Bold" size="24.0" />
                </font>
                <HBox.margin>
                   <Insets />
@@ -28,7 +28,7 @@
                   <Insets bottom="6.0" top="6.0" />
                </HBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="SansSerif Bold" size="18.0" />
                </font>
                <padding>
                   <Insets top="2.0" />
@@ -39,7 +39,7 @@
                   <Insets bottom="6.0" left="8.0" top="6.0" />
                </HBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <padding>
                   <Insets top="2.0" />

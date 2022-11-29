@@ -8,7 +8,7 @@ Button {
 }
 
 Button:hover {
-  -fx-text-fill: #575757;
+  -fx-text-fill: #dadada;
 }
 .active {
   -fx-background-color: #333946;
