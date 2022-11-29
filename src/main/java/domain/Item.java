@@ -49,4 +49,8 @@ public abstract class Item {
         }
         return genreString;
     }
+
+    public String toString(){
+        return title + "; " + releaseYear + ";" + genreToString() + ";" + rating + ";";
+    }
 }

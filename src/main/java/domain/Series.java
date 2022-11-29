@@ -22,15 +22,16 @@ public class Series extends Item {
 
     public String seasonsToString(){
         String seasonsString = "";
-        for (int i = 0; i < genre.length; i++) {
-            seasonsString += (i+1) + "-" +  seasons.get(i) + ",";
+        for (int i = 0; i < genre.length-1; i++) {
+            if(i==genre.length-2) seasonsString += (i+1) + "-" +seasons.get(i);
+            else seasonsString += (i+1) + "-" +  seasons.get(i) + ",";
         }
         return seasonsString;
     }
 
     @Override
     public String toString(){
-        return title + ";" + startYear + "-" + endYear + ";" + genreToString() + ";"+ rating + ";" + seasonsToString() + ";";
+        return title + ";" + startYear + "-" + endYear + ";" + genreToString() + ";"+ String.valueOf(rating).replace(".", ",") + ";" + seasonsToString() + ";";
     }
 }
 
