@@ -1,43 +1,38 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class User {
     String username;
-    String password;
-    ArrayList<Item> favoriteItems;
+    HashSet<String> favoriteItems;
 
     public User(String username, String password){
         this.username=username;
-        this.password=password;
-        this.favoriteItems=new ArrayList<Item>();
+        this.favoriteItems=new HashSet<String>();
     }
 
     public String getUsername(){
         return username;
     }
-    public String getPassword(){
-        return password;
-    }
-    public ArrayList<Item> getFavoriteItems(){
+    public HashSet<String> getFavoriteItems(){
         return favoriteItems;
     }
-    public void addFavoriteItem(Item item){
-        favoriteItems.add(item);
+    public void addFavoriteItem(String itemKey){
+        favoriteItems.add(itemKey);
     }
-    public void removeFavoriteItem(Item item){
-        favoriteItems.remove(item);
+    public void removeFavoriteItem(String itemKey){
+        favoriteItems.remove(itemKey);
     }
     public String favoriteItemsToString(){
         String favoriteItemsString = "";
-        for (Item item : favoriteItems) {
-            favoriteItemsString += item.toString();
+        for (String itemKey : favoriteItems) {
+            favoriteItemsString += itemKey + ",";
         }
         return favoriteItemsString;
     }
 
     public String toString(){
-        return username + ";" + password + ";"+ favoriteItemsToString() + ";";
+        return username + ";" + favoriteItemsToString() + ";";
     }
 
 
