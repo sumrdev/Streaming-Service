@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import domain.ItemRegistry;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +20,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class MainMenuController {
     @FXML
@@ -51,13 +57,70 @@ public class MainMenuController {
                 }
                 image.setImage(img);
 
-                Text text = (Text) itemPane.getChildren().get(1);
+                Text text = (Text) itemPane.getChildren().get(2);
                 text.setText(item);
                 itemGrid.getChildren().add(itemPane);
+
+                addScaleFadeTransition(itemPane, 1.1);
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        });
+    }
+
+    public void addScaleFadeTransition(StackPane itemPane, double maxScaleSize) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(itemPane);
+        st.setDuration(Duration.millis(200));
+        st.setInterpolator(Interpolator.EASE_BOTH);
+
+        FadeTransition ftText = new FadeTransition();
+        FadeTransition ftRegion = new FadeTransition();
+        Region r = (Region) itemPane.getChildren().get(1);
+        Text text = (Text) itemPane.getChildren().get(2);
+        ftRegion.setNode(r);
+        ftText.setNode(text);
+        ftRegion.setDuration(Duration.millis(200));
+        ftText.setDuration(Duration.millis(200));
+        ftRegion.setInterpolator(Interpolator.EASE_BOTH);
+        ftText.setInterpolator(Interpolator.EASE_BOTH);
+
+        itemPane.setOnMouseEntered(e -> {
+            ftRegion.stop();
+            ftRegion.setFromValue(r.getOpacity());
+            ftRegion.setToValue(0.75);
+            ftRegion.play();
+
+            ftText.stop();
+            ftText.setFromValue(text.getOpacity());
+            ftText.setToValue(1);
+            ftText.play();
+
+            st.stop();
+            st.setFromX(itemPane.getScaleX());
+            st.setFromY(itemPane.getScaleY());
+            st.setToX(maxScaleSize);
+            st.setToY(maxScaleSize);
+            st.play();
+        });
+        itemPane.setOnMouseExited(e -> {
+            ftRegion.stop();
+            ftRegion.setFromValue(r.getOpacity());
+            ftRegion.setToValue(0);
+            ftRegion.play();
+
+            ftText.stop();
+            ftText.setFromValue(text.getOpacity());
+            ftText.setToValue(0);
+            ftText.play();
+
+            st.stop();
+            st.setFromX(itemPane.getScaleX());
+            st.setFromY(itemPane.getScaleY());
+            st.setToX(1f);
+            st.setToY(1f);
+            st.play();
         });
     }
 
@@ -100,16 +163,16 @@ public class MainMenuController {
         String search = searchBox.getText();
         HashMap<String, Integer> searchResults = new HashMap<>();
         for (String item : currentItems) {
-            searchResults.put(item, calculate(item, search));
+            searchResults.put(item, calculate(item, search) * 10);
         }
 
-        //add search string that cantains the search string to the list
+        // add search string that cantains the search string to the list
         for (String item : currentItems) {
             if (item.toLowerCase().contains(search.toLowerCase())) {
-                searchResults.put(item, 0);
+                searchResults.put(item, calculate(item, search));
             }
         }
-        
+
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(searchResults.entrySet());
         list.sort((o1, o2) -> o1.getValue() - o2.getValue());
 

@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'open-sans';
-  src: url('fonts/OpenSans-Regular.ttf');
+  font-family: "open-sans";
+  src: url("fonts/OpenSans-Regular.ttf");
 }
 
 Button {
@@ -14,12 +14,6 @@ Button:hover {
   -fx-background-color: #333946;
 }
 
-.item:hover {
-  -fx-scale-x: 1.1;
-  -fx-scale-y: 1.1;
-  -fx-scale-z: 1.1;
-}
-
 .transparent {
   -fx-background-color: transparent;
 }
@@ -29,5 +23,5 @@ Button:hover {
 }
 
 .regular {
-  -fx-font-family: 'open-sans';
+  -fx-font-family: "open-sans";
 }

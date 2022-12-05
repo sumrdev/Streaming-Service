@@ -19,7 +19,7 @@
    <center>
       <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="869.0" styleClass="transparent" BorderPane.alignment="CENTER">
          <content>
-            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="10.0" prefWidth="0.0" styleClass="transparent" vgap="10.0">
+            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="15.0" prefWidth="0.0" styleClass="transparent" vgap="15.0">
                <children>
                   <StackPane alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="0.0" styleClass="item">
                      <children>

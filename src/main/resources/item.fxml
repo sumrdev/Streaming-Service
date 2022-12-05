@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -14,12 +15,13 @@
             <Image url="@2001%20A%20Space%20Odyssey.jpg" />
          </image>
       </ImageView>
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2001 A space odyssey" wrappingWidth="129.35986328125">
+      <Region opacity="0.0" style="-fx-background-color: black;" />
+      <Text fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="129.35986328125">
          <font>
-            <Font size="13.0" />
+            <Font size="22.0" />
          </font>
          <StackPane.margin>
-            <Insets bottom="10.0" />
+            <Insets bottom="20.0" />
          </StackPane.margin>
       </Text>
    </children>
