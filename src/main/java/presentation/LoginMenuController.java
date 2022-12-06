@@ -1,4 +1,5 @@
 package presentation;
+
 import javafx.fxml.FXML;
 import domain.UserRegistry;
 import domain.ItemRegistry;
@@ -16,8 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 public class LoginMenuController {
-    //main Panes
+    // main Panes
     @FXML
     HBox userPane;
     @FXML
@@ -25,15 +27,15 @@ public class LoginMenuController {
     @FXML
     HBox userCreation;
 
-    //when logged in (userPane)
+    // when logged in (userPane)
     @FXML
     FlowPane favoritePane;
 
-    //when choosing user (userSelect)
+    // when choosing user (userSelect)
     @FXML
     FlowPane currentUsers;
 
-    //when creating user (userCreation)
+    // when creating user (userCreation)
     @FXML
     TextField usernameInput;
 
@@ -81,7 +83,6 @@ public class LoginMenuController {
                 text.setText(item);
                 favoritePane.getChildren().add(itemPane);
 
-
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -89,20 +90,39 @@ public class LoginMenuController {
     }
 
     public void showUserCreation() {
-        userCreation.setVisible(true);
+        selectView("userCreation");
     }
 
     public void createNewUser() {
         ur.addUser(usernameInput.getText());
         loadCurrentUsers();
-        userCreation.setVisible(false);
+        selectView("userSelect");
     }
 
     public void selectUser(String username) {
         ur.selectUser(username);
-        userSelect.setVisible(false);
         loadFavorites(ur.getFavoriteItems(username));
+        selectView("userPane");
+    }
+
+    public void selectView(String s) {
+        switch (s) {
+            case "userPane":
+                userPane.setVisible(true);
+                userSelect.setVisible(false);
+                userCreation.setVisible(false);
+                break;
+            case "userSelect":
+                userPane.setVisible(false);
+                userSelect.setVisible(true);
+                userCreation.setVisible(false);
+                break;
+            case "userCreation":
+                userPane.setVisible(false);
+                userSelect.setVisible(false);
+                userCreation.setVisible(true);
+                break;
+        }
     }
 
 }
-
