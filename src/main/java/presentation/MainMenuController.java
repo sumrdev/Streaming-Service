@@ -131,7 +131,7 @@ public class MainMenuController {
         choiceGenre.getItems().addAll(genres);
         choiceGenre.getSelectionModel().selectFirst();
 
-        choiceCategory.getItems().addAll("Movies", "Series", "All");
+        choiceCategory.getItems().addAll("All", "Series", "Movies");
         choiceCategory.getSelectionModel().selectFirst();
     }
 
