@@ -19,7 +19,7 @@ class UserTest {
 
     @Test
     void userGetUsername() {
-        assertEquals("TestUser", userRegistry.userMap.get(userRegistry.getUsername("TestUser")) );
+        assertEquals("TestUser", userRegistry.userMap.get(userRegistry.getUsername("TestUser")).getUsername());
     }
 
     @Test

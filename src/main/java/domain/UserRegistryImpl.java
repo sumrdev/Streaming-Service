@@ -19,8 +19,7 @@ public class UserRegistryImpl implements UserRegistry {
         for (String s : userData){
             String[] data = s.split(";");
             if(data.length == 1) addUser(data[0]);
-            else if (data.length == 2)
-            addUser(data[0], data[1].split(","));
+            else if (data.length == 2) addUser(data[0], data[1].split(","));
         }
     }
 
