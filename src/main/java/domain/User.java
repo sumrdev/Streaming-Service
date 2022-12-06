@@ -23,15 +23,22 @@ public class User {
     public void removeFavoriteItem(String itemKey){
         favoriteItems.remove(itemKey);
     }
-    public String favoriteItemsToString(){
+    private String favoriteItemsToString(){
         String favoriteItemsString = "";
+        int len = favoriteItems.size();
+        int i = 0;
         for (String itemKey : favoriteItems) {
+            i++;
+            if (i == len) {
+                favoriteItemsString += itemKey;
+            } else
             favoriteItemsString += itemKey + ",";
         }
         return favoriteItemsString;
     }
 
     public String toString(){
+        if(favoriteItems.isEmpty()) return username + ";";
         return username + ";" + favoriteItemsToString() + ";";
     }
 

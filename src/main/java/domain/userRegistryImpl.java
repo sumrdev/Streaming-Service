@@ -3,10 +3,11 @@ package domain;
 import java.util.*;
 import data.DataAccessImpl;
 
-public class userRegistryImpl implements userRegistry {
-    HashMap<String, User> userMap;
+public class UserRegistryImpl implements UserRegistry {
+    public HashMap<String, User> userMap;
     ArrayList<String> userNameList;
-    public userRegistryImpl(){
+    String currentUser = null;
+    public UserRegistryImpl(){
         userMap = new HashMap<>();
         userNameList = new ArrayList<>();
     }
@@ -17,25 +18,26 @@ public class userRegistryImpl implements userRegistry {
         List<String> userData = da.load("users");
         for (String s : userData){
             String[] data = s.split(";");
-            String[] favorites = data[1].split(",");
-            addUser(data[0], favorites);
+            if(data.length == 1) addUser(data[0]);
+            else if (data.length == 2)
+            addUser(data[0], data[1].split(","));
         }
     }
 
     @Override
     public void addUser(String username) {
         if (userNameList.contains(username)){
-
-        } else{
-        userMap.put(username, new User(username));
-        userNameList.add(username);
-            }
+            throw new IllegalArgumentException("User already exists");
+        } else {
+            userMap.put(username, new User(username));
+            userNameList.add(username);
+        }
     }
 
     @Override
     public void addUser(String username, String[] favorites) {
         if (userNameList.contains(username)){
-
+            throw new IllegalArgumentException("User already exists");
         } else{
             User user = new User(username);
             for (String favorite : favorites){
@@ -45,31 +47,24 @@ public class userRegistryImpl implements userRegistry {
             userNameList.add(username);
         }
     }
-        
 
     @Override
     public void removeUser(String username) {
         if (userMap.containsKey(username)){
             userMap.remove(username);
+            userNameList.remove(username);
         }
         
     }
-
-    
 
     @Override
     public void save() {
         DataAccessImpl da = new DataAccessImpl("database");
         ArrayList<String> listToBeSaved = new ArrayList<>();
         for (User user : userMap.values()){
-            String saveString = user.getUsername()+"; ";
-            for (String favoriteKey : user.getFavoriteItems()){
-                saveString = saveString + favoriteKey + ", ";
-            }
-            listToBeSaved.add(saveString);
+            listToBeSaved.add(user.toString());
         }
         da.save("users", listToBeSaved);
-
     }
 
     public String getUsername(String userKey){
@@ -92,6 +87,8 @@ public class userRegistryImpl implements userRegistry {
         return userNameList;
     }
 
-
+    public void selectUser(String userKey){
+        currentUser = userKey;
+    }
 
 }
