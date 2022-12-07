@@ -24,7 +24,7 @@ public class UserRegistryImpl implements UserRegistry {
     }
 
     @Override
-    public void addUser(String username) {
+    public void addUser(String username) throws IllegalArgumentException {
         if (userNameList.contains(username)){
             throw new IllegalArgumentException("User already exists");
         } else {
@@ -34,7 +34,7 @@ public class UserRegistryImpl implements UserRegistry {
     }
 
     @Override
-    public void addUser(String username, String[] favorites) {
+    public void addUser(String username, String[] favorites) throws IllegalArgumentException {
         if (userNameList.contains(username)){
             throw new IllegalArgumentException("User already exists");
         } else{
