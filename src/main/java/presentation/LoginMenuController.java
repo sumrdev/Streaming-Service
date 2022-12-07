@@ -67,7 +67,7 @@ public class LoginMenuController {
 
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/avatar.png")));
             avatar.getChildren().add(img);
-            Button delete = new Button("X");
+            Button delete = new Button("✖");
             delete.setOnAction(e -> deleteUser(name));
             avatar.getChildren().add(delete);
             StackPane.setAlignment(delete, javafx.geometry.Pos.TOP_RIGHT);
