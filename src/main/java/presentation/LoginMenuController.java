@@ -5,6 +5,7 @@ import domain.UserRegistry;
 import domain.ItemRegistry;
 import domain.UserRegistryImpl;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
@@ -21,11 +22,11 @@ import javafx.fxml.FXMLLoader;
 public class LoginMenuController {
     // main Panes
     @FXML
-    HBox userPane;
+    VBox userPane;
     @FXML
-    HBox userSelect;
+    VBox userSelect;
     @FXML
-    HBox userCreation;
+    VBox userCreation;
 
     // when logged in (userPane)
     @FXML
@@ -44,20 +45,38 @@ public class LoginMenuController {
 
     public void initialize(ItemRegistry ir) {
         this.ir = ir;
-        UserRegistry ur = new UserRegistryImpl();
+        ur = new UserRegistryImpl();
         ur.initialize();
+        loadCurrentUsers();
     }
 
     public void loadCurrentUsers() {
         currentUsers.getChildren().clear();
+        if (ur.getUsernameList().size() == 0) {
+            Text noUsersText = new Text("There are no users yet!");
+            noUsersText.setStyle("-fx-font: 40 open-sans;");
+            noUsersText.setFill(javafx.scene.paint.Color.WHITE);
+            currentUsers.getChildren().add(noUsersText);
+            return;
+        }
         for (String name : ur.getUsernameList()) {
             VBox v = new VBox();
             v.setAlignment(javafx.geometry.Pos.CENTER);
+
+            StackPane avatar = new StackPane();
+
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/avatar.png")));
-            v.getChildren().add(img);
+            avatar.getChildren().add(img);
+            Button delete = new Button("X");
+            delete.setOnAction(e -> deleteUser(name));
+            avatar.getChildren().add(delete);
+            StackPane.setAlignment(delete, javafx.geometry.Pos.TOP_RIGHT);
+
+            v.getChildren().add(avatar);
 
             Text username = new Text(name);
-            username.setText(name);
+            username.setStyle("-fx-font: 20 open-sans;");
+            username.setFill(javafx.scene.paint.Color.WHITE);
             v.getChildren().add(username);
             v.setOnMouseClicked(e -> selectUser(name));
             currentUsers.getChildren().add(v);
@@ -94,7 +113,15 @@ public class LoginMenuController {
     }
 
     public void createNewUser() {
-        ur.addUser(usernameInput.getText());
+        System.out.println("he" + usernameInput.getText());
+        if (usernameInput.getText().equals(""))
+            return;
+        try {
+            ur.addUser(usernameInput.getText());
+            ur.save();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         loadCurrentUsers();
         selectView("userSelect");
     }
@@ -103,6 +130,11 @@ public class LoginMenuController {
         ur.selectUser(username);
         loadFavorites(ur.getFavoriteItems(username));
         selectView("userPane");
+    }
+
+    public void deleteUser(String username) {
+        ur.removeUser(username);
+        loadCurrentUsers();
     }
 
     public void selectView(String s) {

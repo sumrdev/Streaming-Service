@@ -18,7 +18,7 @@ public class MainWindowController {
     Button navButtonLogin;
 
     Parent loginMenu = null;
-    Parent loginMenuController = null;
+    LoginMenuController loginMenuController = null;
     Parent homeMenu = null;
     MainMenuController homeMenuController = null;
     BorderPane scene;
@@ -45,6 +45,7 @@ public class MainWindowController {
             this.ir = new ItemRegistryImpl();
             this.ir.initialize();
             this.homeMenuController.loadFilters(this.ir);
+            this.loginMenuController.initialize(this.ir);
             this.navigateHome();
         } catch (Exception e) {
             System.out.println(e);

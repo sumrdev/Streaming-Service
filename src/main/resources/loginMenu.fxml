@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.LoginMenuController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="536.0" prefWidth="756.0" style="-fx-background-color: #141b29;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.LoginMenuController">
    <children>
       <VBox fx:id="userPane" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
@@ -40,19 +40,32 @@
          <children>
             <FlowPane fx:id="currentUsers" alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" layoutX="235.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@avatar.png" />
-                           </image>
-                        </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@avatar.png" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" text="-" StackPane.alignment="TOP_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets right="-10.0" top="-10.0" />
+                                 </StackPane.margin>
+                              </Button>
+                           </children>
+                        </StackPane>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
                      </children>
                   </VBox>
                </children>
             </FlowPane>
-            <Button mnemonicParsing="false" text="Add user" />
+            <Button mnemonicParsing="false" onAction="#showUserCreation" text="Add user" />
          </children>
       </VBox>
       <VBox fx:id="userCreation" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
@@ -75,7 +88,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Add user" />
+            <Button mnemonicParsing="false" onAction="#createNewUser" text="Add user" />
          </children>
       </VBox>
    </children>
