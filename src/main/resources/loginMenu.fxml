@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,15 +15,24 @@
 
 <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="536.0" prefWidth="756.0" style="-fx-background-color: #141b29;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.LoginMenuController">
    <children>
-      <VBox fx:id="userPane" prefHeight="200.0" prefWidth="100.0" visible="false">
+      <VBox fx:id="userPane" prefHeight="200.0" prefWidth="100.0">
          <children>
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="600.0">
                <children>
+                  <Region prefHeight="200.0" prefWidth="10.0" HBox.hgrow="ALWAYS" />
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="User: ">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Text>
+                  <Text fx:id="usernameText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <Region prefHeight="200.0" prefWidth="20.0" />
                </children>
             </HBox>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Favorites:">
@@ -36,7 +46,7 @@
             <FlowPane fx:id="favoritePane" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
-      <VBox fx:id="userSelect" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="userSelect" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <FlowPane fx:id="currentUsers" alignment="CENTER" columnHalignment="CENTER" hgap="10.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0">
                <children>

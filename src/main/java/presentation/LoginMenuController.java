@@ -1,23 +1,23 @@
 package presentation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import domain.UserRegistry;
-import domain.ItemRegistry;
-import domain.UserRegistryImpl;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-
-import java.util.HashSet;
-import java.util.List;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.text.Text;
 
 public class LoginMenuController {
     // main Panes
@@ -31,6 +31,8 @@ public class LoginMenuController {
     // when logged in (userPane)
     @FXML
     FlowPane favoritePane;
+    @FXML
+    Text usernameText;
 
     // when choosing user (userSelect)
     @FXML
@@ -40,27 +42,49 @@ public class LoginMenuController {
     @FXML
     TextField usernameInput;
 
-    public UserRegistry ur;
-    public ItemRegistry ir;
+    private FrontEndHelper feh;
+    private ObservableList<String> users = FXCollections.observableArrayList();
+    private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
 
-    public void initialize(ItemRegistry ir) {
-        this.ir = ir;
-        ur = new UserRegistryImpl();
-        ur.initialize();
-        loadCurrentUsers();
+    public void initialize(FrontEndHelper feh) {
+        this.feh = feh;
+        this.itemNodes = feh.createItemPanes();
+        feh.favoriteItems.addListener((ListChangeListener<String>) c -> {
+            favoritePane.getChildren().clear();
+            favoritePane.getChildren().addAll(getItemPanes(feh.favoriteItems));
+        });
+        
+        users.addAll(feh.ur.getUsernameList());
+        currentUsers.getChildren().clear();
+        currentUsers.getChildren().addAll(getUserPanes());
+        users.addListener((ListChangeListener<String>) c -> {
+            while (c.next()) {
+                if (c.wasAdded()) {
+                    System.out.println("Added: " + c.getAddedSubList());
+                    for (String user : c.getAddedSubList()) {
+                        try {
+                            feh.ur.addUser(user);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
+                if (c.wasRemoved()) {
+                    System.out.println("Removed: " + c.getRemoved());
+                    for (String user : c.getRemoved()) {
+                        feh.ur.removeUser(user);
+                    }
+                }
+            }
+            currentUsers.getChildren().clear();
+            currentUsers.getChildren().addAll(getUserPanes());
+            feh.ur.save();
+        });
+        selectView("userSelect");
     }
 
-    public void loadCurrentUsers() {
-        currentUsers.getChildren().clear();
-        if (ur.getUsernameList().size() == 0) {
-            Text noUsersText = new Text("There are no users yet!");
-            noUsersText.setStyle("-fx-font: 40 open-sans;");
-            noUsersText.setFill(javafx.scene.paint.Color.WHITE);
-            currentUsers.getChildren().add(noUsersText);
-            return;
-        }
-        for (String name : ur.getUsernameList()) {
-            VBox v = new VBox();
+    private VBox createUserPane(String name) {
+        VBox v = new VBox();
             v.setAlignment(javafx.geometry.Pos.CENTER);
 
             StackPane avatar = new StackPane();
@@ -68,7 +92,7 @@ public class LoginMenuController {
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/avatar.png")));
             avatar.getChildren().add(img);
             Button delete = new Button("X");
-            delete.setOnAction(e -> deleteUser(name));
+            delete.setOnAction(e -> users.remove(name));
             avatar.getChildren().add(delete);
             StackPane.setAlignment(delete, javafx.geometry.Pos.TOP_RIGHT);
 
@@ -79,33 +103,26 @@ public class LoginMenuController {
             username.setFill(javafx.scene.paint.Color.WHITE);
             v.getChildren().add(username);
             v.setOnMouseClicked(e -> selectUser(name));
-            currentUsers.getChildren().add(v);
-        }
+            return v;
     }
 
-    public void loadFavorites(HashSet<String> keyList) {
-        favoritePane.getChildren().clear();
-        keyList.forEach(item -> {
-            try {
-                StackPane itemPane = (StackPane) FXMLLoader.load(getClass().getClassLoader().getResource("item.fxml"));
-                ImageView image = (ImageView) itemPane.getChildren().get(0);
-                Image img;
-                // System.out.println(item);
-                if (ir.getSeriesSeasons(item) == null) {
-                    img = new Image(getClass().getResourceAsStream("/movie_img/" + item + ".jpg"));
-                } else {
-                    img = new Image(getClass().getResourceAsStream("/show_img/" + item + ".jpg"));
-                }
-                image.setImage(img);
+    private ArrayList<VBox> getUserPanes() {
+        if (feh.ur.getUsernameList().size() == 0) {
+            Text noUsersText = new Text("There are no users yet!");
+            noUsersText.setStyle("-fx-font: 40 open-sans;");
+            noUsersText.setFill(javafx.scene.paint.Color.WHITE);
+            currentUsers.getChildren().add(noUsersText);
+            return new ArrayList<VBox>();
+        }
+        ArrayList<VBox> userPanes = new ArrayList<VBox>();
+        for (String name : feh.ur.getUsernameList()) {
+            userPanes.add(createUserPane(name));
+        }
+        return userPanes;
+    }
 
-                Text text = (Text) itemPane.getChildren().get(2);
-                text.setText(item);
-                favoritePane.getChildren().add(itemPane);
-
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        });
+    private List<StackPane> getItemPanes(List<String> keyList) {
+        return keyList.stream().map(key -> itemNodes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public void showUserCreation() {
@@ -116,28 +133,23 @@ public class LoginMenuController {
         System.out.println("he" + usernameInput.getText());
         if (usernameInput.getText().equals(""))
             return;
-        try {
-            ur.addUser(usernameInput.getText());
-            ur.save();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        loadCurrentUsers();
+
+        users.add(usernameInput.getText());
         selectView("userSelect");
     }
 
     public void selectUser(String username) {
-        ur.selectUser(username);
-        loadFavorites(ur.getFavoriteItems(username));
+        feh.selectUser(username);
+        usernameText.setText(username);
         selectView("userPane");
     }
 
-    public void deleteUser(String username) {
-        ur.removeUser(username);
-        loadCurrentUsers();
+    public void logout() {
+        feh.logout();
+        selectView("userSelect");
     }
 
-    public void selectView(String s) {
+    private void selectView(String s) {
         switch (s) {
             case "userPane":
                 userPane.setVisible(true);

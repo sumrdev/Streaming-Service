@@ -53,16 +53,18 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
     public void addMovie(String title, String[] genre, double rating, int release){
         Movie movieToBeAdded = new Movie(title, genre, rating, release);
-        itemMap.put(title, movieToBeAdded);
-        movieKeyList.add(title);
+        String key = "" + (title + genre + rating + release).hashCode();
+        itemMap.put(key, movieToBeAdded);
+        movieKeyList.add(key);
         for (String genreString : genre){
             genreSet.add(genreString);
         }
     }
     public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
         Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
-        itemMap.put(title,seriesToBeAdded);
-        seriesKeyList.add(title);
+        String key = "" + (title + genre + rating + startYear + endYear + seasons).hashCode();
+        itemMap.put(key,seriesToBeAdded);
+        seriesKeyList.add(key);
         for (String genreString : genre){
             genreSet.add(genreString);
         }

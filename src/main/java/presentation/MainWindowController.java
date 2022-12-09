@@ -1,9 +1,6 @@
 package presentation;
 
-import java.io.IOException;
 
-import domain.ItemRegistry;
-import domain.ItemRegistryImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,13 +19,13 @@ public class MainWindowController {
     Parent homeMenu = null;
     MainMenuController homeMenuController = null;
     BorderPane scene;
-    public ItemRegistry ir;
 
-    public void navigateHome() throws IOException {
+    public void navigateHome() {
         scene.setCenter(homeMenu);
+        //homeMenuController.update();
     }
 
-    public void navigateLogin() throws IOException {
+    public void navigateLogin() {
         scene.setCenter(loginMenu);
     }
 
@@ -42,11 +39,11 @@ public class MainWindowController {
             this.homeMenuController = homeMenu.getController();
             this.loginMenu = loginMenu.load();
             this.loginMenuController = loginMenu.getController();
-            this.ir = new ItemRegistryImpl();
-            this.ir.initialize();
-            this.homeMenuController.loadFilters(this.ir);
-            this.loginMenuController.initialize(this.ir);
-            this.navigateHome();
+
+            FrontEndHelper feh = new FrontEndHelper(this);
+            this.homeMenuController.initialize(feh);
+            this.loginMenuController.initialize(feh);
+            this.scene.setCenter(this.homeMenu);
         } catch (Exception e) {
             System.out.println(e);
         }

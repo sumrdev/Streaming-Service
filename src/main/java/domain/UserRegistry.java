@@ -13,4 +13,5 @@ public interface UserRegistry {
     public void removeFavoriteItem (String userKey, String itemKey);
     public ArrayList<String> getUsernameList();
     public void selectUser(String userKey);
+    public String getSelectedUser();
 }

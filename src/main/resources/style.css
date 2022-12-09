@@ -8,7 +8,7 @@ Button {
 }
 
 Button:hover {
-  -fx-text-fill: #dadada;
+  -fx-opacity: 0.8;
 }
 
 .item:hover {
@@ -78,3 +78,4 @@ Button:hover {
   -fx-background-insets: 2, 0, 0;
   -fx-background-radius: 2em;
 }
+

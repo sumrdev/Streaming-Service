@@ -1,7 +1,5 @@
 package presentation;
 
-import domain.ItemRegistry;
-import domain.ItemRegistryImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

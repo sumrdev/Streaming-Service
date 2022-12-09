@@ -90,4 +90,8 @@ public class UserRegistryImpl implements UserRegistry {
         currentUser = userKey;
     }
 
+    public String getSelectedUser(){
+        return currentUser;
+    }
+
 }
