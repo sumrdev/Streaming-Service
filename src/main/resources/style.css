@@ -3,13 +3,36 @@
   src: url("fonts/OpenSans-Regular.ttf");
 }
 
+/* BUTTONS */
 Button {
   -fx-background-color: transparent;
+  -fx-text-fill: #ffffff;
 }
 
 Button:hover {
   -fx-opacity: 0.8;
 }
+
+.normal-button {
+  -fx-background-color: #ffffff;
+  -fx-background-radius: 0.5em;
+  -fx-text-fill: #141b29;
+}
+
+.delete-button {
+  -fx-background-color: transparent;
+  -fx-text-fill: #ffffff;
+}
+
+/* DROPDOWN */
+.dropdown {
+  -fx-background-color: ffffff;
+  -fx-background-radius: 0.5em;
+  -fx-text-fill: #1c2331;
+}
+
+
+/* ITEMS */
 
 .item:hover {
   -fx-cursor: hand;
@@ -31,6 +54,9 @@ Button:hover {
   -fx-font-family: "open-sans";
 }
 
+
+
+/* SCROLLBAR */
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
   -fx-background-color: #141b29;

@@ -55,8 +55,8 @@
             <Region prefHeight="200.0" prefWidth="50.0" />
             <VBox alignment="CENTER" layoutX="668.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
-                  <TextField fx:id="searchBox" onAction="#search" />
+                  <Text fill="#ffffff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
+                  <TextField fx:id="searchBox" onAction="#search" promptText="Search" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -65,8 +65,11 @@
             <Region prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre" />
-                  <ChoiceBox fx:id="choiceGenre" onAction="#updateItemFilters" prefWidth="150.0" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font></Text>
+                  <ChoiceBox fx:id="choiceGenre" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -74,8 +77,11 @@
             </VBox>
             <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category" />
-                  <ChoiceBox fx:id="choiceCategory" onAction="#updateItemFilters" prefWidth="150.0" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font></Text>
+                  <ChoiceBox fx:id="choiceCategory" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
                </children>
             </VBox>
             <Region prefHeight="200.0" prefWidth="50.0" />
