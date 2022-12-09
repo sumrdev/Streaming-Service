@@ -6,7 +6,6 @@
 /* BUTTONS */
 Button {
   -fx-background-color: transparent;
-  -fx-text-fill: #ffffff;
 }
 
 Button:hover {
