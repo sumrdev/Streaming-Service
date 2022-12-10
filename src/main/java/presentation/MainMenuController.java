@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
@@ -77,7 +79,7 @@ public class MainMenuController {
         }
     }
 
-    public void search(ActionEvent e) {
+    public void search(Event e) {
         String search = searchBox.getText();
         HashMap<String, Integer> searchResults = new HashMap<>();
         for (String item : currentItems) {
