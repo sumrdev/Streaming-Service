@@ -15,7 +15,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1200.0" style="-fx-background-color: #1c2331;" BorderPane.alignment="TOP_LEFT">
          <children>
             <Region prefHeight="0.0" prefWidth="50.0" />
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Steaming-service" textOrigin="TOP">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Streamline" textOrigin="TOP">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
