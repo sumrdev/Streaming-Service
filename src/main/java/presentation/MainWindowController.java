@@ -12,21 +12,24 @@ public class MainWindowController {
     @FXML
     Button navButtonHome;
     @FXML
-    Button navButtonLogin;
+    Button navButtonUser;
 
-    Parent loginMenu = null;
-    LoginMenuController loginMenuController = null;
+    Parent userMenu = null;
+    UserMenuController userMenuController = null;
     Parent homeMenu = null;
     MainMenuController homeMenuController = null;
     BorderPane scene;
+    FrontEndHelper feh = null;
 
     public void navigateHome() {
+        if (this.feh != null && this.feh.ur.getSelectedUser() == null)
+            return;
         scene.setCenter(homeMenu);
         //homeMenuController.update();
     }
 
-    public void navigateLogin() {
-        scene.setCenter(loginMenu);
+    public void navigateUser() {
+        scene.setCenter(userMenu);
     }
 
     public void setup() {
@@ -34,16 +37,17 @@ public class MainWindowController {
 
             this.scene = (BorderPane) navButtonHome.getScene().getRoot();
             FXMLLoader homeMenu = new FXMLLoader(getClass().getClassLoader().getResource("mainMenu.fxml"));
-            FXMLLoader loginMenu = new FXMLLoader(getClass().getClassLoader().getResource("loginMenu.fxml"));
+            FXMLLoader userMenu = new FXMLLoader(getClass().getClassLoader().getResource("userMenu.fxml"));
             this.homeMenu = homeMenu.load();
             this.homeMenuController = homeMenu.getController();
-            this.loginMenu = loginMenu.load();
-            this.loginMenuController = loginMenu.getController();
+            this.userMenu = userMenu.load();
+            this.userMenuController = userMenu.getController();
 
-            FrontEndHelper feh = new FrontEndHelper(this);
+            FrontEndHelper feh = new FrontEndHelper();
+            this.feh = feh;
             this.homeMenuController.initialize(feh);
-            this.loginMenuController.initialize(feh);
-            this.scene.setCenter(this.homeMenu);
+            this.userMenuController.initialize(feh);
+            this.scene.setCenter(this.userMenu);
         } catch (Exception e) {
             System.out.println(e);
         }

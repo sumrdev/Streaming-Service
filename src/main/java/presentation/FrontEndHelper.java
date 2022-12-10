@@ -18,7 +18,7 @@ public class FrontEndHelper {
     UserRegistry ur = null;
     ObservableList<String> favoriteItems = FXCollections.observableArrayList();
 
-    public FrontEndHelper(MainWindowController mmc) {
+    public FrontEndHelper() {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
         this.ir.initialize();
@@ -26,7 +26,6 @@ public class FrontEndHelper {
         favoriteItems.addListener((ListChangeListener<String>) c -> {
             String user = ur.getSelectedUser();
             if (user == null) {
-                mmc.navigateLogin();
                 return;
             };
             while (c.next()) {
@@ -51,7 +50,7 @@ public class FrontEndHelper {
         favoriteItems.addAll(ur.getFavoriteItems(user));
     }
 
-    public void logout() {
+    public void changeUser() {
         ur.selectUser(null);
         favoriteItems.clear();
     }

@@ -19,7 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class LoginMenuController {
+public class UserMenuController {
     // main Panes
     @FXML
     VBox userPane;
@@ -145,7 +145,7 @@ public class LoginMenuController {
     }
 
     public void logout() {
-        feh.logout();
+        feh.changeUser();
         selectView("userSelect");
     }
 
