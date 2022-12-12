@@ -26,9 +26,7 @@ public class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            FileInputStream fis = new FileInputStream(new File(path + "/" + dataField + ".txt"));
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader reader = new BufferedReader(isr);
+            BufferedReader reader = new BufferedReader(new FileReader(this.path + "/" + dataField + ".txt"));
             reader.lines().forEach(data::add);
             reader.close();
         } catch (FileNotFoundException e) {
@@ -37,7 +35,7 @@ public class DataAccessImpl implements DataAccess {
             e.printStackTrace();
             System.out.println("IO Exception while closing file");
         } catch (Exception e){
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage()); 
         }
         return data;
     }
