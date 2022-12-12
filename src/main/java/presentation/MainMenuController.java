@@ -14,6 +14,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -30,20 +31,33 @@ public class MainMenuController {
 
     @FXML
     TextField searchBox;
+    
+    @FXML
+    StackPane MainStackpane;
 
     private FrontEndHelper feh = null;
     private List<String> currentItems = null;
     private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
+    private Popup popup;
 
     public void initialize(FrontEndHelper feh) {
-        this.feh = feh;
-        this.itemNodes = feh.createItemPanes();
-        String[] genres = feh.ir.getGenreSet().stream().toArray(String[]::new);
-        choiceGenre.getItems().addAll("All");
-        choiceGenre.getItems().addAll(genres);
-        choiceGenre.getSelectionModel().selectFirst();
-        choiceCategory.getItems().addAll("All", "Series", "Movies");
-        choiceCategory.getSelectionModel().selectFirst();
+        try {
+            this.feh = feh;
+            popup = new Popup();
+            this.itemNodes = feh.createItemPanes(popup);
+            String[] genres = feh.ir.getGenreSet().stream().toArray(String[]::new);
+            choiceGenre.getItems().addAll("All");
+            choiceGenre.getItems().addAll(genres);
+            choiceGenre.getSelectionModel().selectFirst();
+            choiceCategory.getItems().addAll("All", "Series", "Movies");
+            choiceCategory.getSelectionModel().selectFirst();
+        
+            //String a = feh.ir.getMovieKeyList().get(0);
+            //popup.setMovie(feh.ir.getItemTitle(a), feh.ir.getItemGenre(a), feh.ir.getItemRating(a),new Image(getClass().getResourceAsStream("/movie_img/" + feh.ir.getItemTitle(a) + ".jpg")), feh.ir.getItemRelease(a));
+            MainStackpane.getChildren().add(popup);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

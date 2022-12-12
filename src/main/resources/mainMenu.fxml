@@ -15,77 +15,84 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minWidth="250.0" prefHeight="765.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainMenuController">
-   <center>
-      <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="869.0" styleClass="transparent" BorderPane.alignment="CENTER">
-         <content>
-            <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="15.0" prefWidth="0.0" styleClass="transparent" vgap="15.0">
-               <children>
-                  <StackPane alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="0.0" styleClass="item">
+
+<StackPane fx:id="MainStackpane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainMenuController">
+   <children>
+      <BorderPane minWidth="250.0" prefHeight="765.0" prefWidth="868.0">
+         <center>
+            <ScrollPane fitToWidth="true" prefHeight="458.0" prefWidth="0.0" styleClass="transparent" BorderPane.alignment="CENTER">
+               <content>
+                  <FlowPane fx:id="itemGrid" alignment="TOP_CENTER" hgap="15.0" prefHeight="377.0" prefWidth="141.0" styleClass="transparent" vgap="15.0">
                      <children>
-                        <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                           </image>
-                        </ImageView>
-                        <Text fx:id="itemTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 100;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
-                           <StackPane.margin>
-                              <Insets bottom="10.0" />
-                           </StackPane.margin>
+                        <StackPane alignment="BOTTOM_CENTER" prefHeight="357.0" prefWidth="362.0" styleClass="item">
+                           <children>
+                              <ImageView fitHeight="274.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@2001%20A%20Space%20Odyssey.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Text fx:id="itemTitle" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 100;" text="2001 A space odyssey" textAlignment="CENTER" wrappingWidth="148.716796875">
+                                 <StackPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </StackPane.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </FlowPane>
+               </content>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </padding>
+            </ScrollPane>
+         </center>
+         <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Region prefHeight="200.0" prefWidth="50.0" />
+                  <VBox alignment="CENTER" layoutX="668.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="#ffffff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
+                        <TextField fx:id="searchBox" onAction="#search" onKeyTyped="#search" promptText="Search" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <Region prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="SansSerif Regular" size="12.0" />
                            </font>
                         </Text>
+                        <ChoiceBox fx:id="choiceGenre" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
                      </children>
-                  </StackPane>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category">
+                           <font>
+                              <Font name="SansSerif Regular" size="12.0" />
+                           </font>
+                        </Text>
+                        <ChoiceBox fx:id="choiceCategory" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
+                     </children>
+                  </VBox>
+                  <Region prefHeight="200.0" prefWidth="50.0" />
                </children>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </FlowPane>
-         </content>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
-      </ScrollPane>
-   </center>
-   <top>
-      <HBox alignment="CENTER_RIGHT" prefHeight="73.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <Region prefHeight="200.0" prefWidth="50.0" />
-            <VBox alignment="CENTER" layoutX="668.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text fill="#ffffff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Search" />
-                  <TextField fx:id="searchBox" onAction="#search" onKeyTyped="#search" promptText="Search" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </VBox>
-            <Region prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Genre">
-                     <font>
-                        <Font name="SansSerif Regular" size="12.0" />
-                     </font></Text>
-                  <ChoiceBox fx:id="choiceGenre" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </VBox>
-            <VBox alignment="CENTER" layoutX="778.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Category">
-                     <font>
-                        <Font name="SansSerif Regular" size="12.0" />
-                     </font></Text>
-                  <ChoiceBox fx:id="choiceCategory" onAction="#updateItemFilters" prefWidth="150.0" styleClass="dropdown" stylesheets="@style.css" />
-               </children>
-            </VBox>
-            <Region prefHeight="200.0" prefWidth="50.0" />
-         </children>
-      </HBox>
-   </top>
-</BorderPane>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
+</StackPane>

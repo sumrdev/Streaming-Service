@@ -12,7 +12,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 
-
 public class FrontEndHelper {
     ItemRegistry ir = null;
     UserRegistry ur = null;
@@ -55,9 +54,7 @@ public class FrontEndHelper {
         favoriteItems.clear();
     }
     
-
-
-    public HashMap<String, UserPane> createItemPanes() {
+    public HashMap<String, UserPane> createItemPanes(Popup popup) {
         System.out.println("Creating item panes");
         HashMap<String, UserPane> itemNodes = new HashMap<>();
         ArrayList<String> movies = ir.getMovieKeyList();
@@ -65,7 +62,7 @@ public class FrontEndHelper {
         for (String movieKey : movies) {
             try {
                 String movie = ir.getItemTitle(movieKey);
-                itemNodes.put(movieKey, new UserPane(movieKey, movie, "/movie_img/" + movie + ".jpg", favoriteItems));
+                itemNodes.put(movieKey, new UserPaneMovie(movieKey, movie, ir.getItemGenre(movieKey), ir.getItemRating(movieKey), ir.getItemRelease(movieKey), "/movie_img/" + movie + ".jpg", favoriteItems, popup));
             } catch (Exception e) {
                 System.out.println("Error loading movie: " + ir.getItemTitle(movieKey) + " - " + e.getMessage());
             }
@@ -73,7 +70,7 @@ public class FrontEndHelper {
         for (String serieKey : series) {
             try {
                 String serie = ir.getItemTitle(serieKey);
-                itemNodes.put(serieKey, new UserPane(serieKey, serie, "/show_img/" + serie + ".jpg", favoriteItems));
+                itemNodes.put(serieKey, new UserPaneSeries(serieKey, serie,  ir.getItemGenre(serieKey), ir.getItemRating(serieKey), ir.getItemRelease(serieKey), ir.getSeriesEndYear(serieKey), ir.getSeriesSeasons(serieKey), "/show_img/" + serie + ".jpg", favoriteItems, popup));
             } catch (Exception e) {
                 System.out.println("Error loading movie: " + ir.getItemTitle(serieKey) + " - " + e.getMessage());
             }

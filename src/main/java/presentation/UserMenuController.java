@@ -1,5 +1,6 @@
 package presentation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,9 @@ import javafx.scene.text.Text;
 
 public class UserMenuController {
     // main Panes
+    @FXML
+    StackPane MainStackpane;
+
     @FXML
     VBox userPane;
     @FXML
@@ -48,7 +52,16 @@ public class UserMenuController {
 
     public void initialize(FrontEndHelper feh) {
         this.feh = feh;
-        this.itemNodes = feh.createItemPanes();
+        Popup popup;
+        try {
+            popup = new Popup();
+            MainStackpane.getChildren().add(popup);
+            this.itemNodes = feh.createItemPanes(popup);
+        } catch (ClassCastException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
         feh.favoriteItems.addListener((ListChangeListener<String>) c -> {
             favoritePane.getChildren().clear();
             favoritePane.getChildren().addAll(getItemPanes(feh.favoriteItems));

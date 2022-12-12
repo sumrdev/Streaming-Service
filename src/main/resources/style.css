@@ -104,3 +104,13 @@ Button:hover {
   -fx-background-radius: 2em;
 }
 
+/* Popup  */
+.popup {
+  -fx-background-radius: 0.4em;
+}
+
+.infobox > Text {
+  -fx-font-family: "open-sans";
+  -fx-font-size: 18px;
+  -fx-fill: #ffffff;
+}

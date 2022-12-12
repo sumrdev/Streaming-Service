@@ -1,5 +1,7 @@
 package presentation;
 
+import java.io.IOException;
+
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -11,17 +13,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class UserPane extends StackPane  {
+public abstract class UserPane extends StackPane  {
     private double maxScaleSize = 1.1;
+    protected Image img;
 
-    public UserPane(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList) throws Exception {
-
+    public UserPane(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("item.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
         fxmlLoader.load();
         ImageView image = (ImageView) this.getChildren().get(0);
-        Image img = new Image(getClass().getResourceAsStream(imgPath));
+        img = new Image(getClass().getResourceAsStream(imgPath));
         image.setImage(img);
         StackPane overlay = (StackPane) this.getChildren().get(1);
         Text text = (Text) overlay.getChildren().get(1);
@@ -41,7 +43,11 @@ public class UserPane extends StackPane  {
 
         });
         Transitions.addScaleFadeTransition(this, maxScaleSize);
+
     }
+
+
+
 
     private void toggleFavorites(String key, ObservableList<String> favoriteItems) {
         if (favoriteItems.contains(key)) {
