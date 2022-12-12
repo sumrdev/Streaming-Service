@@ -3,8 +3,8 @@ import java.util.*;
 public class Series extends Item {
     int startYear;
     int endYear;
-    ArrayList<Integer> seasons;
-    public Series(String title, String[] genre, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
+    int[] seasons;
+    public Series(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
         super(title, genre, rating, startYear);
         this.startYear=startYear;
         this.endYear=endYear;
@@ -16,15 +16,15 @@ public class Series extends Item {
     public int getEndYear(){
         return endYear;
     }
-    public ArrayList<Integer> getSeasons(){
+    public int[] getSeasons(){
         return seasons;
     }
 
     public String seasonsToString(){
         String seasonsString = "";
         for (int i = 0; i < genre.length-1; i++) {
-            if(i==genre.length-2) seasonsString += (i+1) + "-" +seasons.get(i);
-            else seasonsString += (i+1) + "-" +  seasons.get(i) + ",";
+            if(i==genre.length-2) seasonsString += (i+1) + "-" +seasons[i];
+            else seasonsString += (i+1) + "-" +  seasons[i] + ",";
         }
         return seasonsString;
     }

@@ -51,10 +51,8 @@ public class ItemRegistryImpl implements ItemRegistry {
                 genre[i] = genre[i].strip();
             }
             double rating = Double.parseDouble(data[3].replace(",", "."));
-            ArrayList<Integer> seasons = new ArrayList<>();
-            for (String string : Arrays.asList(data[4].split(","))){
-                seasons.add(Integer.parseInt(string.split("-")[1]));
-            }                
+            int[] seasons = Arrays.asList(data[4].split(",")).stream().map(e -> e.split("-")[1]).mapToInt(Integer::parseInt).toArray();
+           
             addSeries(title, genre, rating, startYear,endYear, seasons);
         }
     }
@@ -67,7 +65,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             genreSet.add(genreString);
         }
     }
-    public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, ArrayList<Integer> seasons){
+    public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
         Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
         String key = HexFormat.of().formatHex( (this.md.digest((title + genre + rating + startYear + endYear + seasons).getBytes())));
         itemMap.put(key,seriesToBeAdded);
@@ -107,7 +105,7 @@ public class ItemRegistryImpl implements ItemRegistry {
     public int getSeriesEndYear(String itemKey){
         return itemMap.get(itemKey).getEndYear();
     }
-    public ArrayList<Integer> getSeriesSeasons(String itemKey){
+    public int[] getSeriesSeasons(String itemKey){
         return itemMap.get(itemKey).getSeasons();
     }
 

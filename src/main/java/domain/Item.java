@@ -36,7 +36,7 @@ public abstract class Item {
         //should not happen
         return 1;
     }
-    public ArrayList<Integer> getSeasons(){
+    public int[] getSeasons(){
         //should not happen
         return null;
     }
