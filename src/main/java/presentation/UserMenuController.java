@@ -154,6 +154,7 @@ public class UserMenuController {
     public void selectUser(String username) {
         feh.selectUser(username);
         usernameText.setText(username);
+        //select main view
         selectView("userPane");
     }
 
