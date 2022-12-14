@@ -99,7 +99,10 @@ public class HomeMenuController {
         // add search string that cantains the search string to the list
         for (String item : currentItems) {
             String title =  da.getItemTitle(item);
-            if (title.toLowerCase().contains(search.toLowerCase())) {
+            if (title.toLowerCase().equals(search.toLowerCase())) {
+                searchResults.put(item, 0);
+            }
+            else if (title.toLowerCase().contains(search.toLowerCase())) {
                 searchResults.put(item, calculate(item, search));
             }
         }
