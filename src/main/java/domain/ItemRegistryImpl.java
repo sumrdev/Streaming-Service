@@ -1,5 +1,6 @@
 package domain;
 
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.util.*;
 import data.DataAccessImpl;
@@ -16,7 +17,7 @@ public class ItemRegistryImpl implements ItemRegistry {
         itemMap = new HashMap<>();
         genreSet= new HashSet<>();
         try {
-            this.md = MessageDigest.getInstance("SHA-1");
+            this.md = MessageDigest.getInstance("MD5");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -58,7 +59,8 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
     public void addMovie(String title, String[] genre, double rating, int release){
         Movie movieToBeAdded = new Movie(title, genre, rating, release);
-        String key = HexFormat.of().formatHex(this.md.digest((title + genre + rating + release).getBytes()));
+        List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
+        String key = HexFormat.of().formatHex(this.md.digest((title + genreList + release).getBytes()));
         itemMap.put(key, movieToBeAdded);
         movieKeyList.add(key);
         for (String genreString : genre){
@@ -67,7 +69,8 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
     public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
         Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
-        String key = HexFormat.of().formatHex( (this.md.digest((title + genre + rating + startYear + endYear + seasons).getBytes())));
+        List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
+        String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + startYear).getBytes())));
         itemMap.put(key,seriesToBeAdded);
         seriesKeyList.add(key);
         for (String genreString : genre){
