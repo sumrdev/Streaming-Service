@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<StackPane fx:id="MainStackpane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.MainMenuController">
+<StackPane fx:id="MainStackpane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.HomeMenuController">
    <children>
       <BorderPane minWidth="250.0" prefHeight="765.0" prefWidth="868.0">
          <center>

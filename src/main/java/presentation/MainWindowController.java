@@ -2,10 +2,7 @@ package presentation;
 
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 
 public class MainWindowController {
 
@@ -14,43 +11,23 @@ public class MainWindowController {
     @FXML
     Button navButtonUser;
 
-    Parent userMenu = null;
-    UserMenuController userMenuController = null;
-    Parent homeMenu = null;
-    MainMenuController homeMenuController = null;
-    BorderPane scene;
-    FrontEndHelper feh = null;
+    MainWindow mainWindow = null;
+
+    public void initialize(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+    }
+
 
     public void navigateHome() {
-        if (this.feh != null && this.feh.ur.getSelectedUser() == null)
-            return;
-        scene.setCenter(homeMenu);
-        //homeMenuController.update();
+        if (mainWindow != null)
+            mainWindow.navigateHome();
     }
 
     public void navigateUser() {
-        scene.setCenter(userMenu);
+        if (mainWindow != null)
+            mainWindow.navigateUser();
     }
 
-    public void setup() {
-        try {
-
-            this.scene = (BorderPane) navButtonHome.getScene().getRoot();
-            FXMLLoader homeMenu = new FXMLLoader(getClass().getClassLoader().getResource("mainMenu.fxml"));
-            FXMLLoader userMenu = new FXMLLoader(getClass().getClassLoader().getResource("userMenu.fxml"));
-            this.homeMenu = homeMenu.load();
-            this.homeMenuController = homeMenu.getController();
-            this.userMenu = userMenu.load();
-            this.userMenuController = userMenu.getController();
-
-            FrontEndHelper feh = new FrontEndHelper();
-            this.feh = feh;
-            this.homeMenuController.initialize(feh);
-            this.userMenuController.initialize(feh);
-            this.scene.setCenter(this.userMenu);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    
 
 }

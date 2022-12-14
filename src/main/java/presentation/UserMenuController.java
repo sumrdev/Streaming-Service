@@ -1,23 +1,14 @@
 package presentation;
 
+import java.util.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 public class UserMenuController {
@@ -46,28 +37,28 @@ public class UserMenuController {
     @FXML
     TextField usernameInput;
 
-    private FrontEndHelper feh;
+    private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();
     private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
 
-    public void initialize(FrontEndHelper feh) {
-        this.feh = feh;
+    public void initialize(DomainAccess da, MainWindow mw) {
+        this.da = da;
         Popup popup;
         try {
-            popup = new Popup();
+            popup = new Popup(mw);
             MainStackpane.getChildren().add(popup);
-            this.itemNodes = feh.createItemPanes(popup);
+            this.itemNodes = da.createItemPanes(popup);
         } catch (ClassCastException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        feh.favoriteItems.addListener((ListChangeListener<String>) c -> {
+        da.favoriteItems.addListener((ListChangeListener<String>) c -> {
             favoritePane.getChildren().clear();
-            favoritePane.getChildren().addAll(getItemPanes(feh.favoriteItems));
+            favoritePane.getChildren().addAll(getItemPanes(da.favoriteItems));
         });
         
-        users.addAll(feh.ur.getUsernameList());
+        users.addAll(da.getUsernameList());
         currentUsers.getChildren().clear();
         currentUsers.getChildren().addAll(getUserPanes());
         users.addListener((ListChangeListener<String>) c -> {
@@ -76,7 +67,7 @@ public class UserMenuController {
                     System.out.println("Added: " + c.getAddedSubList());
                     for (String user : c.getAddedSubList()) {
                         try {
-                            feh.ur.addUser(user);
+                            da.addUser(user);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -85,13 +76,13 @@ public class UserMenuController {
                 if (c.wasRemoved()) {
                     System.out.println("Removed: " + c.getRemoved());
                     for (String user : c.getRemoved()) {
-                        feh.ur.removeUser(user);
+                        da.removeUser(user);
                     }
                 }
             }
             currentUsers.getChildren().clear();
             currentUsers.getChildren().addAll(getUserPanes());
-            feh.ur.save();
+            da.save();
         });
         selectView("userSelect");
     }
@@ -120,7 +111,7 @@ public class UserMenuController {
     }
 
     private ArrayList<VBox> getUserPanes() {
-        if (feh.ur.getUsernameList().size() == 0) {
+        if (da.getUsernameList().size() == 0) {
             Text noUsersText = new Text("There are no users yet!");
             noUsersText.setStyle("-fx-font: 40 open-sans;");
             noUsersText.setFill(javafx.scene.paint.Color.WHITE);
@@ -128,7 +119,7 @@ public class UserMenuController {
             return new ArrayList<VBox>();
         }
         ArrayList<VBox> userPanes = new ArrayList<VBox>();
-        for (String name : feh.ur.getUsernameList()) {
+        for (String name : da.getUsernameList()) {
             userPanes.add(createUserPane(name));
         }
         return userPanes;
@@ -152,13 +143,13 @@ public class UserMenuController {
     }
 
     public void selectUser(String username) {
-        feh.selectUser(username);
+        da.selectUser(username);
         usernameText.setText(username);
         selectView("userPane");
     }
 
     public void logout() {
-        feh.changeUser();
+        da.changeUser();
         selectView("userSelect");
     }
 

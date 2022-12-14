@@ -114,3 +114,11 @@ Button:hover {
   -fx-font-size: 18px;
   -fx-fill: #ffffff;
 }
+
+.backgroundImage {
+  -fx-background-image: url("fanten.gif");
+  -fx-background-size: contain;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  
+}

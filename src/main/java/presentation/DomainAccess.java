@@ -12,12 +12,12 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 
-public class FrontEndHelper {
-    ItemRegistry ir = null;
-    UserRegistry ur = null;
+public class DomainAccess {
+    private ItemRegistry ir = null;
+    private UserRegistry ur = null;
     ObservableList<String> favoriteItems = FXCollections.observableArrayList();
 
-    public FrontEndHelper() {
+    public DomainAccess() {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
         this.ir.initialize();
@@ -53,7 +53,50 @@ public class FrontEndHelper {
         ur.selectUser(null);
         favoriteItems.clear();
     }
+
+    public String[] getGenreStrings() {
+        return ir.getGenreSet().stream().toArray(String[]::new);
+    }
+
+    public String[] getItemGenre(String itemKey) {
+        return ir.getItemGenre(itemKey);
+    }
+
+    public int[] getSeriesSeasons(String itemKey) {
+        return ir.getSeriesSeasons(itemKey);
+    }
+
+    public ArrayList<String> getMovieKeyList() {
+        return ir.getMovieKeyList();
+    }
+    public ArrayList<String> getSeriesKeyList() {
+        return ir.getSeriesKeyList();
+    }
+
+    public ArrayList<String> getUsernameList() {
+        return ur.getUsernameList();
+    }
+
+    public String getItemTitle(String itemKey) {
+        return ir.getItemTitle(itemKey);
+    }
+
+    public void removeUser(String user) {
+        ur.removeUser(user);
+    }
+
+    public void addUser(String user) {
+        ur.addUser(user);
+    }
     
+    public String getSelectedUser() {
+        return ur.getSelectedUser();
+    }
+
+    public void save() {
+        ur.save();
+    }
+
     public HashMap<String, UserPane> createItemPanes(Popup popup) {
         System.out.println("Creating item panes");
         HashMap<String, UserPane> itemNodes = new HashMap<>();

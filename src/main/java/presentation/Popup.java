@@ -1,19 +1,12 @@
 package presentation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -24,10 +17,8 @@ public class Popup extends HBox {
     private VBox bottom;
     private Button playButton;
     private ChoiceBox<String> seasonChoiceBox;
-    private int selectedEpisode = 1;
-    private int selectedSeason = 1;
-
-    public Popup() throws IOException, ClassCastException {
+    @SuppressWarnings("unchecked") //ChoiceBox generic cast not supported 
+    public Popup(MainWindow mw) throws IOException, ClassCastException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
@@ -47,6 +38,9 @@ public class Popup extends HBox {
         episodeListBox = (VBox) BottomPane.getContent();
 
         playButton = new Button("Play");
+        playButton.setOnAction(e -> {
+            mw.playMovie();
+        });
         playButton.getStyleClass().add("normal-button");
 
         this.setVisible(false);

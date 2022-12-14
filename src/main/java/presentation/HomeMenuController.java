@@ -1,25 +1,14 @@
 package presentation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
-public class MainMenuController {
+public class HomeMenuController {
     @FXML
     FlowPane itemGrid;
 
@@ -35,25 +24,25 @@ public class MainMenuController {
     @FXML
     StackPane MainStackpane;
 
-    private FrontEndHelper feh = null;
+    private DomainAccess da = null;
     private List<String> currentItems = null;
     private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
     private Popup popup;
 
-    public void initialize(FrontEndHelper feh) {
+    public void initialize(DomainAccess da, MainWindow mw) {
         try {
-            this.feh = feh;
-            popup = new Popup();
-            this.itemNodes = feh.createItemPanes(popup);
-            String[] genres = feh.ir.getGenreSet().stream().toArray(String[]::new);
+            this.da = da;
+            popup = new Popup(mw);
+            this.itemNodes = da.createItemPanes(popup);
+            String[] genres = da.getGenreStrings();
             choiceGenre.getItems().addAll("All");
             choiceGenre.getItems().addAll(genres);
             choiceGenre.getSelectionModel().selectFirst();
             choiceCategory.getItems().addAll("All", "Series", "Movies");
             choiceCategory.getSelectionModel().selectFirst();
         
-            //String a = feh.ir.getMovieKeyList().get(0);
-            //popup.setMovie(feh.ir.getItemTitle(a), feh.ir.getItemGenre(a), feh.ir.getItemRating(a),new Image(getClass().getResourceAsStream("/movie_img/" + feh.ir.getItemTitle(a) + ".jpg")), feh.ir.getItemRelease(a));
+            //String a = da.ir.getMovieKeyList().get(0);
+            //popup.setMovie(da.ir.getItemTitle(a), da.ir.getItemGenre(a), da.ir.getItemRating(a),new Image(getClass().getResourceAsStream("/movie_img/" + da.ir.getItemTitle(a) + ".jpg")), da.ir.getItemRelease(a));
             MainStackpane.getChildren().add(popup);
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,18 +59,18 @@ public class MainMenuController {
         String genre = choiceGenre.getValue();
         String category = choiceCategory.getValue();
 
-        Stream<String> items = Stream.concat(feh.ir.getMovieKeyList().stream(), feh.ir.getSeriesKeyList().stream());
+        Stream<String> items = Stream.concat(da.getMovieKeyList().stream(), da.getSeriesKeyList().stream());
         if (genre != null) {
             if (!genre.equals("All")) {
-                items = items.filter(item -> Arrays.asList(feh.ir.getItemGenre(item)).contains(genre));
+                items = items.filter(item -> Arrays.asList(da.getItemGenre(item)).contains(genre));
             }
         }
 
         if (category != null) {
             if (category.equals("Movies")) {
-                items = items.filter(item -> feh.ir.getSeriesSeasons(item) == null);
+                items = items.filter(item -> da.getSeriesSeasons(item) == null);
             } else if (category.equals("Series")) {
-                items = items.filter(item -> feh.ir.getSeriesSeasons(item) != null);
+                items = items.filter(item -> da.getSeriesSeasons(item) != null);
             }
         }
         currentItems = items.toList();
@@ -97,13 +86,13 @@ public class MainMenuController {
         String search = searchBox.getText();
         HashMap<String, Integer> searchResults = new HashMap<>();
         for (String item : currentItems) {
-            String title =  feh.ir.getItemTitle(item);
+            String title =  da.getItemTitle(item);
             searchResults.put(item, calculate(title, search) * 10);
         }
 
         // add search string that cantains the search string to the list
         for (String item : currentItems) {
-            String title =  feh.ir.getItemTitle(item);
+            String title =  da.getItemTitle(item);
             if (title.toLowerCase().contains(search.toLowerCase())) {
                 searchResults.put(item, calculate(item, search));
             }

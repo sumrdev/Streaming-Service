@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.PlayMenuController">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="47.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@play.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <AnchorPane prefHeight="64.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutY="28.0" mnemonicParsing="false" onAction="#back" prefHeight="35.0" prefWidth="44.0" styleClass="normal-button" text="←" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font size="33.0" />
+               </font>
+               <padding>
+                  <Insets bottom="-40.0" left="-40.0" right="-40.0" top="-40.0" />
+               </padding>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <VBox fx:id="Player" alignment="CENTER" minHeight="150.0" minWidth="200.0" styleClass="backgroundImage" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
