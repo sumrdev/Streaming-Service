@@ -24,7 +24,7 @@
                </HBox.margin>
             </Text>
             <Region prefHeight="0.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#navigateHome" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="Home" textAlignment="CENTER" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#navigateHome" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="Home" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="6.0" top="6.0" />
                </HBox.margin>
@@ -38,19 +38,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#navigateUser" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="User" textAlignment="CENTER" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#navigateUser" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="User" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="6.0" left="8.0" top="6.0" />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
-               <padding>
-                  <Insets top="2.0" />
-               </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets top="2.0" />
+               </padding>
             </Button>
             <Region prefHeight="0.0" prefWidth="50.0" />
          </children>
