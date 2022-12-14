@@ -31,7 +31,7 @@
                      </font>
                   </Text>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <Button mnemonicParsing="false" onAction="#logout" styleClass="normal-button" text="Logout" />
                   <Region prefHeight="200.0" prefWidth="20.0" />
                </children>
             </HBox>
@@ -101,7 +101,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#createNewUser" text="Add user" />
+            <Button mnemonicParsing="false" onAction="#createNewUser" styleClass="normal-button" text="Add user" />
          </children>
       </VBox>
    </children>

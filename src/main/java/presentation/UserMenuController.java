@@ -39,7 +39,7 @@ public class UserMenuController {
 
     private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();
-    private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
+    private HashMap<String, ItemPane> itemNodes = new HashMap<>(); 
 
     public void initialize(DomainAccess da, MainWindow mw) {
         this.da = da;
@@ -96,6 +96,10 @@ public class UserMenuController {
             ImageView img = new ImageView(new Image(getClass().getResourceAsStream("/avatar.png")));
             avatar.getChildren().add(img);
             Button delete = new Button("✖");
+            delete.setTextOverrun(OverrunStyle.CLIP);
+            delete.setFont(javafx.scene.text.Font.font("open-sans", 28));
+            delete.setTextFill(javafx.scene.paint.Color.DARKRED);
+            delete.setPadding(new javafx.geometry.Insets(-5, 0, -5, -5));
             delete.setOnAction(e -> users.remove(name));
             avatar.getChildren().add(delete);
             StackPane.setAlignment(delete, javafx.geometry.Pos.TOP_RIGHT);

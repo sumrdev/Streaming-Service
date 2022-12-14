@@ -13,11 +13,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public abstract class UserPane extends StackPane  {
+public abstract class ItemPane extends StackPane  {
     private double maxScaleSize = 1.1;
     protected Image img;
 
-    public UserPane(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList) throws IOException {
+    public ItemPane(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("item.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);

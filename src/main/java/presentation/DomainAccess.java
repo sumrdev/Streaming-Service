@@ -97,15 +97,15 @@ public class DomainAccess {
         ur.save();
     }
 
-    public HashMap<String, UserPane> createItemPanes(Popup popup) {
+    public HashMap<String, ItemPane> createItemPanes(Popup popup) {
         System.out.println("Creating item panes");
-        HashMap<String, UserPane> itemNodes = new HashMap<>();
+        HashMap<String, ItemPane> itemNodes = new HashMap<>();
         ArrayList<String> movies = ir.getMovieKeyList();
         ArrayList<String> series = ir.getSeriesKeyList();
         for (String movieKey : movies) {
             try {
                 String movie = ir.getItemTitle(movieKey);
-                itemNodes.put(movieKey, new UserPaneMovie(movieKey, movie, ir.getItemGenre(movieKey), ir.getItemRating(movieKey), ir.getItemRelease(movieKey), "/movie_img/" + movie + ".jpg", favoriteItems, popup));
+                itemNodes.put(movieKey, new ItemPaneMovie(movieKey, movie, ir.getItemGenre(movieKey), ir.getItemRating(movieKey), ir.getItemRelease(movieKey), "/movie_img/" + movie + ".jpg", favoriteItems, popup));
             } catch (Exception e) {
                 System.out.println("Error loading movie: " + ir.getItemTitle(movieKey) + " - " + e.getMessage());
             }
@@ -113,7 +113,7 @@ public class DomainAccess {
         for (String serieKey : series) {
             try {
                 String serie = ir.getItemTitle(serieKey);
-                itemNodes.put(serieKey, new UserPaneSeries(serieKey, serie,  ir.getItemGenre(serieKey), ir.getItemRating(serieKey), ir.getItemRelease(serieKey), ir.getSeriesEndYear(serieKey), ir.getSeriesSeasons(serieKey), "/show_img/" + serie + ".jpg", favoriteItems, popup));
+                itemNodes.put(serieKey, new ItemPaneSeries(serieKey, serie,  ir.getItemGenre(serieKey), ir.getItemRating(serieKey), ir.getItemRelease(serieKey), ir.getSeriesEndYear(serieKey), ir.getSeriesSeasons(serieKey), "/show_img/" + serie + ".jpg", favoriteItems, popup));
             } catch (Exception e) {
                 System.out.println("Error loading movie: " + ir.getItemTitle(serieKey) + " - " + e.getMessage());
             }

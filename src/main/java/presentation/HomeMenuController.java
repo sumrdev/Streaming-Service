@@ -26,7 +26,7 @@ public class HomeMenuController {
 
     private DomainAccess da = null;
     private List<String> currentItems = null;
-    private HashMap<String, UserPane> itemNodes = new HashMap<>(); 
+    private HashMap<String, ItemPane> itemNodes = new HashMap<>(); 
     private Popup popup;
 
     public void initialize(DomainAccess da, MainWindow mw) {
