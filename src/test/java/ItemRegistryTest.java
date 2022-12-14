@@ -34,7 +34,7 @@ class ItemRegistryTest {
         assertEquals(itemRegistry.getItemGenre(serieList)[1], "Drama");
         assertEquals(itemRegistry.getItemGenre(serieList)[2], "Mystery");
         assertEquals(itemRegistry.getItemRating(serieList), 8.8);
-        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(0), 8);
+        assertEquals(itemRegistry.getSeriesSeasons(serieList)[0], 8);
     }
 
     @Test
@@ -48,6 +48,6 @@ class ItemRegistryTest {
         assertEquals(itemRegistry.getItemGenre(serieList)[1], "Adventure");
         assertEquals(itemRegistry.getItemGenre(serieList)[2], "Drama");
         assertEquals(itemRegistry.getItemRating(serieList), 9.5);
-        assertEquals(itemRegistry.getSeriesSeasons(serieList).get(6), 7);
+        assertEquals(itemRegistry.getSeriesSeasons(serieList)[6], 7);
     }
 }

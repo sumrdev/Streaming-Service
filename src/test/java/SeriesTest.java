@@ -60,7 +60,7 @@ class SeriesTest {
     void getSeriesSeasonsTest() {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String seriesKey = series.get(0);
-        assertEquals(itemRegistry.getSeriesSeasons(seriesKey).get(0), 8);
+        assertEquals(itemRegistry.getSeriesSeasons(seriesKey)[0], 8);
     }
 
 }
