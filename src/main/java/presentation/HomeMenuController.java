@@ -5,6 +5,8 @@ import java.util.stream.*;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -26,14 +28,18 @@ public class HomeMenuController {
 
     private DomainAccess da = null;
     private List<String> currentItems = null;
-    private HashMap<String, ItemPane> itemNodes = new HashMap<>(); 
-    private Popup popup;
+    private HashMap<String, StackPane> itemNodes = new HashMap<>(); 
+    private PopupController popup;
 
     public void initialize(DomainAccess da, MainWindow mw) {
         try {
             this.da = da;
-            popup = new Popup(mw);
-            this.itemNodes = da.createItemPanes(popup);
+            FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
+            Parent popup = popupLoader.load();
+            PopupController puc = popupLoader.getController();
+            puc.initialize(mw, da);
+
+            this.itemNodes = da.createItemPanes(puc);
             String[] genres = da.getGenreStrings();
             choiceGenre.getItems().addAll("All");
             choiceGenre.getItems().addAll(genres);

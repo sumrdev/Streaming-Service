@@ -10,6 +10,8 @@ import domain.UserRegistryImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.StackPane;
 
 
 public class DomainAccess {
@@ -57,15 +59,6 @@ public class DomainAccess {
     public String[] getGenreStrings() {
         return ir.getGenreSet().stream().toArray(String[]::new);
     }
-
-    public String[] getItemGenre(String itemKey) {
-        return ir.getItemGenre(itemKey);
-    }
-
-    public int[] getSeriesSeasons(String itemKey) {
-        return ir.getSeriesSeasons(itemKey);
-    }
-
     public ArrayList<String> getMovieKeyList() {
         return ir.getMovieKeyList();
     }
@@ -73,12 +66,31 @@ public class DomainAccess {
         return ir.getSeriesKeyList();
     }
 
-    public ArrayList<String> getUsernameList() {
-        return ur.getUsernameList();
-    }
-
     public String getItemTitle(String itemKey) {
         return ir.getItemTitle(itemKey);
+    }
+
+    public int getItemRelease(String itemKey) {
+        return ir.getItemRelease(itemKey);
+    }
+
+    public String[] getItemGenre(String itemKey) {
+        return ir.getItemGenre(itemKey);
+    }
+    
+    public double getItemRating(String itemKey) {
+        return ir.getItemRating(itemKey);
+    }
+    
+    public int[] getSeriesSeasons(String itemKey) {
+        return ir.getSeriesSeasons(itemKey);
+    }
+    public int getSeriesEndYear(String itemKey) {
+        return ir.getSeriesEndYear(itemKey);
+    }
+    
+    public ArrayList<String> getUsernameList() {
+        return ur.getUsernameList();
     }
 
     public void removeUser(String user) {
@@ -97,25 +109,31 @@ public class DomainAccess {
         ur.save();
     }
 
-    public HashMap<String, ItemPane> createItemPanes(Popup popup) {
+    public HashMap<String, StackPane> createItemPanes(PopupController popup) {
         System.out.println("Creating item panes");
-        HashMap<String, ItemPane> itemNodes = new HashMap<>();
+        HashMap<String, StackPane> itemNodes = new HashMap<>();
         ArrayList<String> movies = ir.getMovieKeyList();
         ArrayList<String> series = ir.getSeriesKeyList();
         for (String movieKey : movies) {
             try {
+                FXMLLoader ItemLoader = new FXMLLoader(getClass().getClassLoader().getResource("item.fxml"));
+                itemNodes.put(movieKey, ItemLoader.load());
+                ItemPaneController controller = ItemLoader.getController();
                 String movie = ir.getItemTitle(movieKey);
-                itemNodes.put(movieKey, new ItemPaneMovie(movieKey, movie, ir.getItemGenre(movieKey), ir.getItemRating(movieKey), ir.getItemRelease(movieKey), "/movie_img/" + movie + ".jpg", favoriteItems, popup));
+                controller.initialize(movieKey, movie, "/movie_img/" + movie + ".jpg", favoriteItems, popup, "movie");
             } catch (Exception e) {
-                System.out.println("Error loading movie: " + ir.getItemTitle(movieKey) + " - " + e.getMessage());
+                System.out.println("Error loading movie: " + ir.getItemTitle(movieKey) + " - " + e.getStackTrace());
             }
         }
         for (String serieKey : series) {
             try {
+                FXMLLoader ItemLoader = new FXMLLoader(getClass().getClassLoader().getResource("item.fxml"));
+                itemNodes.put(serieKey, ItemLoader.load());
+                ItemPaneController controller = ItemLoader.getController();
                 String serie = ir.getItemTitle(serieKey);
-                itemNodes.put(serieKey, new ItemPaneSeries(serieKey, serie,  ir.getItemGenre(serieKey), ir.getItemRating(serieKey), ir.getItemRelease(serieKey), ir.getSeriesEndYear(serieKey), ir.getSeriesSeasons(serieKey), "/show_img/" + serie + ".jpg", favoriteItems, popup));
+                controller.initialize(serieKey, serie, "/show_img/" + serie + ".jpg", favoriteItems, popup, "series");
             } catch (Exception e) {
-                System.out.println("Error loading movie: " + ir.getItemTitle(serieKey) + " - " + e.getMessage());
+                e.printStackTrace();
             }
         } 
         return itemNodes;

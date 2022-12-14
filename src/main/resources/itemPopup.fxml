@@ -12,19 +12,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="CENTER" style="-fx-background-color: #000000cc;" type="HBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="root" alignment="CENTER" onMouseClicked="#hide" style="-fx-background-color: #000000cc;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.PopupController">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="625.0" spacing="20.0" style="-fx-background-color: #303D57;" styleClass="popup">
          <children>
             <HBox alignment="CENTER" maxWidth="500.0">
                <children>
-                  <ImageView fitHeight="194.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image" fitHeight="194.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@2001%20A%20Space%20Odyssey.jpg" />
                      </image>
                   </ImageView>
                   <Region maxWidth="-Infinity" prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
-                  <VBox alignment="CENTER_LEFT" prefHeight="175.0" prefWidth="273.0" spacing="5.0" styleClass="infobox">
+                  <VBox fx:id="infoBox" alignment="CENTER_LEFT" prefHeight="175.0" prefWidth="273.0" spacing="5.0" styleClass="infobox">
                      <children>
                         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2001 a space odyssey">
                            <font>
@@ -41,7 +41,7 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <Button mnemonicParsing="false" styleClass="normal-button" text="Play">
+                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="normal-button" text="Play">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -50,7 +50,7 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox maxWidth="500.0" spacing="5.0">
+            <VBox fx:id="bottom" maxWidth="500.0" spacing="5.0">
                <children>
                   <HBox prefWidth="200.0">
                      <children>
@@ -60,12 +60,12 @@
                            </font>
                         </Text>
                         <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="105.0" styleClass="dropdown" />
+                        <ChoiceBox fx:id="seasonChoiceBox" prefHeight="25.0" prefWidth="105.0" styleClass="dropdown" />
                      </children>
                   </HBox>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="120.0" prefWidth="500.0" styleClass="transparent">
                      <content>
-                        <VBox prefWidth="100.0">
+                        <VBox fx:id="episodeListBox" prefWidth="100.0">
                            <children>
                               <HBox alignment="CENTER" prefHeight="25.0" prefWidth="498.0" style="-fx-background-color: #253046;">
                                  <children>
@@ -97,4 +97,4 @@
          </children>
       </VBox>
    </children>
-</fx:root>
+</HBox>

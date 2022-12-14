@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
@@ -39,15 +41,17 @@ public class UserMenuController {
 
     private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();
-    private HashMap<String, ItemPane> itemNodes = new HashMap<>(); 
+    private HashMap<String, StackPane> itemNodes = new HashMap<>(); 
 
     public void initialize(DomainAccess da, MainWindow mw) {
         this.da = da;
-        Popup popup;
         try {
-            popup = new Popup(mw);
+            FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
+            Parent popup = popupLoader.load();
+            PopupController puc = popupLoader.getController();
+            puc.initialize(mw, da);
             MainStackpane.getChildren().add(popup);
-            this.itemNodes = da.createItemPanes(popup);
+            this.itemNodes = da.createItemPanes(puc);
         } catch (ClassCastException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
