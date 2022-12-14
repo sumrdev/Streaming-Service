@@ -1,11 +1,13 @@
 package presentation;
 
 import java.io.IOException;
+import java.security.AllPermission;
 import java.util.Arrays;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -73,6 +75,13 @@ public class PopupController  {
             setEpisodes(seasons[seasonChoiceBox.getSelectionModel().getSelectedIndex()]);
         });
         bottom.setVisible(true);
+        //set alert
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("You can select a season and episode to play");
+        alert.show();
+
     }
 
     public void show() {

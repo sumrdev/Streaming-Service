@@ -115,7 +115,7 @@ public class DomainAccess {
         ur.removeUser(user);
     }
 
-    public void addUser(String user) {
+    public void addUser(String user) throws IllegalArgumentException{
         ur.addUser(user);
     }
     

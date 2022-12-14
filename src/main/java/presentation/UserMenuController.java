@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -43,6 +44,7 @@ public class UserMenuController {
     private ObservableList<String> users = FXCollections.observableArrayList();
     private ListChangeListener<String> userFavoriteListener;
     private MainWindow mw;
+
     public void initialize(DomainAccess da, MainWindow mw) {
         this.da = da;
         this.mw = mw;
@@ -70,7 +72,12 @@ public class UserMenuController {
                         try {
                             da.addUser(user);
                         } catch (Exception e) {
-                            System.out.println(e.getMessage());
+                            Alert alert = new Alert(AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("Username cannot be empty");
+                            alert.setContentText("Please enter a username");
+                            alert.showAndWait();
+                            return;
                         }
                     }
                 }
@@ -149,9 +156,16 @@ public class UserMenuController {
     }
 
     public void createNewUser() {
+        //alert if username is empty
         System.out.println("he" + usernameInput.getText());
-        if (usernameInput.getText().equals(""))
+        if (usernameInput.getText().equals("")){
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Username cannot be empty");
+            alert.setContentText("Please enter a username");
+            alert.showAndWait();
             return;
+        }
 
         users.add(usernameInput.getText());
         selectView("userSelect");
