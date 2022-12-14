@@ -15,7 +15,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1200.0" style="-fx-background-color: #1c2331;" BorderPane.alignment="TOP_LEFT">
          <children>
             <Region prefHeight="0.0" prefWidth="50.0" />
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Streamline" textOrigin="TOP">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Neostream" textOrigin="TOP">
                <font>
                   <Font name="Segoe UI Bold" size="24.0" />
                </font>
@@ -24,7 +24,7 @@
                </HBox.margin>
             </Text>
             <Region prefHeight="0.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="navButtonHome" alignment="CENTER" mnemonicParsing="false" onAction="#navigateHome" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="Home" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#navigateHome" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="Home" textAlignment="CENTER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="6.0" top="6.0" />
                </HBox.margin>
@@ -38,7 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="navButtonUser" mnemonicParsing="false" onAction="#navigateUser" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="User" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#navigateUser" prefHeight="45.0" prefWidth="85.0" styleClass="normal-button" stylesheets="@style.css" text="User" textAlignment="CENTER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="6.0" left="8.0" top="6.0" />
                </HBox.margin>

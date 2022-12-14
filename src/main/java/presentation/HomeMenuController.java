@@ -28,37 +28,33 @@ public class HomeMenuController {
 
     private DomainAccess da = null;
     private List<String> currentItems = null;
-    private HashMap<String, StackPane> itemNodes = new HashMap<>(); 
-    private PopupController popup;
 
     public void initialize(DomainAccess da, MainWindow mw) {
         try {
             this.da = da;
-            FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
-            Parent popup = popupLoader.load();
-            PopupController puc = popupLoader.getController();
-            puc.initialize(mw, da);
-
-            this.itemNodes = da.createItemPanes(puc);
             String[] genres = da.getGenreStrings();
             choiceGenre.getItems().addAll("All");
             choiceGenre.getItems().addAll(genres);
             choiceGenre.getSelectionModel().selectFirst();
             choiceCategory.getItems().addAll("All", "Series", "Movies");
             choiceCategory.getSelectionModel().selectFirst();
-        
-            //String a = da.ir.getMovieKeyList().get(0);
-            //popup.setMovie(da.ir.getItemTitle(a), da.ir.getItemGenre(a), da.ir.getItemRating(a),new Image(getClass().getResourceAsStream("/movie_img/" + da.ir.getItemTitle(a) + ".jpg")), da.ir.getItemRelease(a));
-            MainStackpane.getChildren().add(popup);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    private List<StackPane> getItemPanes(List<String> keyList) {
-        return keyList.stream().map(key -> itemNodes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
+    public void unload() {
+        itemGrid.getChildren().clear();
+        MainStackpane.getChildren().remove(da.popup);
     }
+
+    public void load() {
+        unload();
+        MainStackpane.getChildren().add(da.popup);
+        updateItemFilters();
+    }
+
 
 
     public void updateItemFilters() {
@@ -84,7 +80,7 @@ public class HomeMenuController {
             search(null);
         } else {
             itemGrid.getChildren().clear();
-            itemGrid.getChildren().addAll(getItemPanes(currentItems));
+            itemGrid.getChildren().addAll(da.getItemPanes(currentItems));
         }
     }
 
@@ -107,7 +103,7 @@ public class HomeMenuController {
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(searchResults.entrySet());
         list.sort((o1, o2) -> o1.getValue() - o2.getValue());
         itemGrid.getChildren().clear();
-        itemGrid.getChildren().addAll(getItemPanes(list.stream().map(entry -> entry.getKey()).toList()));
+        itemGrid.getChildren().addAll(da.getItemPanes(list.stream().map(entry -> entry.getKey()).toList()));
     }
 
     // by Deep Jain Levenshtein Distance

@@ -37,6 +37,6 @@
       </AnchorPane>
    </top>
    <center>
-      <VBox fx:id="Player" alignment="CENTER" minHeight="150.0" minWidth="200.0" styleClass="backgroundImage" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" minHeight="150.0" minWidth="200.0" styleClass="backgroundImage" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

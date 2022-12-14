@@ -2,6 +2,9 @@ package presentation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import domain.ItemRegistry;
 import domain.ItemRegistryImpl;
@@ -11,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 
@@ -19,11 +23,21 @@ public class DomainAccess {
     private UserRegistry ur = null;
     ObservableList<String> favoriteItems = FXCollections.observableArrayList();
 
-    public DomainAccess() {
+    public HashMap<String, StackPane> itemPanes = new HashMap<>(); 
+    public Parent popup;
+
+    public DomainAccess(MainWindow mw) throws Exception {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
         this.ir.initialize();
         this.ur.initialize();
+
+        FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
+        popup = popupLoader.load();
+        PopupController puc = popupLoader.getController();
+        puc.initialize(mw, this);
+        itemPanes = createItemPanes(puc);
+
         favoriteItems.addListener((ListChangeListener<String>) c -> {
             String user = ur.getSelectedUser();
             if (user == null) {
@@ -43,6 +57,10 @@ public class DomainAccess {
             }
             ur.save();
         });
+    }
+
+    public List<StackPane> getItemPanes(List<String> keyList) {
+        return keyList.stream().map(key -> itemPanes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     public void selectUser(String user) {

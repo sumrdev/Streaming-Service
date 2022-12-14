@@ -18,6 +18,10 @@ public class MainWindow extends Application {
     Parent userMenu = null;
     Parent homeMenu = null;
     Parent playMenu = null;
+
+    HomeMenuController homeMenuController;
+    UserMenuController userMenuController;
+    PlayMenuController playMenuController;
     
     DomainAccess da = null;
     
@@ -41,7 +45,7 @@ public class MainWindow extends Application {
 
     public void setup() {
         try {
-            DomainAccess da = new DomainAccess();
+            DomainAccess da = new DomainAccess(this);
             this.da = da;
 
             FXMLLoader homeMenu = new FXMLLoader(getClass().getClassLoader().getResource("homeMenu.fxml"));
@@ -50,13 +54,15 @@ public class MainWindow extends Application {
             this.homeMenu = homeMenu.load();
             this.userMenu = userMenu.load();
             this.playMenu = playMenu.load();
-            HomeMenuController homeMenuController = homeMenu.getController();
-            UserMenuController userMenuController = userMenu.getController();
-            PlayMenuController playMenuController = playMenu.getController();
+
+            homeMenuController = homeMenu.getController();
+            userMenuController = userMenu.getController();
+            playMenuController = playMenu.getController();
+
             homeMenuController.initialize(da, this);
             userMenuController.initialize(da, this);
             playMenuController.initialize(this);
-            this.root.setCenter(this.userMenu);
+            navigateUser();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -67,12 +73,16 @@ public class MainWindow extends Application {
     public void navigateHome() {
         if (this.da != null && this.da.getSelectedUser() == null)
             return;
+        userMenuController.unload();
+        homeMenuController.load();
         root.setCenter(homeMenu);
-        //homeMenuController.update();
     }
 
     public void navigateUser() {
+        homeMenuController.unload();
+        userMenuController.load();
         root.setCenter(userMenu);
+
     }
 
     public void playMovie() {

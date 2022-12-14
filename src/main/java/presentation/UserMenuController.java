@@ -41,26 +41,16 @@ public class UserMenuController {
 
     private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();
-    private HashMap<String, StackPane> itemNodes = new HashMap<>(); 
-
+    private ListChangeListener<String> userFavoriteListener;
+    private MainWindow mw;
     public void initialize(DomainAccess da, MainWindow mw) {
         this.da = da;
-        try {
-            FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
-            Parent popup = popupLoader.load();
-            PopupController puc = popupLoader.getController();
-            puc.initialize(mw, da);
-            MainStackpane.getChildren().add(popup);
-            this.itemNodes = da.createItemPanes(puc);
-        } catch (ClassCastException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        da.favoriteItems.addListener((ListChangeListener<String>) c -> {
+        this.mw = mw;
+        userFavoriteListener = (ListChangeListener<String>) c -> {
             favoritePane.getChildren().clear();
-            favoritePane.getChildren().addAll(getItemPanes(da.favoriteItems));
-        });
+            favoritePane.getChildren().addAll(da.getItemPanes(da.favoriteItems));
+        };
+
         
         users.addAll(da.getUsernameList());
         currentUsers.getChildren().clear();
@@ -89,6 +79,19 @@ public class UserMenuController {
             da.save();
         });
         selectView("userSelect");
+    }
+
+    public void unload() {
+        da.favoriteItems.removeListener(userFavoriteListener);
+        favoritePane.getChildren().clear();
+        MainStackpane.getChildren().remove(da.popup);
+    }
+
+    public void load() {
+        unload();
+        MainStackpane.getChildren().add(da.popup);
+        favoritePane.getChildren().addAll(da.getItemPanes(da.favoriteItems));
+        da.favoriteItems.addListener(userFavoriteListener);
     }
 
     private VBox createUserPane(String name) {
@@ -133,9 +136,6 @@ public class UserMenuController {
         return userPanes;
     }
 
-    private List<StackPane> getItemPanes(List<String> keyList) {
-        return keyList.stream().map(key -> itemNodes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
-    }
 
     public void showUserCreation() {
         selectView("userCreation");
@@ -155,6 +155,7 @@ public class UserMenuController {
         usernameText.setText(username);
         //select main view
         selectView("userPane");
+        mw.navigateHome();
     }
 
     public void logout() {
