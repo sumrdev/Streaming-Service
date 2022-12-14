@@ -66,7 +66,8 @@ public class Popup extends HBox {
         infoBox.getChildren().add(new Text("Rating: " + rating));
         infoBox.getChildren().add(new Text("Genre: " + genre[0]));
         infoBox.getChildren().add(new Text("Release: " + startYear));
-        infoBox.getChildren().add(new Text("End: " + endYear));
+        if(endYear != 0) infoBox.getChildren().add(new Text("End: " + endYear));
+        else infoBox.getChildren().add(new Text("End: Still running"));
         infoBox.getChildren().add(playButton);
 
         seasonChoiceBox.setOnAction (null); // remove old event handler

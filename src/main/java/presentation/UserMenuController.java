@@ -145,6 +145,7 @@ public class UserMenuController {
     public void selectUser(String username) {
         da.selectUser(username);
         usernameText.setText(username);
+        //select main view
         selectView("userPane");
     }
 
