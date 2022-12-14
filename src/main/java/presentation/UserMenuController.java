@@ -51,6 +51,13 @@ public class UserMenuController {
             favoritePane.getChildren().addAll(da.getItemPanes(da.favoriteItems));
         };
 
+        usernameInput.textProperty().addListener((obs, oldText, newText) -> {
+            boolean acceptable = newText.matches("^[a-zA-Z0-9]*$");
+            if (!acceptable) {
+                usernameInput.setText(oldText);
+            }
+        });
+
         
         users.addAll(da.getUsernameList());
         currentUsers.getChildren().clear();
