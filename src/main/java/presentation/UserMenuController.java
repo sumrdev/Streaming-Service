@@ -52,7 +52,7 @@ public class UserMenuController {
         };
 
         usernameInput.textProperty().addListener((obs, oldText, newText) -> {
-            boolean acceptable = newText.matches("^[a-zA-Z0-9]*$");
+            boolean acceptable = newText.matches("^[a-zA-Z0-9 _]*$");
             if (!acceptable) {
                 usernameInput.setText(oldText);
             }
