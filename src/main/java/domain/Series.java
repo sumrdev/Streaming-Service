@@ -1,5 +1,4 @@
 package domain;
-import java.util.*;
 public class Series extends Item {
     int startYear;
     int endYear;

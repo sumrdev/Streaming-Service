@@ -1,8 +1,6 @@
 package presentation;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 

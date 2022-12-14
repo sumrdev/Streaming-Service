@@ -1,6 +1,5 @@
 package domain;
 
-import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.util.*;
 import data.DataAccessImpl;
