@@ -28,7 +28,7 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("Streaming Service");
+        primaryStage.setTitle("Neostream");
 
         FXMLLoader rootLoader = new FXMLLoader(getClass().getClassLoader().getResource("mainWindow.fxml"));
         root = (BorderPane) rootLoader.load();
