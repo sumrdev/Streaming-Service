@@ -30,11 +30,9 @@ public class PopupController  {
     ChoiceBox<String> seasonChoiceBox;
 
     private DomainAccess da;
-    private MainWindow mw;
 
-    public void initialize(MainWindow mw, DomainAccess da) throws IOException, ClassCastException {
+    public void initialize(DomainAccess da) {
         this.da = da;
-        this.mw = mw;
         hide();
     }
 
@@ -87,9 +85,10 @@ public class PopupController  {
     }
 
     public void play() {
-        mw.playMovie();
+        MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
+        mwc.playMovie();
     }
-
+    
     public void consumeClick(MouseEvent me) {
         me.consume();
     }
@@ -104,6 +103,9 @@ public class PopupController  {
 
     private HBox createEpisodePane(int n) {
         HBox episode = new HBox();
+        episode.setOnMouseClicked(e -> {
+            play();
+        });
         Text t = new Text("Episode " + n);
         t.setFill(Color.WHITE);
         episode.getChildren().add(t);

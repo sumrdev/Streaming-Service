@@ -18,6 +18,9 @@ public class MainWindowController {
             mainWindow.navigateUser();
     }
 
-    
+    public void playMovie() {
+        if (mainWindow != null)
+            mainWindow.playMovie();
+    }
 
 }

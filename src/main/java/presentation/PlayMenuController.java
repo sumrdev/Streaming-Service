@@ -1,15 +1,14 @@
 package presentation;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
+
 public class PlayMenuController {
-
-    MainWindow mainWindow = null;
-
-    public void initialize(MainWindow mw) {
-        this.mainWindow = mw;
-    } 
+    @FXML
+    BorderPane root;
 
     public void back() {
-        if (mainWindow != null)
-            mainWindow.navigateHome();
+        MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
+        mwc.navigateHome();
     }
 }
