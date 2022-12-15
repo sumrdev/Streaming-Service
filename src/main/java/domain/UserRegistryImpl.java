@@ -4,9 +4,9 @@ import java.util.*;
 import data.DataAccessImpl;
 
 public class UserRegistryImpl implements UserRegistry {
-    public HashMap<String, User> userMap;
-    ArrayList<String> userNameList;
-    String currentUser = null;
+    private HashMap<String, User> userMap;
+    private ArrayList<String> userNameList;
+    private String currentUser = null;
     public UserRegistryImpl(){
         userMap = new HashMap<>();
         userNameList = new ArrayList<>();
@@ -33,8 +33,7 @@ public class UserRegistryImpl implements UserRegistry {
         }
     }
 
-    @Override
-    public void addUser(String username, String[] favorites) throws IllegalArgumentException {
+    private void addUser(String username, String[] favorites) throws IllegalArgumentException {
         if (userNameList.contains(username)){
             throw new IllegalArgumentException("User already exists");
         } else{

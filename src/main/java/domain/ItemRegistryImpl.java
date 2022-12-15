@@ -5,11 +5,11 @@ import java.util.*;
 import data.DataAccessImpl;
 
 public class ItemRegistryImpl implements ItemRegistry {
-    HashSet<String> genreSet;
-    ArrayList<String> movieKeyList;
-    ArrayList<String> seriesKeyList;
-    HashMap<String, Item> itemMap;
-    MessageDigest md;
+    private HashSet<String> genreSet;
+    private ArrayList<String> movieKeyList;
+    private ArrayList<String> seriesKeyList;
+    private HashMap<String, Item> itemMap;
+    private MessageDigest md;
     public ItemRegistryImpl (){
         movieKeyList = new ArrayList<>();
         seriesKeyList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             addSeries(title, genre, rating, startYear,endYear, seasons);
         }
     }
-    public void addMovie(String title, String[] genre, double rating, int release){
+    private void addMovie(String title, String[] genre, double rating, int release){
         Movie movieToBeAdded = new Movie(title, genre, rating, release);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
         String key = HexFormat.of().formatHex(this.md.digest((title + genreList + release).getBytes()));
@@ -66,7 +66,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             genreSet.add(genreString);
         }
     }
-    public void addSeries(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
+    private void addSeries(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
         Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
         String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + startYear).getBytes())));
@@ -98,11 +98,8 @@ public class ItemRegistryImpl implements ItemRegistry {
     public double getItemRating(String itemKey){
         return itemMap.get(itemKey).getRating();
     }
-    public int getItemRelease(String itemKey){
-        return itemMap.get(itemKey).getRelease();
-    }
-    public int getSeriesStartYear(String itemKey){
-        return itemMap.get(itemKey).getStartYear();
+    public int getItemReleaseYear(String itemKey){
+        return itemMap.get(itemKey).getReleaseYear();
     }
     public int getSeriesEndYear(String itemKey){
         return itemMap.get(itemKey).getEndYear();
@@ -110,9 +107,4 @@ public class ItemRegistryImpl implements ItemRegistry {
     public int[] getSeriesSeasons(String itemKey){
         return itemMap.get(itemKey).getSeasons();
     }
-
-    public String getItemString(String itemKey){
-        return itemMap.get(itemKey).toString();
-    }
-
 }

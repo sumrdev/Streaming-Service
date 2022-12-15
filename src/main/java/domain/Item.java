@@ -2,10 +2,10 @@ package domain;
 
 
 public abstract class Item {
-    String title;
-    String[] genre;
-    double rating;
-    int releaseYear;
+    protected String title;
+    protected String[] genre;
+    protected double rating;
+    protected int releaseYear;
     
     public Item(String title, String[] genre, double rating, int releaseYear) {
         this.title = title;
@@ -23,13 +23,8 @@ public abstract class Item {
     public double getRating(){
         return rating;  
     }
-    public int getRelease(){
+    public int getReleaseYear(){
         return releaseYear;
-    }
-
-    public int getStartYear(){
-        //should not happen
-        return 1;
     }
     public int getEndYear(){
         //should not happen

@@ -3,8 +3,8 @@ package domain;
 import java.util.HashSet;
 
 public class User {
-    String username;
-    HashSet<String> favoriteItems;
+    private String username;
+    private HashSet<String> favoriteItems;
 
     public User(String username){
         this.username=username;
