@@ -1,5 +1,6 @@
 package presentation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +22,12 @@ import javafx.scene.layout.StackPane;
 public class DomainAccess {
     private ItemRegistry ir = null;
     private UserRegistry ur = null;
-    ObservableList<String> favoriteItems = FXCollections.observableArrayList();
+    private ObservableList<String> favoriteItems = FXCollections.observableArrayList();
 
-    public HashMap<String, StackPane> itemPanes = new HashMap<>(); 
-    public Parent popup;
+    private HashMap<String, StackPane> itemPanes = new HashMap<>(); 
+    private Parent popup;
 
-    public DomainAccess(MainWindow mw) throws Exception {
+    public DomainAccess() throws IOException {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
         this.ir.initialize();
@@ -35,7 +36,7 @@ public class DomainAccess {
         FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
         popup = popupLoader.load();
         PopupController puc = popupLoader.getController();
-        puc.initialize(mw, this);
+        puc.initialize(this);
         itemPanes = createItemPanes(puc);
 
         favoriteItems.addListener((ListChangeListener<String>) c -> {
@@ -61,6 +62,10 @@ public class DomainAccess {
 
     public List<StackPane> getItemPanes(List<String> keyList) {
         return keyList.stream().map(key -> itemPanes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
+    }
+
+    public ObservableList<String> getFavoriteItems() {
+        return favoriteItems;
     }
 
     public void selectUser(String user) {
@@ -125,6 +130,10 @@ public class DomainAccess {
 
     public void save() {
         ur.save();
+    }
+
+    public Parent getPopup() {
+        return popup;
     }
 
     public HashMap<String, StackPane> createItemPanes(PopupController popup) {

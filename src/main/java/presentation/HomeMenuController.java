@@ -29,7 +29,7 @@ public class HomeMenuController {
     private DomainAccess da = null;
     private List<String> currentItems = null;
 
-    public void initialize(DomainAccess da, MainWindow mw) {
+    public void initialize(DomainAccess da) {
         try {
             this.da = da;
             String[] genres = da.getGenreStrings();
@@ -46,12 +46,12 @@ public class HomeMenuController {
 
     public void unload() {
         itemGrid.getChildren().clear();
-        MainStackpane.getChildren().remove(da.popup);
+        MainStackpane.getChildren().remove(da.getPopup());
     }
 
     public void load() {
         unload();
-        MainStackpane.getChildren().add(da.popup);
+        MainStackpane.getChildren().add(da.getPopup());
         updateItemFilters();
     }
 

@@ -13,17 +13,16 @@ import javafx.stage.Stage;
 public class MainWindow extends Application {
     
     // root of main window, set center to one of the roots below
-    BorderPane root;
+    private BorderPane root;
     // roots to show in center of main window
-    Parent userMenu = null;
-    Parent homeMenu = null;
-    Parent playMenu = null;
+    private Parent userMenu = null;
+    private Parent homeMenu = null;
+    private Parent playMenu = null;
 
-    HomeMenuController homeMenuController;
-    UserMenuController userMenuController;
-    PlayMenuController playMenuController;
+    private HomeMenuController homeMenuController;
+    private UserMenuController userMenuController;
     
-    DomainAccess da = null;
+    private DomainAccess da = null;
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,15 +36,16 @@ public class MainWindow extends Application {
         Scene mainScene = new Scene(root);
         mainScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
 
+        mainScene.setUserData(rootController);
         primaryStage.setScene(mainScene);
         primaryStage.show();
         primaryStage.getIcons().add(new Image("icon.png"));
         setup();
     }
 
-    public void setup() {
+    private void setup() {
         try {
-            DomainAccess da = new DomainAccess(this);
+            DomainAccess da = new DomainAccess();
             this.da = da;
 
             FXMLLoader homeMenu = new FXMLLoader(getClass().getClassLoader().getResource("homeMenu.fxml"));
@@ -57,11 +57,9 @@ public class MainWindow extends Application {
 
             homeMenuController = homeMenu.getController();
             userMenuController = userMenu.getController();
-            playMenuController = playMenu.getController();
 
-            homeMenuController.initialize(da, this);
-            userMenuController.initialize(da, this);
-            playMenuController.initialize(this);
+            homeMenuController.initialize(da);
+            userMenuController.initialize(da);
             navigateUser();
         } catch (Exception e) {
             System.out.println(e);
