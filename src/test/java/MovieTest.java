@@ -18,7 +18,7 @@ class MovieTest {
     void toStringTest() {
         ArrayList<String> movies = itemRegistry.getMovieKeyList();
         String movieKey = movies.get(0);
-        assertEquals(itemRegistry.getItemString(movieKey).toString(), "The Godfather; 1972;Crime,Drama;9.2;");
+        assertEquals(itemRegistry.getToString(movieKey).toString(), "The Godfather; 1972;Crime,Drama;9.2;");
     }
 
     @Test
@@ -46,6 +46,6 @@ class MovieTest {
     void getMovieReleaseTest() {
         ArrayList<String> movies = itemRegistry.getMovieKeyList();
         String movieKey = movies.get(0);
-        assertEquals(itemRegistry.getItemRelease(movieKey), 1972);
+        assertEquals(itemRegistry.getItemReleaseYear(movieKey), 1972);
     }
 }

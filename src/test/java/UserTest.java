@@ -1,30 +1,22 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import domain.UserRegistryImpl;
+import domain.User;
 
 class UserTest {
-    static UserRegistryImpl userRegistry;
-
-    @BeforeAll
-    static void beforeAll() {
-        userRegistry = new UserRegistryImpl();
-        userRegistry.initialize();
-        userRegistry.addUser("TestUser");
-    }
 
     @Test
     void userGetUsername() {
-        assertEquals("TestUser", userRegistry.userMap.get(userRegistry.getUsername("TestUser")).getUsername());
+        User user = new User("TestUser");
+        assertEquals("TestUser", user.getUsername());
     }
 
     @Test
     void userToString() {
-        userRegistry.addFavoriteItem("TestUser", "TestItem");
-        userRegistry.addFavoriteItem("TestUser", "TestItem2");
-        System.out.println(userRegistry.userMap.get(userRegistry.getUsername("TestUser").toString()));
-        assertEquals("TestUser;TestItem2,TestItem;", userRegistry.userMap.get(userRegistry.getUsername("TestUser")).toString());
+        User user = new User("TestUser");
+        user.addFavoriteItem("TestItem");
+        user.addFavoriteItem("TestItem2");
+        assertEquals("TestUser;TestItem2,TestItem;", user.toString());
     }
 
 }

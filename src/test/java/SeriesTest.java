@@ -18,7 +18,7 @@ class SeriesTest {
     void toStringTest() {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String seriesKey = series.get(0);
-        assertEquals(itemRegistry.getItemString(seriesKey), "Twin Peaks;1990-1991;Crime,Drama,Mystery;8,8;1-8,2-22;");
+        assertEquals(itemRegistry.getToString(seriesKey), "Twin Peaks;1990-1991;Crime,Drama,Mystery;8,8;1-8,2-22;");
     }
 
     @Test
@@ -46,7 +46,7 @@ class SeriesTest {
     void getSeriesStartYearTest() {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String seriesKey = series.get(0);
-        assertEquals(itemRegistry.getItemRelease(seriesKey), 1990);
+        assertEquals(itemRegistry.getItemReleaseYear(seriesKey), 1990);
     }
 
     @Test

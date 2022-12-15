@@ -28,7 +28,7 @@ class ItemRegistryTest {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String serieList = series.get(0);
         assertEquals(itemRegistry.getItemTitle(serieList), "Twin Peaks");
-        assertEquals(itemRegistry.getItemRelease(serieList), 1990);
+        assertEquals(itemRegistry.getItemReleaseYear(serieList), 1990);
         assertEquals(itemRegistry.getSeriesEndYear(serieList), 1991);
         assertEquals(itemRegistry.getItemGenre(serieList)[0], "Crime");
         assertEquals(itemRegistry.getItemGenre(serieList)[1], "Drama");
@@ -42,7 +42,7 @@ class ItemRegistryTest {
         ArrayList<String> series = itemRegistry.getSeriesKeyList();
         String serieList = series.get(2);
         assertEquals(itemRegistry.getItemTitle(serieList), "Game Of Thrones");
-        assertEquals(itemRegistry.getItemRelease(serieList), 2011);
+        assertEquals(itemRegistry.getItemReleaseYear(serieList), 2011);
         assertEquals(itemRegistry.getSeriesEndYear(serieList), 0);
         assertEquals(itemRegistry.getItemGenre(serieList)[0], "Action");
         assertEquals(itemRegistry.getItemGenre(serieList)[1], "Adventure");
