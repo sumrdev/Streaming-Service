@@ -20,9 +20,9 @@ public class ItemRegistryImpl implements ItemRegistry {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-
+        this.initialize();
     }
-    public void initialize(){
+    private void initialize(){
         DataAccessImpl da = new DataAccessImpl("database");
         List<String> movieData = da.load("movies");
         List<String> seriesData = da.load("series");

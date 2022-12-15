@@ -10,10 +10,10 @@ public class UserRegistryImpl implements UserRegistry {
     public UserRegistryImpl(){
         userMap = new HashMap<>();
         userNameList = new ArrayList<>();
+        this.initialize();
     }
 
-    @Override
-    public void initialize() {
+    private void initialize() {
         DataAccessImpl da = new DataAccessImpl("database");
         List<String> userData = da.load("users");
         for (String s : userData){
@@ -65,6 +65,7 @@ public class UserRegistryImpl implements UserRegistry {
         da.save("users", listToBeSaved);
     }
 
+    
     public String getUsername(String userKey){
         return userMap.get(userKey).getUsername();
     }

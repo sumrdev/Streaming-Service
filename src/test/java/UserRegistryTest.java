@@ -12,7 +12,6 @@ class UserRegistryTest {
     @BeforeAll
     static void beforeAll() {
         userRegistry = new UserRegistryImpl();
-        userRegistry.initialize();
     }
 
     @Test
@@ -73,7 +72,6 @@ class UserRegistryTest {
         userRegistry.addUser("TestUser6");
         userRegistry.save();
         UserRegistry userRegistry2 = new UserRegistryImpl();
-        userRegistry2.initialize();
         assertTrue( userRegistry2.getUsernameList().contains("TestUser6"));
         //cleanup
         userRegistry.removeUser("TestUser6");

@@ -43,14 +43,12 @@ public class UserMenuController {
     private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();
     private ListChangeListener<String> userFavoriteListener;
-    private MainWindow mw;
 
-    public void initialize(DomainAccess da, MainWindow mw) {
+    public void initialize(DomainAccess da) {
         this.da = da;
-        this.mw = mw;
         userFavoriteListener = (ListChangeListener<String>) c -> {
             favoritePane.getChildren().clear();
-            favoritePane.getChildren().addAll(da.getItemPanes(da.favoriteItems));
+            favoritePane.getChildren().addAll(da.getItemPanes(da.getFavoriteItems()));
         };
 
         usernameInput.textProperty().addListener((obs, oldText, newText) -> {
@@ -96,16 +94,16 @@ public class UserMenuController {
     }
 
     public void unload() {
-        da.favoriteItems.removeListener(userFavoriteListener);
+        da.getFavoriteItems().removeListener(userFavoriteListener);
         favoritePane.getChildren().clear();
-        MainStackpane.getChildren().remove(da.popup);
+        MainStackpane.getChildren().remove(da.getPopup());
     }
 
     public void load() {
         unload();
-        MainStackpane.getChildren().add(da.popup);
-        favoritePane.getChildren().addAll(da.getItemPanes(da.favoriteItems));
-        da.favoriteItems.addListener(userFavoriteListener);
+        MainStackpane.getChildren().add(da.getPopup());
+        favoritePane.getChildren().addAll(da.getItemPanes(da.getFavoriteItems()));
+        da.getFavoriteItems().addListener(userFavoriteListener);
     }
 
     private VBox createUserPane(String name) {
@@ -176,7 +174,8 @@ public class UserMenuController {
         usernameText.setText(username);
         //select main view
         selectView("userPane");
-        mw.navigateHome();
+        MainWindowController mwc = (MainWindowController) MainStackpane.getScene().getUserData();
+        mwc.navigateHome();
     }
 
     public void logout() {
