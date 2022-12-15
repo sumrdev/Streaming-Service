@@ -10,6 +10,7 @@ public class ItemRegistryImpl implements ItemRegistry {
     private ArrayList<String> seriesKeyList;
     private HashMap<String, Item> itemMap;
     private MessageDigest md;
+
     public ItemRegistryImpl (){
         movieKeyList = new ArrayList<>();
         seriesKeyList = new ArrayList<>();
@@ -22,6 +23,7 @@ public class ItemRegistryImpl implements ItemRegistry {
         }
         this.initialize();
     }
+
     private void initialize(){
         DataAccessImpl da = new DataAccessImpl("database");
         List<String> movieData = da.load("movies");
@@ -30,13 +32,13 @@ public class ItemRegistryImpl implements ItemRegistry {
         for (String s : movieData){
             String[] data = s.split(";");
             String title = data[0];
-            int release = Integer.parseInt(data[1].strip());
+            int releaseYear = Integer.parseInt(data[1].strip());
             String[] genre = data[2].split(",");
             for (int i = 0; i < genre.length; i++) {
                 genre[i] = genre[i].strip();
             }
             double rating = Double.parseDouble(data[3].replace(",", "."));
-            addMovie(title, genre, rating, release);
+            addMovie(title, genre, rating, releaseYear);
         }
         for (String s : seriesData){
             String[] data = s.split(";");
@@ -56,6 +58,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             addSeries(title, genre, rating, release,endYear, seasons);
         }
     }
+
     private void addMovie(String title, String[] genre, double rating, int release){
         Movie movieToBeAdded = new Movie(title, genre, rating, release);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
@@ -66,6 +69,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             genreSet.add(genreString);
         }
     }
+
     private void addSeries(String title, String[] genre, double rating, int release, int endYear, int[] seasons){
         Series seriesToBeAdded = new Series(title, genre, rating, release, endYear, seasons);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
@@ -80,30 +84,39 @@ public class ItemRegistryImpl implements ItemRegistry {
     public ArrayList<String> getMovieKeyList(){
         return movieKeyList;
     }
+
     public ArrayList<String> getSeriesKeyList(){
         return seriesKeyList;
     }
+
     public HashSet<String> getGenreSet(){
         return genreSet;
     }
+
     public String getToString(String itemKey){
         return itemMap.get(itemKey).toString();
     }
+
     public String getItemTitle(String itemKey){
         return itemMap.get(itemKey).getTitle();
     }
+
     public String[] getItemGenre(String itemKey){
         return itemMap.get(itemKey).getGenre();
     }
+
     public double getItemRating(String itemKey){
         return itemMap.get(itemKey).getRating();
     }
+
     public int getItemReleaseYear(String itemKey){
         return itemMap.get(itemKey).getReleaseYear();
     }
+
     public int getSeriesEndYear(String itemKey){
         return itemMap.get(itemKey).getEndYear();
     }
+
     public int[] getSeriesSeasons(String itemKey){
         return itemMap.get(itemKey).getSeasons();
     }

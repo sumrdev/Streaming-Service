@@ -7,7 +7,6 @@ public class MainWindowController {
         this.mainWindow = mainWindow;
     }
 
-
     public void navigateHome() {
         if (mainWindow != null)
             mainWindow.navigateHome();
@@ -22,5 +21,4 @@ public class MainWindowController {
         if (mainWindow != null)
             mainWindow.playMovie();
     }
-
 }

@@ -57,7 +57,6 @@ public class UserMenuController {
                 usernameInput.setText(oldText);
             }
         });
-
         
         users.addAll(da.getUsernameList());
         currentUsers.getChildren().clear();
@@ -148,7 +147,6 @@ public class UserMenuController {
         return userPanes;
     }
 
-
     public void showUserCreation() {
         selectView("userCreation");
     }
@@ -164,7 +162,6 @@ public class UserMenuController {
             alert.showAndWait();
             return;
         }
-
         users.add(usernameInput.getText());
         selectView("userSelect");
     }

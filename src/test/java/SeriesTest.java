@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import domain.Series;
 
 class SeriesTest {
+    
     @Test
-    //test series not in a registry
     void seriesGettersTest() {
         String[] genres = new String[3];
         genres[0] = "Crime";
@@ -27,5 +27,4 @@ class SeriesTest {
         assertEquals(series.getSeasons()[0], 8);
         assertEquals(series.getSeasons()[1], 22);
     }
-
 }

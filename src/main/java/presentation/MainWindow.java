@@ -8,10 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
-
 public class MainWindow extends Application {
-    
     // root of main window, set center to one of the roots below
     private BorderPane root;
     // roots to show in center of main window
@@ -66,8 +63,6 @@ public class MainWindow extends Application {
         }
     }
 
-
-
     public void navigateHome() {
         if (this.da != null && this.da.getSelectedUser() == null)
             return;
@@ -90,5 +85,4 @@ public class MainWindow extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
