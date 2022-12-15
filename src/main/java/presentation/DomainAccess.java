@@ -30,8 +30,6 @@ public class DomainAccess {
     public DomainAccess() throws IOException {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
-        this.ir.initialize();
-        this.ur.initialize();
 
         FXMLLoader popupLoader = new FXMLLoader(getClass().getClassLoader().getResource("itemPopup.fxml"));
         popup = popupLoader.load();

@@ -3,8 +3,6 @@ package domain;
 import java.util.*;
 
 public interface ItemRegistry {
-    public void initialize();
-    
     public HashSet<String> getGenreSet();
 
     public ArrayList<String> getMovieKeyList();

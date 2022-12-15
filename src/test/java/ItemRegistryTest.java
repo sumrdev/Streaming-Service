@@ -11,7 +11,6 @@ class ItemRegistryTest {
     @BeforeAll
     static void beforeAll() {
         itemRegistry = new ItemRegistryImpl();
-        itemRegistry.initialize();
     }
 
     @Test
