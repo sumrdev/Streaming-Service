@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,9 @@ public class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.path + "/" + dataField + ".txt"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(
+                this.path + "/" + dataField + ".txt")));
+            
             reader.lines().forEach(data::add);
             reader.close();
         } catch (FileNotFoundException e) {
@@ -42,7 +45,8 @@ public class DataAccessImpl implements DataAccess {
     // Throws an exception if there is an error writing to the file
     @Override
     public void save(String dataField, List<String> data) {
-        File f = new File(this.path + "/" + dataField + ".txt");
+        File f = new File(getClass().getClassLoader().getResource(
+            this.path + "/" + dataField + ".txt").getPath());
         PrintWriter pw;
         try {
             pw = new PrintWriter(f);

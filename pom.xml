@@ -30,6 +30,27 @@
     </dependencies>
     <build>
         <plugins>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>presentation.Main</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -49,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <compress>2</compress>
-                            <mainClass>presentation.MainWindow</mainClass>
+                            <mainClass>presentation.Main</mainClass>
                             <noHeaderFiles>true</noHeaderFiles>
                             <stripDebug>true</stripDebug>
                             <noManPages>true</noManPages>
