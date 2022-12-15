@@ -1,17 +1,15 @@
 package domain;
 public class Series extends Item {
-    int startYear;
+    int release;
     int endYear;
     int[] seasons;
-    public Series(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
-        super(title, genre, rating, startYear);
-        this.startYear=startYear;
+    public Series(String title, String[] genre, double rating, int release, int endYear, int[] seasons){
+        super(title, genre, rating, release);
+        this.release=release;
         this.endYear=endYear;
         this.seasons=seasons;
     }
-    public int getStartYear(){
-        return startYear;
-    }
+
     public int getEndYear(){
         return endYear;
     }
@@ -30,7 +28,7 @@ public class Series extends Item {
 
     @Override
     public String toString(){
-        return title + ";" + startYear + "-" + endYear + ";" + genreToString() + ";"+ String.valueOf(rating).replace(".", ",") + ";" + seasonsToString() + ";";
+        return title + ";" + release + "-" + endYear + ";" + genreToString() + ";"+ String.valueOf(rating).replace(".", ",") + ";" + seasonsToString() + ";";
     }
 }
 
