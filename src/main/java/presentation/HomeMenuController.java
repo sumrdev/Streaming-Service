@@ -109,28 +109,27 @@ public class HomeMenuController {
         itemGrid.getChildren().addAll(da.getItemPanes(list.stream().map(entry -> entry.getKey()).toList()));
     }
 
-    // by Deep Jain Levenshtein Distance
     // https://www.baeldung.com/java-levenshtein-distance
-    private static int calculate(String x, String y) {
-        int[][] dp = new int[x.length() + 1][y.length() + 1];
 
-        for (int i = 0; i <= x.length(); i++) {
-            for (int j = 0; j <= y.length(); j++) {
-                if (i == 0) {
-                    dp[i][j] = j;
-                } else if (j == 0) {
-                    dp[i][j] = i;
-                } else {
-                    dp[i][j] = min(dp[i - 1][j - 1]
-                            + costOfSubstitution(x.charAt(i - 1), y.charAt(j - 1)),
-                            dp[i - 1][j] + 1,
-                            dp[i][j - 1] + 1);
-                }
-            }
-        }
+    //returns the levenshtein distance between two strings
+    public static int calculate(String str1, String str2) {
+        int[][] distance = new int[str1.length() + 1][str2.length() + 1];
+    
+        for (int i = 0; i <= str1.length(); i++)
+            distance[i][0] = i;
+        for (int j = 1; j <= str2.length(); j++)
+            distance[0][j] = j;
 
-        return dp[x.length()][y.length()];
+        for (int i = 1; i <= str1.length(); i++)
+            for (int j = 1; j <= str2.length(); j++)
+                distance[i][j] = min(
+                        distance[i - 1][j] + 1,
+                        distance[i][j - 1] + 1,
+                        distance[i - 1][j - 1] + costOfSubstitution(str1.charAt(i - 1), str2.charAt(j - 1)));
+
+        return distance[str1.length()][str2.length()];
     }
+
 
     private static int costOfSubstitution(char a, char b) {
         return a == b ? 0 : 1;
