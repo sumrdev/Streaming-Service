@@ -6,95 +6,110 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <HBox fx:id="root" alignment="CENTER" onMouseClicked="#hide" style="-fx-background-color: #000000cc;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.PopupController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="625.0" spacing="20.0" style="-fx-background-color: #303D57;" styleClass="popup">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#consumeClick" prefHeight="441.0" prefWidth="625.0">
          <children>
-            <HBox alignment="CENTER" maxWidth="500.0">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="625.0" spacing="20.0" style="-fx-background-color: #303D57;" styleClass="popup">
                <children>
-                  <ImageView fx:id="image" fitHeight="194.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@2001%20A%20Space%20Odyssey.jpg" />
-                     </image>
-                  </ImageView>
-                  <Region maxWidth="-Infinity" prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
-                  <VBox fx:id="infoBox" alignment="CENTER_LEFT" prefHeight="175.0" prefWidth="273.0" spacing="5.0" styleClass="infobox">
+                  <HBox alignment="CENTER" maxWidth="500.0">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2001 a space odyssey">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="10.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Released 1990">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Text fill="WHITE" layoutX="10.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genres: Crime, Drama, Romance">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="normal-button" text="Play">
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </Button>
+                        <ImageView fx:id="image" fitHeight="194.0" fitWidth="147.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@2001%20A%20Space%20Odyssey.jpg" />
+                           </image>
+                        </ImageView>
+                        <Region maxWidth="-Infinity" prefHeight="200.0" prefWidth="20.0" HBox.hgrow="ALWAYS" />
+                        <VBox fx:id="infoBox" alignment="CENTER_LEFT" prefHeight="175.0" prefWidth="273.0" spacing="5.0" styleClass="infobox">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="2001 a space odyssey">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="10.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Released 1990">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="10.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genres: Crime, Drama, Romance">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" styleClass="normal-button" text="Play">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="bottom" maxWidth="500.0" spacing="5.0">
+                     <children>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Episodes">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="seasonChoiceBox" prefHeight="25.0" prefWidth="105.0" styleClass="dropdown" />
+                           </children>
+                        </HBox>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="120.0" prefWidth="500.0" styleClass="transparent">
+                           <content>
+                              <VBox fx:id="episodeListBox" prefWidth="100.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="25.0" prefWidth="498.0" style="-fx-background-color: #253046;">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Episode 1">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Text>
+                                          <Region prefHeight="200.0" HBox.hgrow="ALWAYS" />
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@play.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </ScrollPane>
                      </children>
                   </VBox>
                </children>
-            </HBox>
-            <VBox fx:id="bottom" maxWidth="500.0" spacing="5.0">
-               <children>
-                  <HBox prefWidth="200.0">
-                     <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Episodes">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <ChoiceBox fx:id="seasonChoiceBox" prefHeight="25.0" prefWidth="105.0" styleClass="dropdown" />
-                     </children>
-                  </HBox>
-                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="120.0" prefWidth="500.0" styleClass="transparent">
-                     <content>
-                        <VBox fx:id="episodeListBox" prefWidth="100.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="25.0" prefWidth="498.0" style="-fx-background-color: #253046;">
-                                 <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Episode 1">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Text>
-                                    <Region prefHeight="200.0" HBox.hgrow="ALWAYS" />
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@play.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </content>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </ScrollPane>
-               </children>
             </VBox>
+            <AnchorPane prefHeight="441.0" prefWidth="625.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#hide" styleClass="normal-button" text="✖" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
-      </VBox>
+      </StackPane>
    </children>
 </HBox>

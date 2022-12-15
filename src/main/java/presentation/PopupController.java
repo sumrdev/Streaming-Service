@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -87,6 +88,10 @@ public class PopupController  {
 
     public void play() {
         mw.playMovie();
+    }
+
+    public void consumeClick(MouseEvent me) {
+        me.consume();
     }
 
 
