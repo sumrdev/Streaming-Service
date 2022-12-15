@@ -41,7 +41,7 @@ public class ItemRegistryImpl implements ItemRegistry {
         for (String s : seriesData){
             String[] data = s.split(";");
             String title = data[0];
-            int startYear = Integer.parseInt(data[1].split("-")[0].strip());
+            int release = Integer.parseInt(data[1].split("-")[0].strip());
             int endYear = 0;
             if (data[1].split("-").length == 2 && !data[1].split("-")[1].equals(" ")) {
                 endYear = Integer.parseInt(data[1].split("-")[1].strip());
@@ -53,7 +53,7 @@ public class ItemRegistryImpl implements ItemRegistry {
             double rating = Double.parseDouble(data[3].replace(",", "."));
             int[] seasons = Arrays.asList(data[4].split(",")).stream().map(e -> e.split("-")[1]).mapToInt(Integer::parseInt).toArray();
            
-            addSeries(title, genre, rating, startYear,endYear, seasons);
+            addSeries(title, genre, rating, release,endYear, seasons);
         }
     }
     private void addMovie(String title, String[] genre, double rating, int release){
@@ -66,10 +66,10 @@ public class ItemRegistryImpl implements ItemRegistry {
             genreSet.add(genreString);
         }
     }
-    private void addSeries(String title, String[] genre, double rating, int startYear, int endYear, int[] seasons){
-        Series seriesToBeAdded = new Series(title, genre, rating, startYear, endYear, seasons);
+    private void addSeries(String title, String[] genre, double rating, int release, int endYear, int[] seasons){
+        Series seriesToBeAdded = new Series(title, genre, rating, release, endYear, seasons);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
-        String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + startYear).getBytes())));
+        String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + release).getBytes())));
         itemMap.put(key,seriesToBeAdded);
         seriesKeyList.add(key);
         for (String genreString : genre){
