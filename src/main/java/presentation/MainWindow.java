@@ -118,8 +118,8 @@ public class MainWindow extends Application {
 
     /**
      * Navigates to the playMenu. Loads the playMenu with the given itemTitle and itemEpisode.
-     * @param itemTitle
-     * @param itemEpisode
+     * @param itemTitle title of the item to play
+     * @param itemEpisode episode of the item to play
      */
     public void playMovie(String itemTitle, String itemEpisode) {
         playMenuController.load(itemTitle, itemEpisode);
