@@ -21,16 +21,16 @@ public class ItemPaneController  {
     private String type;
 
     @FXML
-    StackPane itemPane;
+    private StackPane itemPane;
 
     @FXML
-    ImageView imageContainer;
+    private ImageView imageContainer;
 
     @FXML
-    Text itemNameText;
+    private Text itemNameText;
 
     @FXML
-    Button favoriteButton;
+    private Button favoriteButton;
 
     public void initialize(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList, PopupController popup, String type) throws IOException {
         this.itemKey = itemkey;

@@ -1,7 +1,7 @@
 package presentation;
 
 public class MainWindowController {
-    MainWindow mainWindow = null;
+    MainWindow mainWindow;
 
     public void initialize(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -18,9 +18,14 @@ public class MainWindowController {
             mainWindow.navigateUser();
     }
 
-    public void playMovie() {
+    public void playMovie(String itemTitle) {
+        String itemEpisode = "";
         if (mainWindow != null)
-            mainWindow.playMovie();
+            mainWindow.playMovie(itemTitle, itemEpisode);
+    }
+    public void playMovie(String itemTitle, String itemEpisode) {
+        if (mainWindow != null)
+            mainWindow.playMovie(itemTitle, itemEpisode);
     }
 
 }

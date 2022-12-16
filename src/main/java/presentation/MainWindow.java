@@ -21,6 +21,7 @@ public class MainWindow extends Application {
 
     private HomeMenuController homeMenuController;
     private UserMenuController userMenuController;
+    private PlayMenuController playMenuController;
     
     private DomainAccess da = null;
     
@@ -35,15 +36,15 @@ public class MainWindow extends Application {
         rootController.initialize(this);
         Scene mainScene = new Scene(root);
         mainScene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toExternalForm());
-
         mainScene.setUserData(rootController);
+
         primaryStage.setScene(mainScene);
         primaryStage.show();
         primaryStage.getIcons().add(new Image("icon.png"));
         setup();
     }
 
-    private void setup() {
+    public void setup() {
         try {
             DomainAccess da = new DomainAccess();
             this.da = da;
@@ -57,6 +58,7 @@ public class MainWindow extends Application {
 
             homeMenuController = homeMenu.getController();
             userMenuController = userMenu.getController();
+            playMenuController = playMenu.getController();
 
             homeMenuController.initialize(da);
             userMenuController.initialize(da);
@@ -83,9 +85,11 @@ public class MainWindow extends Application {
 
     }
 
-    public void playMovie() {
+    public void playMovie(String itemTitle, String itemEpisode) {
+        playMenuController.load(itemTitle, itemEpisode);
         root.setCenter(playMenu);
     }
+
 
     public static void main(String[] args) {
         launch(args);

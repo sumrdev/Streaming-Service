@@ -17,28 +17,28 @@ import javafx.scene.text.Text;
 public class UserMenuController {
     // main Panes
     @FXML
-    StackPane MainStackpane;
+    private StackPane MainStackpane;
 
     @FXML
-    VBox userPane;
+    private VBox userPane;
     @FXML
-    VBox userSelect;
+    private VBox userSelect;
     @FXML
-    VBox userCreation;
+    private VBox userCreation;
 
     // when logged in (userPane)
     @FXML
-    FlowPane favoritePane;
+    private FlowPane favoritePane;
     @FXML
-    Text usernameText;
+    private Text usernameText;
 
     // when choosing user (userSelect)
     @FXML
-    FlowPane currentUsers;
+    private FlowPane currentUsers;
 
     // when creating user (userCreation)
     @FXML
-    TextField usernameInput;
+    private TextField usernameInput;
 
     private DomainAccess da;
     private ObservableList<String> users = FXCollections.observableArrayList();

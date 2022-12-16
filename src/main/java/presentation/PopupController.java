@@ -15,21 +15,22 @@ import javafx.scene.text.Text;
 
 public class PopupController  {
     @FXML
-    HBox root;
+    private HBox root;
     @FXML
-    ImageView image;
+    private ImageView image;
     @FXML
-    VBox infoBox;
+    private VBox infoBox;
     @FXML
-    VBox episodeListBox;
+    private VBox episodeListBox;
     @FXML
-    VBox bottom;
+    private VBox bottom;
     @FXML
-    Button playButton;
+    private Button playButton;
     @FXML
-    ChoiceBox<String> seasonChoiceBox;
-
+    private ChoiceBox<String> seasonChoiceBox;
+    
     private DomainAccess da;
+    private String itemTitle = "";
 
     public void initialize(DomainAccess da) {
         this.da = da;
@@ -39,11 +40,12 @@ public class PopupController  {
 
     public void setMovie(String itemKey, Image itemImg) {
         image.setImage(itemImg);
+        itemTitle = da.getItemTitle(itemKey);
         infoBox.getChildren().clear();
-        infoBox.getChildren().add(new Text(da.getItemTitle(itemKey)));
+        infoBox.getChildren().add(new Text(itemTitle));
         infoBox.getChildren().add(new Text("Rating: " + da.getItemRating(itemKey)));
         infoBox.getChildren().add(new Text("Genre: " + (""+Arrays.asList(da.getItemGenre(itemKey))).replace("[", "").replace("]", "") ));
-        infoBox.getChildren().add(new Text("Release: " + da.getItemRelease(itemKey)));
+        infoBox.getChildren().add(new Text("Release: " + da.getItemReleaseYear(itemKey)));
         infoBox.getChildren().add(playButton);
 
         bottom.setVisible(false);
@@ -51,11 +53,12 @@ public class PopupController  {
     }
     public void setSeries(String itemKey, Image itemImg ) {
         image.setImage(itemImg);
+        itemTitle = da.getItemTitle(itemKey);
         infoBox.getChildren().clear();
-        infoBox.getChildren().add(new Text(da.getItemTitle(itemKey)));
+        infoBox.getChildren().add(new Text(itemTitle));
         infoBox.getChildren().add(new Text("Rating: " + da.getItemRating(itemKey)));
         infoBox.getChildren().add(new Text("Genre: " + (""+Arrays.asList(da.getItemGenre(itemKey))).replace("[", "").replace("]", "") ));
-        infoBox.getChildren().add(new Text("Release: " + da.getItemRelease(itemKey)));
+        infoBox.getChildren().add(new Text("Release: " + da.getItemReleaseYear(itemKey)));
         int endYear = da.getSeriesEndYear(itemKey);
         if(endYear != 0) infoBox.getChildren().add(new Text("End: " + endYear));
         else infoBox.getChildren().add(new Text("End: Still running"));
@@ -86,7 +89,12 @@ public class PopupController  {
 
     public void play() {
         MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
-        mwc.playMovie();
+        mwc.playMovie(this.itemTitle, "");
+    }
+
+    private void play(String episode) {
+        MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
+        mwc.playMovie(this.itemTitle, episode);
     }
     
     public void consumeClick(MouseEvent me) {
@@ -104,7 +112,7 @@ public class PopupController  {
     private HBox createEpisodePane(int n) {
         HBox episode = new HBox();
         episode.setOnMouseClicked(e -> {
-            play();
+            play(""+n);
         });
         Text t = new Text("Episode " + n);
         t.setFill(Color.WHITE);

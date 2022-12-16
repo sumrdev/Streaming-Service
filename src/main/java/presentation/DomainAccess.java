@@ -91,7 +91,7 @@ public class DomainAccess {
         return ir.getItemTitle(itemKey);
     }
 
-    public int getItemRelease(String itemKey) {
+    public int getItemReleaseYear(String itemKey) {
         return ir.getItemReleaseYear(itemKey);
     }
 

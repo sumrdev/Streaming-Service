@@ -12,22 +12,22 @@ import javafx.scene.layout.*;
 
 public class HomeMenuController {
     @FXML
-    FlowPane itemGrid;
+    private FlowPane itemGrid;
 
     @FXML
-    ChoiceBox<String> choiceGenre;
+    private ChoiceBox<String> choiceGenre;
 
     @FXML
-    ChoiceBox<String> choiceCategory;
+    private ChoiceBox<String> choiceCategory;
 
     @FXML
-    TextField searchBox;
+    private TextField searchBox;
     
     @FXML
-    StackPane MainStackpane;
+    private StackPane MainStackpane;
 
-    private DomainAccess da = null;
-    private List<String> currentItems = null;
+    private DomainAccess da;
+    private List<String> currentItems;
 
     public void initialize(DomainAccess da) {
         try {
@@ -109,9 +109,8 @@ public class HomeMenuController {
         itemGrid.getChildren().addAll(da.getItemPanes(list.stream().map(entry -> entry.getKey()).toList()));
     }
 
-    // https://www.baeldung.com/java-levenshtein-distance
 
-    //returns the levenshtein distance between two strings
+    //returns the edit distance between two strings
     public static int calculate(String str1, String str2) {
         int[][] distance = new int[str1.length() + 1][str2.length() + 1];
     
