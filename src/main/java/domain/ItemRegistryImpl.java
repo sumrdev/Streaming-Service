@@ -10,7 +10,13 @@ public class ItemRegistryImpl implements ItemRegistry {
     private ArrayList<String> seriesKeyList;
     private HashMap<String, Item> itemMap;
     private MessageDigest md;
-
+/**
+ * Constructor for ItemRegistryImpl
+ * @param movieKeyList is an ArrayList containing String keys mapping to Movie objects
+ * @param seriesKeyList is an ArrayList containing String keys mapping to Series objects
+ * @param itemMap is a HashMap mapping String keys to Item objects
+ * @param genreSet is a HashSet containing the genres of all Item objects in itemMap
+ */
     public ItemRegistryImpl (){
         movieKeyList = new ArrayList<>();
         seriesKeyList = new ArrayList<>();
@@ -23,7 +29,9 @@ public class ItemRegistryImpl implements ItemRegistry {
         }
         this.initialize();
     }
-
+/**
+ * Initializes by loading data and calling addMovie and addSeries
+ */
     private void initialize(){
         DataAccessImpl da = new DataAccessImpl("database");
         List<String> movieData = da.load("movies");
@@ -58,22 +66,27 @@ public class ItemRegistryImpl implements ItemRegistry {
             addSeries(title, genre, rating, release,endYear, seasons);
         }
     }
-
-    private void addMovie(String title, String[] genre, double rating, int release){
-        Movie movieToBeAdded = new Movie(title, genre, rating, release);
+/*
+ * Adds a Movie object to the registry
+ */
+    private void addMovie(String title, String[] genre, double rating, int releaseYear){
+        Movie movieToBeAdded = new Movie(title, genre, rating, releaseYear);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
-        String key = HexFormat.of().formatHex(this.md.digest((title + genreList + release).getBytes()));
+        String key = HexFormat.of().formatHex(this.md.digest((title + genreList + releaseYear).getBytes()));
         itemMap.put(key, movieToBeAdded);
         movieKeyList.add(key);
         for (String genreString : genre){
             genreSet.add(genreString);
         }
     }
+/*
+ * Adds a Series object to the registry
+ */
 
-    private void addSeries(String title, String[] genre, double rating, int release, int endYear, int[] seasons){
-        Series seriesToBeAdded = new Series(title, genre, rating, release, endYear, seasons);
+    private void addSeries(String title, String[] genre, double rating, int releaseYear, int endYear, int[] seasons){
+        Series seriesToBeAdded = new Series(title, genre, rating, releaseYear, endYear, seasons);
         List<String> genreList = Arrays.asList(genre).stream().sorted().toList();
-        String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + release).getBytes())));
+        String key = HexFormat.of().formatHex( (this.md.digest((title + genreList + releaseYear).getBytes())));
         itemMap.put(key,seriesToBeAdded);
         seriesKeyList.add(key);
         for (String genreString : genre){
