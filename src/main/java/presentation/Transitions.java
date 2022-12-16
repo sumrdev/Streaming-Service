@@ -5,6 +5,11 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 public interface Transitions {
+    /**
+     * Adds a scale and fade transition to the given itemPane.
+     * @param itemPane the pane to add the transition to.
+     * @param maxScaleSize the maximum scale size of the transition.
+     */
     public static void addScaleFadeTransition(StackPane itemPane, double maxScaleSize) {
         ScaleTransition st = new ScaleTransition();
         st.setNode(itemPane);

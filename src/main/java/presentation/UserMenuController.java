@@ -15,10 +15,16 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 public class UserMenuController {
-    // main Panes
+    /**
+     * The root pane of the user menu.
+     */
     @FXML
     private StackPane MainStackpane;
 
+    /**
+     * Overlays for the user menu. Switches between userSelect, 
+     *  userCreation, and userPane depending on the state.
+     */
     @FXML
     private VBox userPane;
     @FXML
@@ -26,24 +32,39 @@ public class UserMenuController {
     @FXML
     private VBox userCreation;
 
-    // when logged in (userPane)
+    /**
+    * Used when logged in (userPane)
+    */ 
     @FXML
     private FlowPane favoritePane;
     @FXML
     private Text usernameText;
 
-    // when choosing user (userSelect)
+    /**
+    * Used when choosing user (userSelect)
+    */ 
     @FXML
     private FlowPane currentUsers;
 
-    // when creating user (userCreation)
+    /**
+    * Used when creating user (userCreation)
+    */ 
     @FXML
     private TextField usernameInput;
 
     private DomainAccess da;
+    /**
+     * ObservableList of users to be displayed in the userSelect pane. Automatically updates userRegistry.
+     */
     private ObservableList<String> users = FXCollections.observableArrayList();
     private ListChangeListener<String> userFavoriteListener;
 
+    /**
+     * Initializes the user menu and users ObservableList. 
+     * Sets up the favorite listener to listen for new favoriteItems.
+     * Also sets up the usernameInput to only accept alphanumeric characters.
+     * @param da the DomainAccess object to use
+     */
     public void initialize(DomainAccess da) {
         this.da = da;
         userFavoriteListener = (ListChangeListener<String>) c -> {
@@ -92,12 +113,18 @@ public class UserMenuController {
         selectView("userSelect");
     }
 
+    /** 
+     * Unloads itemPanes and listeners
+    */
     public void unload() {
         da.getFavoriteItems().removeListener(userFavoriteListener);
         favoritePane.getChildren().clear();
         MainStackpane.getChildren().remove(da.getPopup());
     }
 
+    /**
+     * Loads itemPanes and listeners.
+     */
     public void load() {
         unload();
         MainStackpane.getChildren().add(da.getPopup());
@@ -105,6 +132,12 @@ public class UserMenuController {
         da.getFavoriteItems().addListener(userFavoriteListener);
     }
 
+    /**
+     * Creates a VBox with the userName and an image.
+     * Sets onAction to select the user.
+     * @param name the name of the user
+     * @return the created VBox
+     */
     private VBox createUserPane(String name) {
         VBox v = new VBox();
             v.setAlignment(javafx.geometry.Pos.CENTER);
@@ -132,6 +165,11 @@ public class UserMenuController {
             return v;
     }
 
+    /**
+     * Creates and gets all userPanes for the currentUsers.
+     * If there are no users, it displays a message.
+     * @return an ArrayList of userPanes
+     */
     private ArrayList<VBox> getUserPanes() {
         if (da.getUsernameList().size() == 0) {
             Text noUsersText = new Text("There are no users yet!");
@@ -147,13 +185,18 @@ public class UserMenuController {
         return userPanes;
     }
 
+    /**
+     * Shows the user creation menu.
+     */
     public void showUserCreation() {
         selectView("userCreation");
     }
 
+    /**
+     * Creates a new user with the username in the usernameInput.
+     */
     public void createNewUser() {
         //alert if username is empty
-        System.out.println("he" + usernameInput.getText());
         if (usernameInput.getText().equals("")){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
@@ -166,6 +209,10 @@ public class UserMenuController {
         selectView("userSelect");
     }
 
+    /**
+     * Selects the user with the given username.
+     * @param username the username of the user
+     */
     public void selectUser(String username) {
         da.selectUser(username);
         usernameText.setText(username);
@@ -175,11 +222,18 @@ public class UserMenuController {
         mwc.navigateHome();
     }
 
+    /**
+     * Logs out the current user.
+     */
     public void logout() {
         da.changeUser();
         selectView("userSelect");
     }
 
+    /**
+     * The view specified by the parameter string.
+     * @param s the view to be selected, either "userPane", "userSelect" or "userCreation"
+     */
     private void selectView(String s) {
         switch (s) {
             case "userPane":

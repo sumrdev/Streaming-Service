@@ -32,11 +32,20 @@ public class PopupController  {
     private DomainAccess da;
     private String itemTitle = "";
 
+    /**
+     * Initializes and hides the popup
+     * @param da the domain access to use
+     */
     public void initialize(DomainAccess da) {
         this.da = da;
         hide();
     }
 
+    /**
+     * Gets relevant item information and displays it in the popup
+     * @param itemKey the key of the item
+     * @param itemImg the image object of the item
+     */
     public void setMovie(String itemKey, Image itemImg) {
         image.setImage(itemImg);
         itemTitle = da.getItemTitle(itemKey);
@@ -50,6 +59,12 @@ public class PopupController  {
         bottom.setVisible(false);
     }
 
+    /**
+     * Gets relevant item information and displays it in the popup
+     * Genereates a list of episodes for the selected season
+     * @param itemKey the key of the item
+     * @param itemImg the image object of the item
+     */
     public void setSeries(String itemKey, Image itemImg ) {
         image.setImage(itemImg);
         itemTitle = da.getItemTitle(itemKey);
@@ -85,20 +100,34 @@ public class PopupController  {
         root.setVisible(false);
     }
 
+    /**
+     * Navigate to the play menu and play the selected item
+     */
     public void play() {
         MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
         mwc.playMovie(this.itemTitle, "");
     }
 
+    /**
+     * Navigate to the play menu and play the selected episode
+     * @param episode the episode identifier
+     */
     private void play(String episode) {
         MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
         mwc.playMovie(this.itemTitle, episode);
     }
     
+    /**
+     * Consumes the mouse event to prevent the popup from closing, when clicking on the popup
+     */
     public void consumeClick(MouseEvent me) {
         me.consume();
     }
 
+    /**
+     * Generates a list of episodes for the selected season
+     * @param amount the amount of episodes in the season
+     */
     private void setEpisodes(int amount) {
         episodeListBox.getChildren().clear();
         for (int i = 0; i < amount; i++) {
@@ -106,6 +135,11 @@ public class PopupController  {
         }
     }
 
+    /**
+     * Creates a pane for an episode
+     * @param n the episode number
+     * @return the pane in the form of an HBox
+     */
     private HBox createEpisodePane(int n) {
         HBox episode = new HBox();
         episode.setOnMouseClicked(e -> {

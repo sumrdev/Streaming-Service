@@ -12,14 +12,22 @@ public class PlayMenuController {
     @FXML
     private Text episode;
 
+    /**
+     * Navigates back to the home screen.
+     */
     public void back() {
         MainWindowController mwc = (MainWindowController) root.getScene().getUserData();
         mwc.navigateHome();
     }
 
+    /**
+     * Sets the given itemTitle and episodeTitle onto the play menu.
+     * @param itemTitle String title of the item to play.
+     * @param episodeTitle String of episode identifier of the item to play.
+     */
     public void load(String itemTitle, String episodeTitle) {
         System.out.println("Loading " + itemTitle + " " + episodeTitle);
-        title.setText("Wathcing: " + itemTitle);
+        title.setText("Watching: " + itemTitle);
         if (!episodeTitle.equals("")) {
             episode.setText("Episode: "+episodeTitle);
         } else {

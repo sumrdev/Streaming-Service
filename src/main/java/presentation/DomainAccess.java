@@ -22,11 +22,19 @@ import javafx.scene.layout.StackPane;
 public class DomainAccess {
     private ItemRegistry ir = null;
     private UserRegistry ur = null;
+    /**
+     * List used to keep track of the favorite items of the currently selected user.
+     * Automatically saves changes to the user registry.
+     */
     private ObservableList<String> favoriteItems = FXCollections.observableArrayList();
 
     private HashMap<String, StackPane> itemPanes = new HashMap<>(); 
     private Parent popup;
 
+    /**
+     * Creates a new DomainAccess object and sets up popup, itemPanes and favoritelist.
+     * @throws IOException if the itemPopup.fxml file cannot be found.
+     */
     public DomainAccess() throws IOException {
         this.ir = new ItemRegistryImpl();
         this.ur = new UserRegistryImpl();
@@ -57,7 +65,11 @@ public class DomainAccess {
             ur.save();
         });
     }
-
+    /**
+     * Creates a List of StackPanes from a list of item keys.
+     * @param keyList the list of item keys.
+     * @return a list of StackPanes.
+     */
     public List<StackPane> getItemPanes(List<String> keyList) {
         return keyList.stream().map(key -> itemPanes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
     }
@@ -136,6 +148,11 @@ public class DomainAccess {
         return popup;
     }
 
+    /**
+     * Creates a HashMap of StackPanes from the item registry.
+     * @param popup the popup controller used to initialize the item panes.
+     * @return a HashMap of StackPanes.
+     */
     public HashMap<String, StackPane> createItemPanes(PopupController popup) {
         System.out.println("Creating item panes");
         HashMap<String, StackPane> itemNodes = new HashMap<>();

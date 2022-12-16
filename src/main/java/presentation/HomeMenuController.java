@@ -29,6 +29,10 @@ public class HomeMenuController {
     private DomainAccess da;
     private List<String> currentItems;
 
+    /**
+     * Initializes the ChoiceBoxs of the menu.
+     * @param da the DomainAccess object to use
+     */
     public void initialize(DomainAccess da) {
         try {
             this.da = da;
@@ -55,6 +59,9 @@ public class HomeMenuController {
         updateItemFilters();
     }
 
+    /**
+     * Updates the itemGrid with the current filters.
+     */
     public void updateItemFilters() {
         String genre = choiceGenre.getValue();
         String category = choiceCategory.getValue();
@@ -82,6 +89,9 @@ public class HomeMenuController {
         }
     }
 
+    /**
+     * Updates the itemGrid with the current search and filters.
+     */
     public void search(Event e) {
         String search = searchBox.getText();
         HashMap<String, Integer> searchResults = new HashMap<>();
@@ -90,7 +100,9 @@ public class HomeMenuController {
             searchResults.put(item, calculate(title, search) * 10);
         }
 
-        // add search string that cantains the search string to the list
+        /**
+         * add search string that contains the search string to the list
+        */
         for (String item : currentItems) {
             String title =  da.getItemTitle(item);
             if (title.toLowerCase().equals(search.toLowerCase())) {
@@ -108,7 +120,12 @@ public class HomeMenuController {
     }
 
 
-    //returns the edit distance between two strings
+    /**
+        * Returns the edit distance between two strings
+        * @param str1 the first string
+        * @param str2 the second string
+        * @return the edit distance between the two strings
+    */
     public static int calculate(String str1, String str2) {
         int[][] distance = new int[str1.length() + 1][str2.length() + 1];
     

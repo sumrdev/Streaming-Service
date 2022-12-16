@@ -1,5 +1,7 @@
 package presentation;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,21 +11,31 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class MainWindow extends Application {
-    // root of main window, set center to one of the roots below
+    /**
+     * root of main window, set center to one of the roots below
+     */
     private BorderPane root;
-    // roots to show in center of main window
-    private Parent userMenu = null;
-    private Parent homeMenu = null;
-    private Parent playMenu = null;
-
+    /**
+     * roots to show in center of main window
+     */
+    private Parent userMenu;
+    private Parent homeMenu;
+    private Parent playMenu;
+    /**
+     * controllers for the roots
+     */
     private HomeMenuController homeMenuController;
     private UserMenuController userMenuController;
     private PlayMenuController playMenuController;
     
-    private DomainAccess da = null;
+    private DomainAccess da;
     
+    /**
+     * Start method for javafx application, is called by javafx after launch.
+     * Sets and loads the mainWindow. Calls setup() to load the other windows.
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
 
         primaryStage.setTitle("Neostream");
 
@@ -41,6 +53,10 @@ public class MainWindow extends Application {
         setup();
     }
 
+    /**
+     * Setup method for the application, loads the roots to show and their controllers.
+     * Navigates to the userMenu.
+     */
     public void setup() {
         try {
             DomainAccess da = new DomainAccess();
@@ -65,6 +81,9 @@ public class MainWindow extends Application {
         }
     }
 
+    /**
+     * Navigates to the homeMenu. Unloads the userMenu.
+     */
     public void navigateHome() {
         if (this.da != null && this.da.getSelectedUser() == null)
             return;
@@ -73,6 +92,9 @@ public class MainWindow extends Application {
         root.setCenter(homeMenu);
     }
 
+    /**
+     * Navigates to the userMenu. Unloads the homeMenu.
+     */
     public void navigateUser() {
         homeMenuController.unload();
         userMenuController.load();
@@ -80,12 +102,19 @@ public class MainWindow extends Application {
 
     }
 
+    /**
+     * Navigates to the playMenu. Loads the playMenu with the given itemTitle and itemEpisode.
+     * @param itemTitle
+     * @param itemEpisode
+     */
     public void playMovie(String itemTitle, String itemEpisode) {
         playMenuController.load(itemTitle, itemEpisode);
         root.setCenter(playMenu);
     }
 
-
+    /** 
+     * main method for javafx calls launch.
+    */
     public static void main(String[] args) {
         launch(args);
     }

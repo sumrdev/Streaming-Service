@@ -32,6 +32,16 @@ public class ItemPaneController  {
     @FXML
     private Button favoriteButton;
 
+    /**
+     * Initializes the item pane with the given parameters
+     * @param itemkey the key of the item
+     * @param itemName the name of the item
+     * @param imgPath the path to the image of the item
+     * @param favoriteList the list of favorite items to add or remove the item from
+     * @param popup the popup controller to show on click
+     * @param type the type of the item, either movie or series
+     * @throws IOException if the image path is invalid
+     */
     public void initialize(String itemkey, String itemName, String imgPath, ObservableList<String> favoriteList, PopupController popup, String type) throws IOException {
         this.itemKey = itemkey;
         this.favoriteList = favoriteList;
@@ -54,6 +64,9 @@ public class ItemPaneController  {
 
     }
 
+    /**
+     * Shows the corresponding popup for the item 
+     */
     public void showPopup() {
         if (type.equals("movie")) {
             popup.setMovie(itemKey, img);
@@ -63,6 +76,9 @@ public class ItemPaneController  {
         popup.show();
     }
 
+    /**
+     * Toggles the item between being on the favoriteList and not being on the favoriteList
+     */
     public void toggleFavorites() {
         if (favoriteList.contains(itemKey)) {
             favoriteList.remove(itemKey);
