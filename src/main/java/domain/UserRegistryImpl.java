@@ -64,7 +64,6 @@ public class UserRegistryImpl implements UserRegistry {
         }
         da.save("users", listToBeSaved);
     }
-
     
     public String getUsername(String userKey){
         return userMap.get(userKey).getUsername();
@@ -93,5 +92,4 @@ public class UserRegistryImpl implements UserRegistry {
     public String getSelectedUser(){
         return currentUser;
     }
-
 }

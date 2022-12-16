@@ -80,9 +80,11 @@ public class DomainAccess {
     public String[] getGenreStrings() {
         return ir.getGenreSet().stream().toArray(String[]::new);
     }
+
     public ArrayList<String> getMovieKeyList() {
         return ir.getMovieKeyList();
     }
+
     public ArrayList<String> getSeriesKeyList() {
         return ir.getSeriesKeyList();
     }
@@ -139,6 +141,7 @@ public class DomainAccess {
         HashMap<String, StackPane> itemNodes = new HashMap<>();
         ArrayList<String> movies = ir.getMovieKeyList();
         ArrayList<String> series = ir.getSeriesKeyList();
+        
         for (String movieKey : movies) {
             try {
                 FXMLLoader ItemLoader = new FXMLLoader(getClass().getClassLoader().getResource("item.fxml"));
@@ -163,6 +166,4 @@ public class DomainAccess {
         } 
         return itemNodes;
     }
-
-    
 }

@@ -37,7 +37,6 @@ public class PopupController  {
         hide();
     }
 
-
     public void setMovie(String itemKey, Image itemImg) {
         image.setImage(itemImg);
         itemTitle = da.getItemTitle(itemKey);
@@ -49,8 +48,8 @@ public class PopupController  {
         infoBox.getChildren().add(playButton);
 
         bottom.setVisible(false);
-
     }
+
     public void setSeries(String itemKey, Image itemImg ) {
         image.setImage(itemImg);
         itemTitle = da.getItemTitle(itemKey);
@@ -76,7 +75,6 @@ public class PopupController  {
             setEpisodes(seasons[seasonChoiceBox.getSelectionModel().getSelectedIndex()]);
         });
         bottom.setVisible(true);
-
     }
 
     public void show() {
@@ -100,7 +98,6 @@ public class PopupController  {
     public void consumeClick(MouseEvent me) {
         me.consume();
     }
-
 
     private void setEpisodes(int amount) {
         episodeListBox.getChildren().clear();
@@ -134,5 +131,4 @@ public class PopupController  {
 
         return episode;
     }
-
 }

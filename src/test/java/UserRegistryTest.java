@@ -58,14 +58,12 @@ class UserRegistryTest {
         userRegistry.removeUser("TestUser");
     }
 
-
     @Test
     void removeUserTest() {
         userRegistry.addUser("TestUser5");
         userRegistry.removeUser("TestUser5");
         assertTrue( !userRegistry.getUsernameList().contains("TestUser5"));
     }        
-
 
     @Test
     void saveUserRegistryTest() {

@@ -2,6 +2,7 @@ package domain;
 public class Series extends Item {
     private int endYear;
     private int[] seasons;
+    
     public Series(String title, String[] genre, double rating, int release, int endYear, int[] seasons){
         super(title, genre, rating, release);
         this.endYear=endYear;
@@ -11,6 +12,7 @@ public class Series extends Item {
     public int getEndYear(){
         return endYear;
     }
+
     public int[] getSeasons(){
         return seasons;
     }

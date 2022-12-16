@@ -55,8 +55,6 @@ public class HomeMenuController {
         updateItemFilters();
     }
 
-
-
     public void updateItemFilters() {
         String genre = choiceGenre.getValue();
         String category = choiceCategory.getValue();
@@ -128,7 +126,6 @@ public class HomeMenuController {
 
         return distance[str1.length()][str2.length()];
     }
-
 
     private static int costOfSubstitution(char a, char b) {
         return a == b ? 0 : 1;

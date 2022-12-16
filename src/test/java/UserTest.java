@@ -18,5 +18,4 @@ class UserTest {
         user.addFavoriteItem("TestItem2");
         assertEquals("TestUser;TestItem2,TestItem;", user.toString());
     }
-
 }

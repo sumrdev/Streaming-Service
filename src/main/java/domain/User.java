@@ -14,15 +14,19 @@ public class User {
     public String getUsername(){
         return username;
     }
+
     public HashSet<String> getFavoriteItems(){
         return favoriteItems;
     }
+
     public void addFavoriteItem(String itemKey){
         favoriteItems.add(itemKey);
     }
+
     public void removeFavoriteItem(String itemKey){
         favoriteItems.remove(itemKey);
     }
+
     private String favoriteItemsToString(){
         String favoriteItemsString = "";
         int len = favoriteItems.size();
@@ -41,6 +45,4 @@ public class User {
         if(favoriteItems.isEmpty()) return username + ";";
         return username + ";" + favoriteItemsToString() + ";";
     }
-
-
 }

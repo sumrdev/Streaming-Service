@@ -17,19 +17,24 @@ public abstract class Item {
     public String getTitle(){
         return title;
     }
+
     public String[] getGenre(){
         return genre;
     }
+
     public double getRating(){
         return rating;  
     }
+    
     public int getReleaseYear(){
         return releaseYear;
     }
+
     public int getEndYear(){
         //should not happen
         return 1;
     }
+
     public int[] getSeasons(){
         //should not happen
         return null;
