@@ -121,6 +121,7 @@ public class UserRegistryImpl implements UserRegistry {
     /**
      * Adds a favorite item to a user
      * @param userKey is the username of the user
+     * @param itemKey is the item to be added to the user's favorite items
      */
     public void addFavoriteItem (String userKey, String itemKey){
         userMap.get(userKey).addFavoriteItem(itemKey);
@@ -128,6 +129,7 @@ public class UserRegistryImpl implements UserRegistry {
     /**
      * Removes a favorite item from a user
      * @param userKey is the username of the user
+     * @param itemKey is the item to be removed from the user's favorite items
      */
     public void removeFavoriteItem (String userKey, String itemKey){
         userMap.get(userKey).removeFavoriteItem(itemKey);

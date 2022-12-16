@@ -97,42 +97,82 @@ public class ItemRegistryImpl implements ItemRegistry {
         }
     }
 
+    /**
+     * Returns the List of movie keys
+     * @return the movieKeyList
+     */
     public ArrayList<String> getMovieKeyList(){
         return movieKeyList;
     }
 
+    /**
+     * Returns the List of series keys
+     * @return the seriesKeyList
+     */
     public ArrayList<String> getSeriesKeyList(){
         return seriesKeyList;
     }
 
+    /**
+     * Returns the HashMap of items
+     * @return the set of genres
+     */
     public HashSet<String> getGenreSet(){
         return genreSet;
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the item as a String
+     */
     public String getToString(String itemKey){
         return itemMap.get(itemKey).toString();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the title of the item
+     */
     public String getItemTitle(String itemKey){
         return itemMap.get(itemKey).getTitle();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the genre of the item
+     */
     public String[] getItemGenre(String itemKey){
         return itemMap.get(itemKey).getGenre();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the rating of the item
+     */
     public double getItemRating(String itemKey){
         return itemMap.get(itemKey).getRating();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the release year of the item
+     */
     public int getItemReleaseYear(String itemKey){
         return itemMap.get(itemKey).getReleaseYear();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the end year of the item 
+     */
     public int getSeriesEndYear(String itemKey){
         return itemMap.get(itemKey).getEndYear();
     }
 
+    /**
+     * @param itemKey is the key of the item
+     * @return the seasons of the item as an array
+     */
     public int[] getSeriesSeasons(String itemKey){
         return itemMap.get(itemKey).getSeasons();
     }
