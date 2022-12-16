@@ -35,7 +35,7 @@ public class Series extends Item {
 
     /**
      * Converts seasons to a string
-     * @return seasonsString
+     * @return String representation of seasons
      */
     public String seasonsToString(){
         String seasonsString = "";
@@ -47,7 +47,7 @@ public class Series extends Item {
     }
     /**
      * Converts series to a string
-     * @return seriesString
+     * @return String representation of series
      */
     @Override
     public String toString(){
