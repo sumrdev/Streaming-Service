@@ -120,7 +120,7 @@ public class DomainAccess {
 
     /**
      * Gets Series key list.
-     * @return ArrayList<String>
+     * @return ArrayList<String> of Series keys.
      */
     public ArrayList<String> getSeriesKeyList() {
         return ir.getSeriesKeyList();
