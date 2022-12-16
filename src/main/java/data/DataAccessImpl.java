@@ -2,7 +2,8 @@ package data;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +31,13 @@ public class DataAccessImpl implements DataAccess {
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(
-                this.path + "/" + dataField + ".txt")));
+            BufferedReader reader = new BufferedReader(new FileReader(this.path + "/" + dataField + ".txt"));
             reader.lines().forEach(data::add);
             reader.close();
-        } catch (NullPointerException e) {
+        } catch (FileNotFoundException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error, file not found");
-            alert.setContentText("Please try again");
-            alert.showAndWait();
-        } catch (SecurityException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Your system does not allow access to the database");
             alert.setContentText("Please try again");
             alert.showAndWait();
         } catch (Exception e){
@@ -65,16 +59,21 @@ public class DataAccessImpl implements DataAccess {
      */
     @Override
     public void save(String dataField, List<String> data) {
-        File f = new File(getClass().getClassLoader().getResource(
-            this.path + "/" + dataField + ".txt").getPath());
-        PrintWriter pw;
         try {
+            File f = new File(this.path + "/" + dataField + ".txt");
+            PrintWriter pw;
             pw = new PrintWriter(f);
             for (String s : data) {
                 pw.println(s);
             }
             pw.close();
         } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error saving data, no file name specified");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
+        } catch (FileNotFoundException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Error saving data, no file name specified");
