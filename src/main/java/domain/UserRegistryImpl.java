@@ -15,6 +15,7 @@ public class UserRegistryImpl implements UserRegistry {
 
     /**
      * Constructor for UserRegistryImpl class
+     * calls initialize() to load the data from the database
      */
     public UserRegistryImpl(){
         userMap = new HashMap<>();

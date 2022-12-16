@@ -116,7 +116,7 @@ Button:hover {
 }
 
 .backgroundImage {
-  -fx-background-image: url("fanten.gif");
+  -fx-background-image: url("loading.gif");
   -fx-background-size: contain;
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
