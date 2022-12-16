@@ -26,7 +26,6 @@ public class PlayMenuController {
      * @param episodeTitle String of episode identifier of the item to play.
      */
     public void load(String itemTitle, String episodeTitle) {
-        System.out.println("Loading " + itemTitle + " " + episodeTitle);
         title.setText("Watching: " + itemTitle);
         if (!episodeTitle.equals("")) {
             episode.setText("Episode: "+episodeTitle);

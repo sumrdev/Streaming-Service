@@ -85,7 +85,6 @@ public class UserMenuController {
         users.addListener((ListChangeListener<String>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
-                    System.out.println("Added: " + c.getAddedSubList());
                     for (String user : c.getAddedSubList()) {
                         try {
                             da.addUser(user);
@@ -100,7 +99,6 @@ public class UserMenuController {
                     }
                 }
                 if (c.wasRemoved()) {
-                    System.out.println("Removed: " + c.getRemoved());
                     for (String user : c.getRemoved()) {
                         da.removeUser(user);
                     }

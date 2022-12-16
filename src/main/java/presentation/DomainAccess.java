@@ -16,6 +16,8 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 
 
@@ -167,7 +169,11 @@ public class DomainAccess {
                 String movie = ir.getItemTitle(movieKey);
                 controller.initialize(movieKey, movie, "/movie_img/" + movie + ".jpg", favoriteItems, popup, "movie");
             } catch (Exception e) {
-                System.out.println("Error loading movie: " + ir.getItemTitle(movieKey) + " - " + e.getStackTrace());
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error loading movie");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
         }
         for (String serieKey : series) {
@@ -178,7 +184,11 @@ public class DomainAccess {
                 String serie = ir.getItemTitle(serieKey);
                 controller.initialize(serieKey, serie, "/show_img/" + serie + ".jpg", favoriteItems, popup, "series");
             } catch (Exception e) {
-                e.printStackTrace();
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error loading Series");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
             }
         } 
         return itemNodes;

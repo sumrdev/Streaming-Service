@@ -6,6 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -76,8 +78,20 @@ public class MainWindow extends Application {
             homeMenuController.initialize(da);
             userMenuController.initialize(da);
             navigateUser();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Reading FXML file failed");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error loading application");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
