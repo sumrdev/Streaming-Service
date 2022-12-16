@@ -17,7 +17,7 @@ public class User {
 
     /**
      * Returns username
-     * @return
+     * @return username
      */
     public String getUsername(){
         return username;
