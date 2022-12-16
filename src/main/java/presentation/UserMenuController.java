@@ -1,13 +1,9 @@
 package presentation;
 
 import java.util.*;
-import java.io.IOException;
-import java.util.stream.Collectors;
 
 import javafx.collections.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.*;

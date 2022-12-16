@@ -3,12 +3,13 @@ package data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.scene.control.Alert;
 
 public class DataAccessImpl implements DataAccess {
 
@@ -18,31 +19,53 @@ public class DataAccessImpl implements DataAccess {
         this.path = path;
     }
 
-    // Load data from file and return as a list of strings
-    // Each string is a line from the file
-    // Throws an exception if the file is not found or if there is an error reading the file
+    /**
+     * Load data from file
+     * 
+     * @param dataField The name of the data field to load
+     * @return A list of strings containing the data
+     * @throws Exception
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     @Override
     public List<String> load(String dataField) {
         List<String> data = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(
                 this.path + "/" + dataField + ".txt")));
-            
+            System.out.println(reader.lines());
             reader.lines().forEach(data::add);
             reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("IO Exception while closing file");
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error, file not found");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
+        } catch (SecurityException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your system does not allow access to the database");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
         } catch (Exception e){
-            System.out.println("Error: " + e.getMessage()); 
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error loading data");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
         }
         return data;
     }
 
-    // Save data to file
-    // Throws an exception if there is an error writing to the file
+    /**
+     * Save data to file
+     * 
+     * @param dataField The filename to save to
+     * @param data      A list of strings containing the data
+     * @
+     */
     @Override
     public void save(String dataField, List<String> data) {
         File f = new File(getClass().getClassLoader().getResource(
@@ -54,8 +77,24 @@ public class DataAccessImpl implements DataAccess {
                 pw.println(s);
             }
             pw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error saving data, no file name specified");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
+        } catch (SecurityException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your system does not allow access to the database");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error saving data");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
         }
     }
 
