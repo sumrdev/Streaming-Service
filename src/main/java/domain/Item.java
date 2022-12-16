@@ -6,7 +6,13 @@ public abstract class Item {
     protected String[] genre;
     protected double rating;
     protected int releaseYear;
-    
+   /**
+    * Constructor for the Item class.
+    *@param title
+    *@param genre
+    *@param rating
+    *@param releaseYear
+    */
     public Item(String title, String[] genre, double rating, int releaseYear) {
         this.title = title;
         this.genre = genre;
@@ -39,7 +45,10 @@ public abstract class Item {
         //should not happen
         return null;
     }
-
+/**
+ * Converts genre to a String
+ * @return genreString
+ */
     public String genreToString(){
         String genreString = "";
         for (int i = 0; i < genre.length; i++) {
@@ -48,7 +57,10 @@ public abstract class Item {
         }
         return genreString;
     }
-
+/**
+ * Converts Item to a String
+ * @return itemString
+ */
     public String toString(){
         return title + "; " + releaseYear + ";" + genreToString() + ";" + rating + ";";
     }
