@@ -30,7 +30,8 @@ public class ItemRegistryImpl implements ItemRegistry {
         this.initialize();
     }
 /**
- * Initializes by loading data and calling addMovie and addSeries
+ * Initializes by loading data from the database
+ * and calling addMovie and addSeries
  */
     private void initialize(){
         DataAccessImpl da = new DataAccessImpl("database");
@@ -68,6 +69,7 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
 /*
  * Adds a Movie object to the registry
+ * by adding it to itemMap, and adding its key to movieKeyList
  */
     private void addMovie(String title, String[] genre, double rating, int releaseYear){
         Movie movieToBeAdded = new Movie(title, genre, rating, releaseYear);
@@ -81,6 +83,7 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
 /*
  * Adds a Series object to the registry
+ * by adding it to itemMap, and adding its key to seriesKeyList
  */
 
     private void addSeries(String title, String[] genre, double rating, int releaseYear, int endYear, int[] seasons){
