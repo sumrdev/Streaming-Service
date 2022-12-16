@@ -67,9 +67,13 @@ public class ItemRegistryImpl implements ItemRegistry {
             addSeries(title, genre, rating, release,endYear, seasons);
         }
     }
-/*
+/**
  * Adds a Movie object to the registry
  * by adding it to itemMap, and adding its key to movieKeyList
+ * @param title is the title of the movie
+ * @param genre is an array of Strings representing the genres of the movie
+ * @param rating is the rating of the movie as a double
+ * @param releaseYear is the release year of the movie as an int
  */
     private void addMovie(String title, String[] genre, double rating, int releaseYear){
         Movie movieToBeAdded = new Movie(title, genre, rating, releaseYear);
@@ -98,30 +102,31 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
 
     /**
-     * Returns the List of movie keys
-     * @return the movieKeyList
+     * Gets the List of movie keys
+     * @return an arrayList of movie keys
      */
     public ArrayList<String> getMovieKeyList(){
         return movieKeyList;
     }
 
     /**
-     * Returns the List of series keys
-     * @return the seriesKeyList
+     * Gets the List of series keys
+     * @return an arrayList of series keys
      */
     public ArrayList<String> getSeriesKeyList(){
         return seriesKeyList;
     }
 
     /**
-     * Returns the HashMap of items
-     * @return the set of genres
+     * Gets the HashSet of genres
+     * @return a Hashset of genres
      */
     public HashSet<String> getGenreSet(){
         return genreSet;
     }
 
     /**
+     * Gets String representation of an item
      * @param itemKey is the key of the item
      * @return the item as a String
      */
@@ -130,48 +135,54 @@ public class ItemRegistryImpl implements ItemRegistry {
     }
 
     /**
+     * Gets the title of an item
      * @param itemKey is the key of the item
-     * @return the title of the item
+     * @return A string representing the title of the item
      */
     public String getItemTitle(String itemKey){
         return itemMap.get(itemKey).getTitle();
     }
 
     /**
+     * Gets genre of an item
      * @param itemKey is the key of the item
-     * @return the genre of the item
+     * @return String[] containing the genres of the item
      */
     public String[] getItemGenre(String itemKey){
         return itemMap.get(itemKey).getGenre();
     }
 
     /**
+     * Gets the rating of an item
      * @param itemKey is the key of the item
-     * @return the rating of the item
+     * @return double representing the rating of the item
      */
     public double getItemRating(String itemKey){
         return itemMap.get(itemKey).getRating();
     }
 
     /**
+     * Gets the release year of an item
      * @param itemKey is the key of the item
-     * @return the release year of the item
+     * @return int representing the release year of the item
      */
     public int getItemReleaseYear(String itemKey){
         return itemMap.get(itemKey).getReleaseYear();
     }
 
     /**
+     * Gets the end year of an item
      * @param itemKey is the key of the item
-     * @return the end year of the item 
+     * @return int representing the end year of the item 
      */
     public int getSeriesEndYear(String itemKey){
         return itemMap.get(itemKey).getEndYear();
     }
 
     /**
+     * Gets the seasons of an item
      * @param itemKey is the key of the item
-     * @return the seasons of the item as an array
+     * @return int[] representing the seasons of the item
      */
     public int[] getSeriesSeasons(String itemKey){
         return itemMap.get(itemKey).getSeasons();
