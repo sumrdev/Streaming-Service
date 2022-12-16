@@ -47,7 +47,7 @@ public abstract class Item {
     }
 /**
  * Converts genre to a String
- * @return genreString
+ * @return String representation of genre
  */
     public String genreToString(){
         String genreString = "";
@@ -59,7 +59,7 @@ public abstract class Item {
     }
 /**
  * Converts Item to a String
- * @return itemString
+ * @return String representation of item
  */
     public String toString(){
         return title + "; " + releaseYear + ";" + genreToString() + ";" + rating + ";";
