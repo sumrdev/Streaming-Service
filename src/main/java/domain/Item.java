@@ -21,32 +21,32 @@ public abstract class Item {
     }
 
     /**
-     * Returns title
-     * @return returns a String 
+     * Gets the title of an item
+     * @return a String representing the title of an item 
      */
     public String getTitle(){
         return title;
     }
 
     /**
-     * Returns genre
-     * @return genre
+     * Gets the genre of an item
+     * @return a String[] containing the genres of an item
      */
     public String[] getGenre(){
         return genre;
     }
 
     /**
-     * Returns rating
-     * @return rating
+     * Gets the rating of an item
+     * @return a double representing the rating of an item
      */
     public double getRating(){
         return rating;  
     }
     
     /**
-     * Returns releaseYear
-     * @return releaseYear
+     * Gets the release year of an item
+     * @return an int representing the release year of an item
      */
     public int getReleaseYear(){
         return releaseYear;
@@ -63,7 +63,7 @@ public abstract class Item {
     }
 /**
  * Converts genre to a String
- * @return String representation of genre
+ * @return a String representation of genre
  */
     public String genreToString(){
         String genreString = "";
@@ -75,7 +75,7 @@ public abstract class Item {
     }
 /**
  * Converts Item to a String
- * @return String representation of item
+ * @return a String representation of item
  */
     public String toString(){
         return title + "; " + releaseYear + ";" + genreToString() + ";" + rating + ";";
