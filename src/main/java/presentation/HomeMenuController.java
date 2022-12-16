@@ -46,11 +46,17 @@ public class HomeMenuController {
         }
     }
 
+    /**
+     * Unloads the menu. 
+     */
     public void unload() {
         itemGrid.getChildren().clear();
         MainStackpane.getChildren().remove(da.getPopup());
     }
 
+    /**
+     * Loads the menu.
+     */
     public void load() {
         unload();
         MainStackpane.getChildren().add(da.getPopup());
@@ -142,10 +148,21 @@ public class HomeMenuController {
         return distance[str1.length()][str2.length()];
     }
 
+    /**
+     * Returns the cost of substituting character a with character b
+     * @param a first character
+     * @param b second character
+     * @return int
+     */
     private static int costOfSubstitution(char a, char b) {
         return a == b ? 0 : 1;
     }
 
+    /**
+     * Returns the minimum of one or more integers
+     * @param numbers integers to compare
+     * @return the minimum of the parameters
+     */
     private static int min(int... numbers) {
         return Arrays.stream(numbers)
                 .min().orElse(Integer.MAX_VALUE);

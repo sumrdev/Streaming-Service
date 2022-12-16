@@ -76,76 +76,154 @@ public class DomainAccess {
         return keyList.stream().map(key -> itemPanes.get(key)).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
+    /**
+     * Gets the getFavoriteItems of the currently selected user
+     * @return ObservableList<String> of favorite items.
+     */
     public ObservableList<String> getFavoriteItems() {
         return favoriteItems;
     }
 
-    public void selectUser(String user) {
-        ur.selectUser(user);
+    /**
+     * Selects a user and updates the favoriteItems list.
+     * @param userKey
+     */
+    public void selectUser(String userKey) {
+        ur.selectUser(userKey);
         favoriteItems.clear();
-        favoriteItems.addAll(ur.getFavoriteItems(user));
+        favoriteItems.addAll(ur.getFavoriteItems(userKey));
     }
 
+    /**
+     * Changes the currently selected user to null.
+     */
     public void changeUser() {
         ur.selectUser(null);
         favoriteItems.clear();
     }
 
+    /**
+     * Gets all genres as an array of strings.
+     * @return String[] of genres.
+     */
     public String[] getGenreStrings() {
         return ir.getGenreSet().stream().toArray(String[]::new);
     }
 
+    /**
+     * Gets Movie key list.
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getMovieKeyList() {
         return ir.getMovieKeyList();
     }
 
+    /**
+     * Gets Series key list.
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getSeriesKeyList() {
         return ir.getSeriesKeyList();
     }
 
+    /**
+     * Gets item title.
+     * @param itemKey the key of the item.
+     * @return String of the item title.
+     */
     public String getItemTitle(String itemKey) {
         return ir.getItemTitle(itemKey);
     }
 
+    /**
+     * Gets item Release Year.
+     * @param itemKey the key of the item.
+     * @return int of the ReleaseYear.
+     */
     public int getItemReleaseYear(String itemKey) {
         return ir.getItemReleaseYear(itemKey);
     }
 
+    /**
+     * Gets item Genres.
+     * @param itemKey the key of the item.
+     * @return String[] of the Genres.
+     */
     public String[] getItemGenre(String itemKey) {
         return ir.getItemGenre(itemKey);
     }
-    
+
+    /**
+     * Gets item Rating.
+     * @param itemKey the key of the item.
+     * @return double of the Rating.
+     */
     public double getItemRating(String itemKey) {
         return ir.getItemRating(itemKey);
     }
-    
+
+    /**
+     * Gets Series Seasons.
+     * @param itemKey the key of the item. (a series)
+     * @return int[] of the Seasons.
+     */
     public int[] getSeriesSeasons(String itemKey) {
         return ir.getSeriesSeasons(itemKey);
     }
+
+    /**
+     * Gets Series EndYear.
+     * @param itemKey the key of the item. (a series)
+     * @return int of the Seasons.
+     */
     public int getSeriesEndYear(String itemKey) {
         return ir.getSeriesEndYear(itemKey);
     }
-    
+
+    /**
+     * Gets Username List.
+     * @return ArrayList<String> of User.
+     */
     public ArrayList<String> getUsernameList() {
         return ur.getUsernameList();
     }
 
-    public void removeUser(String user) {
-        ur.removeUser(user);
+    /**
+     * Removes a User.
+     * @param userKey the key of the user.
+     */
+    public void removeUser(String userKey) {
+        ur.removeUser(userKey);
     }
 
-    public void addUser(String user) throws IllegalArgumentException{
-        ur.addUser(user);
+    /**
+     * Adds a User.
+     * @param userKey the key of the user.
+     * @throws IllegalArgumentException if the userKey is already in use.
+     */
+    public void addUser(String userKey) throws IllegalArgumentException{
+        ur.addUser(userKey);
     }
-    
+
+    /**
+     * Gets the currently selected user.
+     * @return String of the selected user.
+     */
     public String getSelectedUser() {
         return ur.getSelectedUser();
     }
 
+    /**
+     * Saves the user registry.
+     */
     public void save() {
         ur.save();
     }
 
+    /**
+     * Gets the popup controller.
+     * @return Popup node as Parent.
+     */
     public Parent getPopup() {
         return popup;
     }

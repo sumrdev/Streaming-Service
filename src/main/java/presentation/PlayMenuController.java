@@ -33,6 +33,11 @@ public class PlayMenuController {
             episode.setText("");
         }
     }
+
+    /**
+     * overload of load method, calls the load method with no episodeTitle.
+     * @param itemTitle String title of the item to play.
+     */
     public void load(String itemTitle) {
         title.setText(itemTitle);
     }

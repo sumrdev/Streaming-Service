@@ -90,10 +90,16 @@ public class PopupController  {
         bottom.setVisible(true);
     }
 
+    /**
+     * Shows the popup
+     */
     public void show() {
         root.setVisible(true);
     }
 
+    /**
+     * Hides the popup
+     */
     public void hide() {
         root.setVisible(false);
     }

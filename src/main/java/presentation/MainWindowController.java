@@ -11,11 +11,17 @@ public class MainWindowController {
         this.mainWindow = mainWindow;
     }
 
+    /**
+     * Navigates to the home screen, calling the navigateHome method in the main window.
+     */
     public void navigateHome() {
         if (mainWindow != null)
             mainWindow.navigateHome();
     }
 
+    /**
+     * Navigates to the user screen, calling the navigateUser method in the main window.
+     */
     public void navigateUser() {
         if (mainWindow != null)
             mainWindow.navigateUser();
