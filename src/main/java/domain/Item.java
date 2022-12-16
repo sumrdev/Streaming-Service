@@ -20,18 +20,34 @@ public abstract class Item {
         this.releaseYear = releaseYear;
     }
 
+    /**
+     * Returns title
+     * @return title
+     */
     public String getTitle(){
         return title;
     }
 
+    /**
+     * Returns genre
+     * @return genre
+     */
     public String[] getGenre(){
         return genre;
     }
 
+    /**
+     * Returns rating
+     * @return rating
+     */
     public double getRating(){
         return rating;  
     }
     
+    /**
+     * Returns releaseYear
+     * @return releaseYear
+     */
     public int getReleaseYear(){
         return releaseYear;
     }
