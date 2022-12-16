@@ -34,7 +34,6 @@ public class DataAccessImpl implements DataAccess {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(
                 this.path + "/" + dataField + ".txt")));
-            System.out.println(reader.lines());
             reader.lines().forEach(data::add);
             reader.close();
         } catch (NullPointerException e) {
