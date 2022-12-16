@@ -49,7 +49,7 @@ public class User {
 
     /**
      * Converts favoriteItems to a string
-     * @return favoriteItemsString
+     * @return String representation of favoriteItems
      */
     private String favoriteItemsToString(){
         String favoriteItemsString = "";
@@ -67,7 +67,7 @@ public class User {
 
     /**
      * Converts User to a string
-     * @return UserString
+     * @return String representation of User
      */
     public String toString(){
         if(favoriteItems.isEmpty()) return username + ";";

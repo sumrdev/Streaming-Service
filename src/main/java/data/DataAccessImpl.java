@@ -24,9 +24,9 @@ public class DataAccessImpl implements DataAccess {
      * 
      * @param dataField The name of the data field to load
      * @return A list of strings containing the data
+     * @throws NullPointerException
+     * @throws SecurityException
      * @throws Exception
-     * @throws IOException
-     * @throws FileNotFoundException
      */
     @Override
     public List<String> load(String dataField) {
