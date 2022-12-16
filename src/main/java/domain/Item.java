@@ -22,7 +22,7 @@ public abstract class Item {
 
     /**
      * Returns title
-     * @return title
+     * @return returns a String 
      */
     public String getTitle(){
         return title;

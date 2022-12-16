@@ -16,16 +16,16 @@ public class User {
     }
 
     /**
-     * Returns username
-     * @return username
+     * Gets the username of the user
+     * @return the String representing the username
      */
     public String getUsername(){
         return username;
     }
 
     /**
-     * Returns favoriteItems
-     * @return favoriteItems
+     * Gets the favorite items of the user
+     * @return a HashSet containing the favorites of the user represented by their String key
      */
     public HashSet<String> getFavoriteItems(){
         return favoriteItems;
@@ -49,7 +49,7 @@ public class User {
 
     /**
      * Converts favoriteItems to a string
-     * @return String representation of favoriteItems
+     * @return a String representation of favoriteItems
      */
     private String favoriteItemsToString(){
         String favoriteItemsString = "";
@@ -67,7 +67,7 @@ public class User {
 
     /**
      * Converts User to a string
-     * @return String representation of User
+     * @return a String representation of User
      */
     public String toString(){
         if(favoriteItems.isEmpty()) return username + ";";

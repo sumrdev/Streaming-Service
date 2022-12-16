@@ -18,16 +18,16 @@ public class Series extends Item {
     }
 
     /**
-     * Returns endYear
-     * @return endYear
+     * Gets the end year of a series
+     * @return an int representing the end year of the series
      */
     public int getEndYear(){
         return endYear;
     }
 
     /**
-     * Returns seasons
-     * @return seasons
+     * Gets the seasons of a series
+     * @return returns an int[] representing seasons with episodes
      */
     public int[] getSeasons(){
         return seasons;
