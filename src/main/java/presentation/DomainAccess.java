@@ -156,7 +156,6 @@ public class DomainAccess {
      * @return a HashMap of StackPanes.
      */
     public HashMap<String, StackPane> createItemPanes(PopupController popup) {
-        System.out.println("Creating item panes");
         HashMap<String, StackPane> itemNodes = new HashMap<>();
         ArrayList<String> movies = ir.getMovieKeyList();
         ArrayList<String> series = ir.getSeriesKeyList();
