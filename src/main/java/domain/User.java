@@ -67,6 +67,7 @@ public class User {
 
     /**
      * Converts User to a string
+     * @return UserString
      */
     public String toString(){
         if(favoriteItems.isEmpty()) return username + ";";
