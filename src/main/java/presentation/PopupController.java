@@ -1,7 +1,5 @@
 package presentation;
 
-import java.io.IOException;
-import java.security.AllPermission;
 import java.util.Arrays;
 
 import javafx.fxml.FXML;
